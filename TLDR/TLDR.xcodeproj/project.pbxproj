@@ -12,7 +12,15 @@
 		9BBA939C28BC6C70002CB0CF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BBA939B28BC6C70002CB0CF /* Assets.xcassets */; };
 		9BBA939F28BC6C70002CB0CF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BBA939D28BC6C70002CB0CF /* LaunchScreen.storyboard */; };
 		9BBA93B128BF6E7F002CB0CF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93B028BF6E7F002CB0CF /* BaseViewController.swift */; };
-		9BBA93B428BF6EC6002CB0CF /* LauchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93B328BF6EC6002CB0CF /* LauchViewController.swift */; };
+		9BBA93B428BF6EC6002CB0CF /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93B328BF6EC6002CB0CF /* LaunchViewController.swift */; };
+		9BBA93B628BF6F1B002CB0CF /* LaunchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93B528BF6F1B002CB0CF /* LaunchView.swift */; };
+		9BBA93B928BF706D002CB0CF /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93B828BF706D002CB0CF /* UIColor.swift */; };
+		9BBA93BB28BF721A002CB0CF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93BA28BF721A002CB0CF /* UIView.swift */; };
+		9BBA93BE28BF78C5002CB0CF /* TimeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93BD28BF78C5002CB0CF /* TimeUtil.swift */; };
+		9BBA93C128BF7A41002CB0CF /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93C028BF7A41002CB0CF /* HomeViewController.swift */; };
+		9BBA93C328BF7A4F002CB0CF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93C228BF7A4F002CB0CF /* HomeView.swift */; };
+		9BBA93C528BF7D12002CB0CF /* SizeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93C428BF7D12002CB0CF /* SizeUtil.swift */; };
+		9BBA93C728BF9CA4002CB0CF /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93C628BF9CA4002CB0CF /* UIButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +31,15 @@
 		9BBA939E28BC6C70002CB0CF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9BBA93A028BC6C70002CB0CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BBA93B028BF6E7F002CB0CF /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
-		9BBA93B328BF6EC6002CB0CF /* LauchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LauchViewController.swift; sourceTree = "<group>"; };
+		9BBA93B328BF6EC6002CB0CF /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
+		9BBA93B528BF6F1B002CB0CF /* LaunchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchView.swift; sourceTree = "<group>"; };
+		9BBA93B828BF706D002CB0CF /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
+		9BBA93BA28BF721A002CB0CF /* UIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
+		9BBA93BD28BF78C5002CB0CF /* TimeUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeUtil.swift; sourceTree = "<group>"; };
+		9BBA93C028BF7A41002CB0CF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		9BBA93C228BF7A4F002CB0CF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		9BBA93C428BF7D12002CB0CF /* SizeUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeUtil.swift; sourceTree = "<group>"; };
+		9BBA93C628BF9CA4002CB0CF /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +72,11 @@
 		9BBA939128BC6C6F002CB0CF /* TLDR */ = {
 			isa = PBXGroup;
 			children = (
-				9BBA93AF28BF6E6F002CB0CF /* BaseGroup */,
 				9BBA93AE28BF6E61002CB0CF /* LaunchScreen */,
+				9BBA93BF28BF78DF002CB0CF /* HomeScreen */,
+				9BBA93AF28BF6E6F002CB0CF /* BaseGroup */,
+				9BBA93B728BF7060002CB0CF /* Extensions */,
+				9BBA93BC28BF78B5002CB0CF /* Utils */,
 				9BBA939228BC6C6F002CB0CF /* AppDelegate.swift */,
 				9BBA939428BC6C6F002CB0CF /* SceneDelegate.swift */,
 				9BBA939B28BC6C70002CB0CF /* Assets.xcassets */,
@@ -70,7 +89,8 @@
 		9BBA93AE28BF6E61002CB0CF /* LaunchScreen */ = {
 			isa = PBXGroup;
 			children = (
-				9BBA93B328BF6EC6002CB0CF /* LauchViewController.swift */,
+				9BBA93B328BF6EC6002CB0CF /* LaunchViewController.swift */,
+				9BBA93B528BF6F1B002CB0CF /* LaunchView.swift */,
 			);
 			path = LaunchScreen;
 			sourceTree = "<group>";
@@ -81,6 +101,34 @@
 				9BBA93B028BF6E7F002CB0CF /* BaseViewController.swift */,
 			);
 			path = BaseGroup;
+			sourceTree = "<group>";
+		};
+		9BBA93B728BF7060002CB0CF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9BBA93B828BF706D002CB0CF /* UIColor.swift */,
+				9BBA93BA28BF721A002CB0CF /* UIView.swift */,
+				9BBA93C628BF9CA4002CB0CF /* UIButton.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9BBA93BC28BF78B5002CB0CF /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9BBA93C428BF7D12002CB0CF /* SizeUtil.swift */,
+				9BBA93BD28BF78C5002CB0CF /* TimeUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		9BBA93BF28BF78DF002CB0CF /* HomeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				9BBA93C028BF7A41002CB0CF /* HomeViewController.swift */,
+				9BBA93C228BF7A4F002CB0CF /* HomeView.swift */,
+			);
+			path = HomeScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -153,10 +201,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9BBA93B428BF6EC6002CB0CF /* LauchViewController.swift in Sources */,
+				9BBA93B428BF6EC6002CB0CF /* LaunchViewController.swift in Sources */,
+				9BBA93B928BF706D002CB0CF /* UIColor.swift in Sources */,
+				9BBA93B628BF6F1B002CB0CF /* LaunchView.swift in Sources */,
+				9BBA93C328BF7A4F002CB0CF /* HomeView.swift in Sources */,
+				9BBA93BB28BF721A002CB0CF /* UIView.swift in Sources */,
 				9BBA939328BC6C6F002CB0CF /* AppDelegate.swift in Sources */,
+				9BBA93C128BF7A41002CB0CF /* HomeViewController.swift in Sources */,
 				9BBA939528BC6C6F002CB0CF /* SceneDelegate.swift in Sources */,
+				9BBA93BE28BF78C5002CB0CF /* TimeUtil.swift in Sources */,
 				9BBA93B128BF6E7F002CB0CF /* BaseViewController.swift in Sources */,
+				9BBA93C528BF7D12002CB0CF /* SizeUtil.swift in Sources */,
+				9BBA93C728BF9CA4002CB0CF /* UIButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
