@@ -13,5 +13,13 @@ final class LaunchViewController: BaseViewController<LaunchView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Task {
+            try await Task.sleep(nanoseconds: TimeUtil.nano2sec(0.5)) //런치 시간
+                        
+            let homeVC: HomeViewController = HomeViewController()
+            homeVC.modalPresentationStyle = .fullScreen
+            self.present(homeVC, animated: false)
+        }
+
     }
 }
