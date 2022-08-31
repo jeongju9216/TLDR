@@ -10,7 +10,7 @@ import UIKit
 final class LaunchView: UIView {
     
     //MARK: - Views
-    
+    private var titleLabel: UILabel!
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -25,6 +25,17 @@ final class LaunchView: UIView {
     
     //MARK: - Setup
     private func setup() {
+        setupTitleLable()
+    }
+    
+    private func setupTitleLable() {
+        titleLabel = UILabel()
         
+        titleLabel.text = "TL;DR"
+        titleLabel.textColor = .mainColor
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
+        
+        self.addSubview(titleLabel)
+        titleLabel.pinCenter(ofView: self)
     }
 }
