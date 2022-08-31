@@ -15,7 +15,7 @@ extension UIColor {
     static var mainColor: UIColor {
         return UIColor(named: "MainColor") ?? .black
     }
-
+    
     static var darkColor: UIColor {
         return UIColor(named: "DarkColor") ?? .black
     }
