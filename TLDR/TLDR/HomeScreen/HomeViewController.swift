@@ -12,5 +12,11 @@ final class HomeViewController: BaseViewController<HomeView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.layoutView.sumUpButton.addTarget(self, action: #selector(clickedSumUpButton), for: .touchUpInside)
+    }
+    
+    //MARK: - Actions
+    @objc func clickedSumUpButton() {
+        print("\(#line)-line, \(#function)")
     }
 }
