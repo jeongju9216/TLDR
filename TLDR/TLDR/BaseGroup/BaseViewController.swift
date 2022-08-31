@@ -14,5 +14,6 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     
     override func loadView() {
         self.view = LayoutView(frame: UIScreen.main.bounds)
+        self.view.backgroundColor = .backgroundColor
     }
 }
