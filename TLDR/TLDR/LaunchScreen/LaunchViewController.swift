@@ -15,11 +15,10 @@ final class LaunchViewController: BaseViewController<LaunchView> {
         
         Task {
             try await Task.sleep(nanoseconds: TimeUtil.nano2sec(0.5)) //런치 시간
-                        
-            let homeVC: HomeViewController = HomeViewController()
-            homeVC.modalPresentationStyle = .fullScreen
-            self.present(homeVC, animated: false)
+                    
+            let navigationVC: UINavigationController = UINavigationController(rootViewController: HomeViewController())
+            navigationVC.modalPresentationStyle = .fullScreen
+            self.present(navigationVC, animated: false)
         }
-
     }
 }
