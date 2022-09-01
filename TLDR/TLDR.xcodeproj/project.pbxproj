@@ -76,9 +76,9 @@
 		9BBA939128BC6C6F002CB0CF /* TLDR */ = {
 			isa = PBXGroup;
 			children = (
-				9BBA93C928C0753C002CB0CF /* SummarizeScreen */,
 				9BBA93AE28BF6E61002CB0CF /* LaunchScreen */,
 				9BBA93BF28BF78DF002CB0CF /* HomeScreen */,
+				9BBA93C928C0753C002CB0CF /* SummarizeScreen */,
 				9BBA93AF28BF6E6F002CB0CF /* BaseGroup */,
 				9BBA93B728BF7060002CB0CF /* Extensions */,
 				9BBA93BC28BF78B5002CB0CF /* Utils */,
