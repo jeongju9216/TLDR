@@ -15,16 +15,18 @@ final class HomeView: UIView {
     
     private var textView: UITextView! //텍스트 입력창
     
-    var sumUpButton: UIButton!
+    var summarizeButton: UIButton!
     
     var hideKeyboardButton: UIButton!
     
     //MARK: - Properties
+    private var fontSize: CGFloat = 18.0
     private var statusBarHeight: CGFloat = SizeUtil.statusBarHeight
     private var topBarHeight: CGFloat {
-        return 50 + statusBarHeight
+        return 40 + statusBarHeight
     }
     private var animationDuration: Double = 0.3
+    let testString = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세"
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -39,51 +41,49 @@ final class HomeView: UIView {
     
     //MARK: - Methods
     func showTopBar() {
-        self.textView.textContainerInset = UIEdgeInsets(top: 60, left: 15, bottom: 10, right: 15)
+        textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 10, right: 15)
         
         UIView.animate(withDuration: animationDuration, animations: {
             let scale = CGAffineTransform(translationX: 0, y: 0)
             self.topBarView.transform = scale
+            self.textView.transform = scale
             
             self.topBarView.alpha = 1
         })
     }
     
     func hideTopBar() {
-        self.textView.textContainerInset = UIEdgeInsets(top: 20, left: 15, bottom: 250, right: 15)
-
+        textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 300, right: 15)
+        
         UIView.animate(withDuration: animationDuration, animations: {
             let scale = CGAffineTransform(translationX: 0, y: -(self.topBarHeight))
             self.topBarView.transform = scale
+            
+            let scale2 = CGAffineTransform(translationX: 0, y: -(self.topBarHeight - self.statusBarHeight))
+            self.textView.transform = scale2
             
             self.topBarView.alpha = 0
         })
     }
     
-    func showSumUpButton() {
+    func showSummarizeButton() {
         UIView.animate(withDuration: animationDuration, animations: {
-            let scale = CGAffineTransform(translationX: 0, y: 0)
-            self.sumUpButton.transform = scale
-            
-            self.sumUpButton.alpha = 1
+            self.summarizeButton.alpha = 1
         })
     }
     
-    func hideSumUpButton() {
+    func hideSummarizeButton() {
         UIView.animate(withDuration: animationDuration, animations: {
-            let scale = CGAffineTransform(translationX: 0, y: 80)
-            self.sumUpButton.transform = scale
-            
-            self.sumUpButton.alpha = 0
+            self.summarizeButton.alpha = 0
         })
     }
     
     //MARK: - Setup
-    private func setup() {
+    private func setup() {        
         setupTopBarView()
         setupTitleLable()
         
-        setupSumUpButton()
+        setupSummarizeButton()
         setupHideKeyboardButton()
         
         setupTextView()
@@ -94,16 +94,22 @@ final class HomeView: UIView {
     private func setupTopBarView() {
         topBarView = UIView(frame: .init(x: 0, y: 0, width: self.bounds.width, height: topBarHeight))
         
-        topBarView.backgroundColor = .darkColor
+        topBarView.backgroundColor = .backgroundColor
+        
+        topBarView.layer.masksToBounds = false
+        topBarView.layer.shadowColor = UIColor.label.cgColor
+        topBarView.layer.shadowOffset = .zero
+        topBarView.layer.shadowRadius = 1
+        topBarView.layer.shadowOpacity = 0.2
                 
         self.addSubview(topBarView)
     }
     
     private func setupTitleLable() {
-        titleLabel = UILabel(frame: .init(x: 0, y: statusBarHeight, width: self.bounds.width, height: 50))
+        titleLabel = UILabel(frame: .init(x: 0, y: statusBarHeight, width: self.bounds.width, height: topBarHeight - statusBarHeight))
         
         titleLabel.text = "TL;DR"
-        titleLabel.textColor = .white
+        titleLabel.textColor = .label
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.textAlignment = .center
         
@@ -114,33 +120,35 @@ final class HomeView: UIView {
         textView = UITextView()
         textView.backgroundColor = .backgroundColor
         
-        textView.font = UIFont.systemFont(ofSize: 18)
-        textView.textContainerInset = UIEdgeInsets(top: 60, left: 15, bottom: 10, right: 15)
+        textView.applyTextWithLineHeight(string: testString)
+        textView.textColor = .label
+        textView.font = UIFont.systemFont(ofSize: fontSize)
+        textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 10, right: 15)
         
         textView.inputAccessoryView = hideKeyboardButton
         
         self.addSubview(textView)
         textView.pinWidth(constant: self.bounds.width)
-        textView.pinTop(to: self.safeAreaLayoutGuide.topAnchor)
-        textView.pinBottom(to: self.sumUpButton.topAnchor)
+        textView.pinTop(to: self.topBarView.bottomAnchor)
+        textView.pinBottom(to: self.summarizeButton.topAnchor)
     }
     
-    private func setupSumUpButton() {
-        sumUpButton = UIButton(type: .custom)
+    private func setupSummarizeButton() {
+        summarizeButton = UIButton(type: .custom)
         
-        sumUpButton.setBackgroundColor(.mainColor, for: .normal)
+        summarizeButton.setBackgroundColor(.mainColor, for: .normal)
         
-        sumUpButton.setTitle("요약하기", for: .normal)
-        sumUpButton.setTitleColor(.white, for: .normal)
-        sumUpButton.setTitleColor(.lightGray, for: .highlighted)
+        summarizeButton.setTitle("요약하기", for: .normal)
+        summarizeButton.setTitleColor(.white, for: .normal)
+        summarizeButton.setTitleColor(.lightGray, for: .highlighted)
         
-        sumUpButton.titleLabel?.textAlignment = .center
-        sumUpButton.titleLabel?.font = .boldSystemFont(ofSize: 21)
+        summarizeButton.titleLabel?.textAlignment = .center
+        summarizeButton.titleLabel?.font = .boldSystemFont(ofSize: 21)
         
-        self.addSubview(sumUpButton)
-        sumUpButton.pinWidth(constant: self.bounds.width)
-        sumUpButton.pinHeight(constant: 80)
-        sumUpButton.pinBottom(to: self.bottomAnchor)
+        self.addSubview(summarizeButton)
+        summarizeButton.pinWidth(constant: self.bounds.width)
+        summarizeButton.pinHeight(constant: 80)
+        summarizeButton.pinBottom(to: self.bottomAnchor)
     }
     
     private func setupHideKeyboardButton() {
@@ -150,13 +158,10 @@ final class HomeView: UIView {
         
         hideKeyboardButton.setTitle("⌵", for: .normal)
         hideKeyboardButton.setTitleColor(.label, for: .normal)
-        
-//        hideKeyboardButton.titleLabel?.textAlignment = .center
-        hideKeyboardButton.contentEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 20, right: 0)
         hideKeyboardButton.titleLabel?.font = .boldSystemFont(ofSize: 32)
-        
+
         self.addSubview(hideKeyboardButton)
         hideKeyboardButton.pinWidth(constant: self.bounds.width)
-        hideKeyboardButton.pinHeight(constant: 20)
+        hideKeyboardButton.pinHeight(constant: 35)
     }
 }

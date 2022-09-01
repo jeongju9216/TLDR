@@ -23,6 +23,9 @@
 		9BBA93C728BF9CA4002CB0CF /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93C628BF9CA4002CB0CF /* UIButton.swift */; };
 		9BBA93CB28C0762B002CB0CF /* SummarizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93CA28C0762B002CB0CF /* SummarizeViewController.swift */; };
 		9BBA93CD28C07632002CB0CF /* SummarizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93CC28C07632002CB0CF /* SummarizeView.swift */; };
+		9BBA93D128C0ADBD002CB0CF /* LineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93D028C0ADBD002CB0CF /* LineView.swift */; };
+		9BBA93D428C0B7F2002CB0CF /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93D328C0B7F2002CB0CF /* UITextView.swift */; };
+		9BBA93D628C0CEB1002CB0CF /* UnderLineLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93D528C0CEB1002CB0CF /* UnderLineLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		9BBA93C628BF9CA4002CB0CF /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		9BBA93CA28C0762B002CB0CF /* SummarizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeViewController.swift; sourceTree = "<group>"; };
 		9BBA93CC28C07632002CB0CF /* SummarizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeView.swift; sourceTree = "<group>"; };
+		9BBA93D028C0ADBD002CB0CF /* LineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineView.swift; sourceTree = "<group>"; };
+		9BBA93D328C0B7F2002CB0CF /* UITextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextView.swift; sourceTree = "<group>"; };
+		9BBA93D528C0CEB1002CB0CF /* UnderLineLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderLineLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,7 @@
 				9BBA93B828BF706D002CB0CF /* UIColor.swift */,
 				9BBA93BA28BF721A002CB0CF /* UIView.swift */,
 				9BBA93C628BF9CA4002CB0CF /* UIButton.swift */,
+				9BBA93D328C0B7F2002CB0CF /* UITextView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -141,6 +148,8 @@
 			children = (
 				9BBA93CA28C0762B002CB0CF /* SummarizeViewController.swift */,
 				9BBA93CC28C07632002CB0CF /* SummarizeView.swift */,
+				9BBA93D028C0ADBD002CB0CF /* LineView.swift */,
+				9BBA93D528C0CEB1002CB0CF /* UnderLineLabel.swift */,
 			);
 			path = SummarizeScreen;
 			sourceTree = "<group>";
@@ -220,9 +229,12 @@
 				9BBA93B928BF706D002CB0CF /* UIColor.swift in Sources */,
 				9BBA93B628BF6F1B002CB0CF /* LaunchView.swift in Sources */,
 				9BBA93C328BF7A4F002CB0CF /* HomeView.swift in Sources */,
+				9BBA93D628C0CEB1002CB0CF /* UnderLineLabel.swift in Sources */,
 				9BBA93BB28BF721A002CB0CF /* UIView.swift in Sources */,
 				9BBA939328BC6C6F002CB0CF /* AppDelegate.swift in Sources */,
 				9BBA93C128BF7A41002CB0CF /* HomeViewController.swift in Sources */,
+				9BBA93D128C0ADBD002CB0CF /* LineView.swift in Sources */,
+				9BBA93D428C0B7F2002CB0CF /* UITextView.swift in Sources */,
 				9BBA939528BC6C6F002CB0CF /* SceneDelegate.swift in Sources */,
 				9BBA93CB28C0762B002CB0CF /* SummarizeViewController.swift in Sources */,
 				9BBA93BE28BF78C5002CB0CF /* TimeUtil.swift in Sources */,

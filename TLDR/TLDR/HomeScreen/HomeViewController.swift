@@ -9,9 +9,12 @@ import UIKit
 
 final class HomeViewController: BaseViewController<HomeView> {
     
+    //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
      
+        self.navigationController?.navigationBar.isHidden = true
+        
         addTargets()
         addObservers()
     }
@@ -19,12 +22,15 @@ final class HomeViewController: BaseViewController<HomeView> {
     //MARK: - Actions
     @objc func clickedSumUpButton() {
         print("\(#line)-line, \(#function)")
+        
+        let summarizeVC: SummarizeViewController = SummarizeViewController()
+        self.navigationController?.pushViewController(summarizeVC, animated: true)
     }
     
     @objc func clickedHideKeyboardButton() {
         print("\(#line)-line, \(#function)")
         self.layoutView.showTopBar()
-        self.layoutView.showSumUpButton()
+        self.layoutView.showSummarizeButton()
         
         self.layoutView.endEditing(true)
     }
@@ -32,7 +38,7 @@ final class HomeViewController: BaseViewController<HomeView> {
     @objc func keyboardWillShow(notification: NSNotification) {
         print("\(#line)-line, \(#function)")
         self.layoutView.hideTopBar()
-        self.layoutView.hideSumUpButton()
+        self.layoutView.hideSummarizeButton()
     }
 
     @objc func keyboardWillHide(notification: NSNotification) {
@@ -41,7 +47,7 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     //MARK: - Methods
     private func addTargets() {
-        self.layoutView.sumUpButton.addTarget(self, action: #selector(clickedSumUpButton), for: .touchUpInside)
+        self.layoutView.summarizeButton.addTarget(self, action: #selector(clickedSumUpButton), for: .touchUpInside)
         self.layoutView.hideKeyboardButton.addTarget(self, action: #selector(clickedHideKeyboardButton), for: .touchUpInside)
     }
     
