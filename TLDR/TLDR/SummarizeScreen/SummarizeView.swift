@@ -11,7 +11,19 @@ import UIKit
 final class SummarizeView: UIView {
     
     //MARK: - Views
-    var textView: UITextView! //텍스트 입력창
+    //요약 내용
+    private var summarizeUnderLineLabel: UnderLineLabel!
+    private var summarizeTextView: UITextView!
+    
+    //핵심 키워드
+    private var keywordUnderLineLabel: UnderLineLabel!
+    private var keywordLabel: UILabel!
+    
+    
+    //MARK: - Properties
+    private var fontSize: CGFloat = 18
+    let testString = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세"
+    let testKeyword: [String] = ["동해물", "백두산", "하느님", "우리나라", "만세", "대한", "무궁화"]
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -24,54 +36,71 @@ final class SummarizeView: UIView {
         setup()
     }
     
-    //MARK: - Methods
-    func scrollToTopTextView() {
-        textView.setContentOffset(.zero, animated: false)
-        textView.layoutIfNeeded()
-    }
-    
-    
     //MARK: - Setup
     private func setup() {
-        setupTextView()
+        setupSummarizeUnderLineLabel()
+        setupSummarizeTextView()
+        
+        setupKeywordUnderLineLabel()
+        setupKeywordLabel()
     }
     
-    private func setupTextView() {
-        textView = UITextView()
-        textView.backgroundColor = .backgroundColor
+    private func setupSummarizeUnderLineLabel() {
+        summarizeUnderLineLabel = UnderLineLabel(title: "요약 내용")
         
-        textView.text = """
-                        애국가 가사 1절
-                        동해물과 백두산이 마르고 닳도록
-                        하느님이 보우하사 우리나라 만세
-                        무궁화 삼천리 화려강산
-                        대한 사람 대한으로 길이 보전하세
-                        
-                        애국가 가사 2절
-                        남산 위에 저 소나무 철갑을 두른 듯
-                        바람 서리 불변함은 우리 기상일세
-                        무궁화 삼천리 화려강산
-                        대한 사람 대한으로 길이 보전하세
-                        
-                        애국가 가사 3절
-                        가을 하늘 공활한데 높고 구름 없이
-                        밝은 달은 우리 가슴 일편단심일세
-                        무궁화 삼천리 화려강산
-                        대한 사람 대한으로 길이 보전하세
-
-                        애국가 가사 4절
-                        이 기상과 이 맘으로 충성을 다하여
-                        괴로우나 즐거우나 나라 사랑하세
-                        무궁화 삼천리 화려강산
-                        대한 사람 대한으로 길이 보전하세
-                        """
+        self.addSubview(summarizeUnderLineLabel)
+        summarizeUnderLineLabel.pinHeight(constant: 30)
+        summarizeUnderLineLabel.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor, offset: 15)
+        summarizeUnderLineLabel.pinRight(to: self.safeAreaLayoutGuide.rightAnchor, offset: -15)
+        summarizeUnderLineLabel.pinTop(to: self.safeAreaLayoutGuide.topAnchor, offset: 15)
+    }
+    
+    private func setupSummarizeTextView() {
+        summarizeTextView = UITextView()
         
-        textView.font = UIFont.systemFont(ofSize: 18)
-        textView.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
-                
-        self.addSubview(textView)
-        textView.pinWidth(constant: self.bounds.width)
-        textView.pinHeight(constant: self.bounds.height * 0.5)
-        textView.pinTop(to: self.safeAreaLayoutGuide.topAnchor)
+        summarizeTextView.isEditable = false
+        
+        summarizeTextView.backgroundColor = .backgroundColor
+        
+        summarizeTextView.applyTextWithLineHeight(string: testString)
+        summarizeTextView.textColor = .label
+        summarizeTextView.font = UIFont.systemFont(ofSize: fontSize)
+        summarizeTextView.textContainerInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        
+        self.addSubview(summarizeTextView)
+        summarizeTextView.pinWidth(constant: self.bounds.width)
+        summarizeTextView.pinHeight(constant: self.bounds.height * 0.3)
+        summarizeTextView.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor)
+        summarizeTextView.pinRight(to: self.safeAreaLayoutGuide.rightAnchor)
+        summarizeTextView.pinTop(to: self.summarizeUnderLineLabel.bottomAnchor, offset: 10)
+    }
+    
+    private func setupKeywordUnderLineLabel() {
+        keywordUnderLineLabel = UnderLineLabel(title: "핵심 키워드")
+        
+        self.addSubview(keywordUnderLineLabel)
+        keywordUnderLineLabel.pinHeight(constant: 30)
+        keywordUnderLineLabel.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor, offset: 15)
+        keywordUnderLineLabel.pinRight(to: self.safeAreaLayoutGuide.rightAnchor, offset: -15)
+        keywordUnderLineLabel.pinTop(to: self.summarizeTextView.bottomAnchor, offset: 30)
+    }
+    
+    private func setupKeywordLabel() {
+        keywordLabel = UILabel()
+        
+        var str: String = ""
+        for keyword in testKeyword {
+            str += "#\(keyword) "
+        }
+        
+        keywordLabel.text = str
+        keywordLabel.font = UIFont.systemFont(ofSize: fontSize)
+        keywordLabel.lineBreakMode = .byCharWrapping
+        keywordLabel.numberOfLines = .zero
+        
+        self.addSubview(keywordLabel)
+        keywordLabel.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor, offset: 20)
+        keywordLabel.pinRight(to: self.safeAreaLayoutGuide.rightAnchor, offset: -20)
+        keywordLabel.pinTop(to: self.keywordUnderLineLabel.bottomAnchor, offset: 15)
     }
 }
