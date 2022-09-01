@@ -11,13 +11,9 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.layoutView.sumUpButton.addTarget(self, action: #selector(clickedSumUpButton), for: .touchUpInside)
-        self.layoutView.hideKeyboardButton.addTarget(self, action: #selector(clickedHideKeyboardButton), for: .touchUpInside)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification , object:nil)
-
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification , object:nil)
+     
+        addTargets()
+        addObservers()
     }
     
     //MARK: - Actions
@@ -41,6 +37,17 @@ final class HomeViewController: BaseViewController<HomeView> {
 
     @objc func keyboardWillHide(notification: NSNotification) {
         print("\(#line)-line, \(#function)")
-        
+    }
+    
+    //MARK: - Methods
+    private func addTargets() {
+        self.layoutView.sumUpButton.addTarget(self, action: #selector(clickedSumUpButton), for: .touchUpInside)
+        self.layoutView.hideKeyboardButton.addTarget(self, action: #selector(clickedHideKeyboardButton), for: .touchUpInside)
+    }
+    
+    private func addObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification , object:nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification , object:nil)
     }
 }
