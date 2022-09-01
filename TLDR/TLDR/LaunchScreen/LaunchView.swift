@@ -24,7 +24,7 @@ final class LaunchView: UIView {
     }
     
     //MARK: - Setup
-    private func setup() {
+    private func setup() {        
         setupTitleLable()
     }
     
