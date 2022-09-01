@@ -24,7 +24,7 @@ extension UIView {
         self.centerYAnchor.constraint(equalTo: anchor, constant: offset).isActive = true
     }
     
-    func pinWidth(to anchor: NSLayoutAnchor<NSLayoutDimension>? = nil, constant: CGFloat = 0) {
+    func pinWidth(to anchor: NSLayoutAnchor<NSLayoutDimension>? = nil, constant: CGFloat) {
         self.translatesAutoresizingMaskIntoConstraints = false
         if let anchor = anchor {
             self.widthAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
@@ -33,7 +33,7 @@ extension UIView {
         }
     }
     
-    func pinHeight(to anchor: NSLayoutAnchor<NSLayoutDimension>? = nil, constant: CGFloat = 0) {
+    func pinHeight(to anchor: NSLayoutAnchor<NSLayoutDimension>? = nil, constant: CGFloat) {
         self.translatesAutoresizingMaskIntoConstraints = false
         if let anchor = anchor {
             self.heightAnchor.constraint(equalTo: anchor, constant: constant).isActive = true
