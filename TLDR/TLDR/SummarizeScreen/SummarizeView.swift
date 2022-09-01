@@ -24,6 +24,13 @@ final class SummarizeView: UIView {
         setup()
     }
     
+    //MARK: - Methods
+    func scrollToTopTextView() {
+        textView.setContentOffset(.zero, animated: false)
+        textView.layoutIfNeeded()
+    }
+    
+    
     //MARK: - Setup
     private func setup() {
         setupTextView()
@@ -60,11 +67,11 @@ final class SummarizeView: UIView {
                         """
         
         textView.font = UIFont.systemFont(ofSize: 18)
-        textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 10, right: 15)
+        textView.textContainerInset = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
                 
         self.addSubview(textView)
         textView.pinWidth(constant: self.bounds.width)
-        textView.pinHeight(constant: self.bounds.height / 2)
-        textView.pinTop(to: self.safeAreaLayoutGuide.topAnchor, offset: 50)
+        textView.pinHeight(constant: self.bounds.height * 0.5)
+        textView.pinTop(to: self.safeAreaLayoutGuide.topAnchor)
     }
 }
