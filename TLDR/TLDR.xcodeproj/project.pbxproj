@@ -21,6 +21,8 @@
 		9BBA93C328BF7A4F002CB0CF /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93C228BF7A4F002CB0CF /* HomeView.swift */; };
 		9BBA93C528BF7D12002CB0CF /* SizeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93C428BF7D12002CB0CF /* SizeUtil.swift */; };
 		9BBA93C728BF9CA4002CB0CF /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93C628BF9CA4002CB0CF /* UIButton.swift */; };
+		9BBA93CB28C0762B002CB0CF /* SummarizeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93CA28C0762B002CB0CF /* SummarizeViewController.swift */; };
+		9BBA93CD28C07632002CB0CF /* SummarizeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93CC28C07632002CB0CF /* SummarizeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		9BBA93C228BF7A4F002CB0CF /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		9BBA93C428BF7D12002CB0CF /* SizeUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizeUtil.swift; sourceTree = "<group>"; };
 		9BBA93C628BF9CA4002CB0CF /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
+		9BBA93CA28C0762B002CB0CF /* SummarizeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeViewController.swift; sourceTree = "<group>"; };
+		9BBA93CC28C07632002CB0CF /* SummarizeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,7 @@
 		9BBA939128BC6C6F002CB0CF /* TLDR */ = {
 			isa = PBXGroup;
 			children = (
+				9BBA93C928C0753C002CB0CF /* SummarizeScreen */,
 				9BBA93AE28BF6E61002CB0CF /* LaunchScreen */,
 				9BBA93BF28BF78DF002CB0CF /* HomeScreen */,
 				9BBA93AF28BF6E6F002CB0CF /* BaseGroup */,
@@ -129,6 +134,15 @@
 				9BBA93C228BF7A4F002CB0CF /* HomeView.swift */,
 			);
 			path = HomeScreen;
+			sourceTree = "<group>";
+		};
+		9BBA93C928C0753C002CB0CF /* SummarizeScreen */ = {
+			isa = PBXGroup;
+			children = (
+				9BBA93CA28C0762B002CB0CF /* SummarizeViewController.swift */,
+				9BBA93CC28C07632002CB0CF /* SummarizeView.swift */,
+			);
+			path = SummarizeScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -201,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BBA93CD28C07632002CB0CF /* SummarizeView.swift in Sources */,
 				9BBA93B428BF6EC6002CB0CF /* LaunchViewController.swift in Sources */,
 				9BBA93B928BF706D002CB0CF /* UIColor.swift in Sources */,
 				9BBA93B628BF6F1B002CB0CF /* LaunchView.swift in Sources */,
@@ -209,6 +224,7 @@
 				9BBA939328BC6C6F002CB0CF /* AppDelegate.swift in Sources */,
 				9BBA93C128BF7A41002CB0CF /* HomeViewController.swift in Sources */,
 				9BBA939528BC6C6F002CB0CF /* SceneDelegate.swift in Sources */,
+				9BBA93CB28C0762B002CB0CF /* SummarizeViewController.swift in Sources */,
 				9BBA93BE28BF78C5002CB0CF /* TimeUtil.swift in Sources */,
 				9BBA93B128BF6E7F002CB0CF /* BaseViewController.swift in Sources */,
 				9BBA93C528BF7D12002CB0CF /* SizeUtil.swift in Sources */,
