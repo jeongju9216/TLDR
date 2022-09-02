@@ -22,7 +22,13 @@ final class SummarizeView: UIView {
     
     //MARK: - Properties
     private var fontSize: CGFloat = 18
-    let testString = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세"
+    private var contentSize: CGFloat {
+        let size = CGSize(width: self.bounds.width, height: .infinity)
+        let estimatedSize = summarizeTextView.sizeThatFits(size)
+
+        return min(estimatedSize.height, self.bounds.height * 0.3)
+    }
+    let testString = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세"
     let testKeyword: [String] = ["동해물", "백두산", "하느님", "우리나라", "만세", "대한", "무궁화"]
     
     //MARK: - Init
@@ -67,9 +73,10 @@ final class SummarizeView: UIView {
         summarizeTextView.font = UIFont.systemFont(ofSize: fontSize)
         summarizeTextView.textContainerInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
         
+        
         self.addSubview(summarizeTextView)
         summarizeTextView.pinWidth(constant: self.bounds.width)
-        summarizeTextView.pinHeight(constant: self.bounds.height * 0.3)
+        summarizeTextView.pinHeight(constant: contentSize)
         summarizeTextView.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor)
         summarizeTextView.pinRight(to: self.safeAreaLayoutGuide.rightAnchor)
         summarizeTextView.pinTop(to: self.summarizeUnderLineLabel.bottomAnchor, offset: 10)
@@ -102,5 +109,6 @@ final class SummarizeView: UIView {
         keywordLabel.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor, offset: 20)
         keywordLabel.pinRight(to: self.safeAreaLayoutGuide.rightAnchor, offset: -20)
         keywordLabel.pinTop(to: self.keywordUnderLineLabel.bottomAnchor, offset: 15)
+        
     }
 }
