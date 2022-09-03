@@ -14,41 +14,29 @@ final class SummarizeView: UIView {
     //요약 내용
     private var summarizeUnderLineLabel: UnderLineLabel!
     private var summarizeTextView: UITextView!
+    var keywordButton: UIButton!
     
-    //핵심 키워드
-    private var keywordUnderLineLabel: UnderLineLabel!
-    private var keywordLabel: UILabel!
-    
-    
-    //MARK: - Properties
-    private var fontSize: CGFloat = 18
-    private var contentSize: CGFloat {
-        let size = CGSize(width: self.bounds.width, height: .infinity)
-        let estimatedSize = summarizeTextView.sizeThatFits(size)
-
-        return min(estimatedSize.height, self.bounds.height * 0.3)
-    }
-    let testString = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세"
-    let testKeyword: [String] = ["동해물", "백두산", "하느님", "우리나라", "만세", "대한", "무궁화"]
+    private var summarizeText: String = ""
+    private var countOfKeywords: Int = 0
     
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setup()
     }
     
     //MARK: - Setup
-    private func setup() {
-        setupSummarizeUnderLineLabel()
-        setupSummarizeTextView()
+    func setup(summarizeText: String, countOfKeywords: Int) {
+        self.summarizeText = summarizeText
+        self.countOfKeywords = countOfKeywords
         
-        setupKeywordUnderLineLabel()
-        setupKeywordLabel()
+        setupSummarizeUnderLineLabel()
+        setupKeywordButton()
+
+        setupSummarizeTextView()
     }
     
     private func setupSummarizeUnderLineLabel() {
@@ -65,50 +53,33 @@ final class SummarizeView: UIView {
         summarizeTextView = UITextView()
         
         summarizeTextView.isEditable = false
-        
         summarizeTextView.backgroundColor = .backgroundColor
-        
-        summarizeTextView.applyTextWithLineHeight(string: testString)
-        summarizeTextView.textColor = .label
-        summarizeTextView.font = UIFont.systemFont(ofSize: fontSize)
         summarizeTextView.textContainerInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        
+
+        summarizeTextView.text = summarizeText
+        summarizeTextView.applyLineHeight()
         
         self.addSubview(summarizeTextView)
         summarizeTextView.pinWidth(constant: self.bounds.width)
-        summarizeTextView.pinHeight(constant: contentSize)
-        summarizeTextView.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor)
-        summarizeTextView.pinRight(to: self.safeAreaLayoutGuide.rightAnchor)
         summarizeTextView.pinTop(to: self.summarizeUnderLineLabel.bottomAnchor, offset: 10)
+        summarizeTextView.pinBottom(to: self.keywordButton.topAnchor, offset: -10)
     }
     
-    private func setupKeywordUnderLineLabel() {
-        keywordUnderLineLabel = UnderLineLabel(title: "핵심 키워드")
+    private func setupKeywordButton() {
+        keywordButton = UIButton(type: .custom)
         
-        self.addSubview(keywordUnderLineLabel)
-        keywordUnderLineLabel.pinHeight(constant: 30)
-        keywordUnderLineLabel.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor, offset: 15)
-        keywordUnderLineLabel.pinRight(to: self.safeAreaLayoutGuide.rightAnchor, offset: -15)
-        keywordUnderLineLabel.pinTop(to: self.summarizeTextView.bottomAnchor, offset: 30)
-    }
-    
-    private func setupKeywordLabel() {
-        keywordLabel = UILabel()
+        keywordButton.setBackgroundColor(.mainColor, for: .normal)
         
-        var str: String = ""
-        for keyword in testKeyword {
-            str += "#\(keyword) "
-        }
+        keywordButton.setTitle("\(countOfKeywords)개 키워드로 원본 보기", for: .normal)
+        keywordButton.setTitleColor(.white, for: .normal)
+        keywordButton.setTitleColor(.lightGray, for: .highlighted)
         
-        keywordLabel.text = str
-        keywordLabel.font = UIFont.systemFont(ofSize: fontSize)
-        keywordLabel.lineBreakMode = .byCharWrapping
-        keywordLabel.numberOfLines = .zero
+        keywordButton.titleLabel?.textAlignment = .center
+        keywordButton.titleLabel?.font = .boldSystemFont(ofSize: 21)
         
-        self.addSubview(keywordLabel)
-        keywordLabel.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor, offset: 20)
-        keywordLabel.pinRight(to: self.safeAreaLayoutGuide.rightAnchor, offset: -20)
-        keywordLabel.pinTop(to: self.keywordUnderLineLabel.bottomAnchor, offset: 15)
-        
+        self.addSubview(keywordButton)
+        keywordButton.pinWidth(constant: self.bounds.width)
+        keywordButton.pinHeight(constant: 80)
+        keywordButton.pinBottom(to: self.bottomAnchor)
     }
 }

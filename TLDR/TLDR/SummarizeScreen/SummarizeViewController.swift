@@ -9,22 +9,33 @@ import UIKit
 
 final class SummarizeViewController: BaseViewController<SummarizeView> {
     
+    //MARK: - Properties
+    var summarizeData: SummarizeData!
+    
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("summarizeData: \(summarizeData)")
+        
         setupNavigationBar()
+        self.layoutView.setup(summarizeText: summarizeData.summarizeText, countOfKeywords: summarizeData.keywords.count)
+        
+        addTargets()        
+    }
+    
+    //MARK: - Actions
+    @objc func clickedKeywordButton() {
+        print("\(#line)-line, \(#function)")
+    
+        let keywordVC: KeywordViewController = KeywordViewController()
+        keywordVC.summarizeData = self.summarizeData
+
+        self.navigationController?.pushViewController(keywordVC, animated: true)
     }
     
     //MARK: - Methods
-    private func setupNavigationBar() {
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationController?.navigationBar.tintColor = .label
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .backgroundColor
-        self.navigationItem.standardAppearance = appearance
-        self.navigationItem.scrollEdgeAppearance = appearance
+    private func addTargets() {
+        self.layoutView.keywordButton.addTarget(self, action: #selector(clickedKeywordButton), for: .touchUpInside)
     }
 }
