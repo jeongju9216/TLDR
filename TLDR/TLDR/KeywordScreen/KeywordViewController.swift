@@ -5,4 +5,18 @@
 //  Created by 유정주 on 2022/09/02.
 //
 
-import Foundation
+import UIKit
+
+final class KeywordViewController: BaseViewController<KeywordView> {
+    
+    //MARK: - Properties
+    var summarizeData: SummarizeData = SummarizeData()
+    
+    //MARK: - Life Cycles
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupNavigationBar()
+        layoutView.setup(keywords: summarizeData.keywords, text: summarizeData.text)
+    }
+}
