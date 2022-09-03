@@ -8,16 +8,29 @@
 import UIKit
 
 extension UITextView {
-    func applyTextWithLineHeight(string: String, _ lineHeight: CGFloat = 1.6) {
-        let style = NSMutableParagraphStyle()
-        let lineheight = 18 * 1.6
-        style.minimumLineHeight = lineheight
-        style.maximumLineHeight = lineheight
-        self.attributedText = NSAttributedString(
-            string: string,
-            attributes: [
-                .paragraphStyle: style
-            ]
-        )
+    func applyLineHeight(fontSize: CGFloat = TextUtil.fontSize, _ lineHeight: CGFloat = TextUtil.lineHeight) {
+        self.attributedText = NSAttributedString(string: self.text, attributes: TextUtil.textViewStyle)
+    }
+    
+    func highlightKeywords(_ keywords: [String], color: UIColor = .mainColor) {
+        
+        let attrString = NSMutableAttributedString(string: self.text, attributes: TextUtil.textViewStyle)
+        
+        if let text = self.text {
+            for keyword in keywords {
+                var searchRange = text.startIndex..<text.endIndex
+                while let range = text.range(of: keyword, options: .caseInsensitive, range: searchRange) {
+                    attrString.addAttribute(.foregroundColor, value: color, range: NSRange(range, in: text))
+                    attrString.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: TextUtil.fontSize), range: NSRange(range, in: text))
+                    
+                    searchRange = range.upperBound..<searchRange.upperBound
+                }
+            }
+        }
+        
+//        var searchRange = text.startIndex..<text.endIndex
+//        attrString.addAttribute(.paragraphStyle, value: TextUtil.textViewStyle, range: NSRange(searchRange, in: text))
+        
+        self.attributedText = attrString
     }
 }

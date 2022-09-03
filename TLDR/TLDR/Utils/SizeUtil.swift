@@ -21,5 +21,4 @@ final class SizeUtil {
         print("\(#line)-line, \(#function)")
         return statusBarHeight
     }
-    
 }
