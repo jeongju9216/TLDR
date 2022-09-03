@@ -13,20 +13,18 @@ final class HomeView: UIView {
     private var topBarView: UIView! //상단바(네비바 모양)
     private var titleLabel: UILabel!
     
-    private var textView: UITextView! //텍스트 입력창
+    var textView: UITextView! //텍스트 입력창
     
     var summarizeButton: UIButton!
     
     var hideKeyboardButton: UIButton!
     
     //MARK: - Properties
-    private var fontSize: CGFloat = 18.0
     private var statusBarHeight: CGFloat = SizeUtil.statusBarHeight
     private var topBarHeight: CGFloat {
         return 40 + statusBarHeight
     }
     private var animationDuration: Double = 0.3
-    let testString = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세"
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -118,14 +116,13 @@ final class HomeView: UIView {
     
     private func setupTextView() {
         textView = UITextView()
+        
         textView.backgroundColor = .backgroundColor
-        
-        textView.applyTextWithLineHeight(string: testString)
-        textView.textColor = .label
-        textView.font = UIFont.systemFont(ofSize: fontSize)
-        textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 10, right: 15)
-        
         textView.inputAccessoryView = hideKeyboardButton
+        textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 10, right: 15)
+
+        textView.font = UIFont.systemFont(ofSize: TextUtil.fontSize)
+        textView.typingAttributes = TextUtil.textViewStyle
         
         self.addSubview(textView)
         textView.pinWidth(constant: self.bounds.width)
