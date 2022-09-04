@@ -14,6 +14,7 @@ final class KeywordView: UIView {
     private var keywordUnderLineLabel: UnderLineLabel!
     private var keywordLabel: UILabel!
 
+    //키워드 강조 원본
     private var textUnderLineLabel: UnderLineLabel!
     private var textView: UITextView!
         
@@ -35,6 +36,10 @@ final class KeywordView: UIView {
         self.keywords = keywords
         self.text = text
         
+        setup()
+    }
+    
+    private func setup() {
         setupKeywordUnderLineLabel()
         setupKeywordLabel()
         
@@ -86,8 +91,6 @@ final class KeywordView: UIView {
         textView.backgroundColor = .backgroundColor
         textView.textContainerInset = UIEdgeInsets(top: 0, left: 10, bottom: 40, right: 10)
         
-        textView.font = UIFont.systemFont(ofSize: TextUtil.fontSize)
-
         textView.text = self.text
         textView.applyLineHeight()
         textView.highlightKeywords(keywords)

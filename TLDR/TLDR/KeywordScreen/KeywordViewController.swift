@@ -17,6 +17,7 @@ final class KeywordViewController: BaseViewController<KeywordView> {
         super.viewDidLoad()
         
         setupNavigationBar()
-        layoutView.setup(keywords: summarizeData.keywords, text: summarizeData.text)
+        
+        self.layoutView.setup(keywords: summarizeData.keywords, text: summarizeData.text)
     }
 }
