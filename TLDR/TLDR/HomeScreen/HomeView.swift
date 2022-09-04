@@ -11,13 +11,12 @@ final class HomeView: UIView {
     
     //MARK: - Views
     private var topBarView: UIView! //상단바(네비바 모양)
-    private var titleLabel: UILabel!
+    private var titleLabel: UILabel! //TLDR 라벨
     
     var textView: UITextView! //텍스트 입력창
     
-    var summarizeButton: UIButton!
-    
-    var hideKeyboardButton: UIButton!
+    var summarizeButton: UIButton! //요약하기 버튼
+    var hideKeyboardButton: UIButton! //키보드 숨김 버튼
     
     //MARK: - Properties
     private var statusBarHeight: CGFloat = SizeUtil.statusBarHeight
@@ -38,6 +37,7 @@ final class HomeView: UIView {
     }
     
     //MARK: - Methods
+    //키보드 내려가면 탑바 보임
     func showTopBar() {
         textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 10, right: 15)
         
@@ -50,6 +50,7 @@ final class HomeView: UIView {
         })
     }
     
+    //키보드 올라가면 탑바 숨김
     func hideTopBar() {
         textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 300, right: 15)
         
@@ -64,12 +65,14 @@ final class HomeView: UIView {
         })
     }
     
+    //키보드 올라가면 요약하기 버튼 숨김
     func showSummarizeButton() {
         UIView.animate(withDuration: animationDuration, animations: {
             self.summarizeButton.alpha = 1
         })
     }
     
+    //키보드 올라가면 요약하기 버튼 보임
     func hideSummarizeButton() {
         UIView.animate(withDuration: animationDuration, animations: {
             self.summarizeButton.alpha = 0
@@ -121,7 +124,6 @@ final class HomeView: UIView {
         textView.inputAccessoryView = hideKeyboardButton
         textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 10, right: 15)
 
-        textView.font = UIFont.systemFont(ofSize: TextUtil.fontSize)
         textView.typingAttributes = TextUtil.textViewStyle
         
         self.addSubview(textView)
