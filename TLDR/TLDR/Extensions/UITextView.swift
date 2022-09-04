@@ -28,9 +28,6 @@ extension UITextView {
             }
         }
         
-//        var searchRange = text.startIndex..<text.endIndex
-//        attrString.addAttribute(.paragraphStyle, value: TextUtil.textViewStyle, range: NSRange(searchRange, in: text))
-        
         self.attributedText = attrString
     }
 }
