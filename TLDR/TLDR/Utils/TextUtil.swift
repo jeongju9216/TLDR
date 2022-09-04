@@ -22,6 +22,7 @@ final class TextUtil {
             print("fontSize * lineHeight: \(fontSize * lineHeight)")
             return style
         }(),
-        .font: UIFont.systemFont(ofSize: fontSize)
+        .font: UIFont.systemFont(ofSize: fontSize),
+        .foregroundColor: UIColor.label
     ]
 }
