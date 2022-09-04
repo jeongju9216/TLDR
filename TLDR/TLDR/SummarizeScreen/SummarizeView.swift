@@ -11,13 +11,12 @@ import UIKit
 final class SummarizeView: UIView {
     
     //MARK: - Views
-    //요약 내용
-    private var summarizeUnderLineLabel: UnderLineLabel!
-    private var summarizeTextView: UITextView!
-    var keywordButton: UIButton!
+    private var summarizeUnderLineLabel: UnderLineLabel! //타이틀
+    private var summarizeTextView: UITextView! //요약내용 TextView
+    var keywordButton: UIButton! //키워드 Screen으로 이동
     
-    private var summarizeText: String = ""
-    private var countOfKeywords: Int = 0
+    private var summarizeText: String = "" //요약내용
+    private var countOfKeywords: Int = 0 //키워드 개수
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -29,10 +28,15 @@ final class SummarizeView: UIView {
     }
     
     //MARK: - Setup
+    //요약 내용과 키워드 개수를 입력받음
     func setup(summarizeText: String, countOfKeywords: Int) {
         self.summarizeText = summarizeText
         self.countOfKeywords = countOfKeywords
         
+        setup()
+    }
+    
+    private func setup() {
         setupSummarizeUnderLineLabel()
         setupKeywordButton()
 

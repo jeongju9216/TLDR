@@ -15,11 +15,10 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("summarizeData: \(summarizeData)")
-        
-        setupNavigationBar()
-        self.layoutView.setup(summarizeText: summarizeData.summarizeText, countOfKeywords: summarizeData.keywords.count)
+                
+        setupNavigationBar() //네비게이션 세팅
+        self.layoutView.setup(summarizeText: summarizeData.summarizeText,
+                              countOfKeywords: summarizeData.keywords.count)
         
         addTargets()        
     }
@@ -29,8 +28,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
         print("\(#line)-line, \(#function)")
     
         let keywordVC: KeywordViewController = KeywordViewController()
-        keywordVC.summarizeData = self.summarizeData
-
+        keywordVC.summarizeData = self.summarizeData //전달받은 데이터 그대로 넣기
         self.navigationController?.pushViewController(keywordVC, animated: true)
     }
     
