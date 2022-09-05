@@ -54,7 +54,7 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     //MARK: - Methods
     private func testData() -> SummarizeData {
-        return SummarizeData(text: self.inputText, summarizeText: BaseData.shared.testSummarizeText, keywords: BaseData.shared.testKeywords)
+        return SummarizeData(text: BaseData.shared.testText, summarizeText: BaseData.shared.testSummarizeText, keywords: BaseData.shared.testKeywords)
     }
     
     private func addTargets() {
