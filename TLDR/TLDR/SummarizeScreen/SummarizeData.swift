@@ -12,3 +12,9 @@ struct SummarizeData {
     var summarizeText: String = "" //요약 내용
     var keywords: [String] = [] //핵심 키워드
 }
+
+enum SummarizeLangauge: String {
+    case auto
+    case en
+    case kr
+}

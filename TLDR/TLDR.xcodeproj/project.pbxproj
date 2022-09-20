@@ -31,6 +31,9 @@
 		9BBA93DE28C1D416002CB0CF /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93DD28C1D416002CB0CF /* BaseData.swift */; };
 		9BBA93E128C33742002CB0CF /* SummarizeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93E028C33742002CB0CF /* SummarizeData.swift */; };
 		9BBA93E328C355FF002CB0CF /* TextUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA93E228C355FF002CB0CF /* TextUtil.swift */; };
+		9BD3C43E28D9C63A00B3B594 /* HttpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C43D28D9C63A00B3B594 /* HttpService.swift */; };
+		9BD3C44028D9D52100B3B594 /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C43F28D9D52100B3B594 /* HttpError.swift */; };
+		9BD3C44228D9D55000B3B594 /* HttpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C44128D9D55000B3B594 /* HttpAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +63,9 @@
 		9BBA93DD28C1D416002CB0CF /* BaseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		9BBA93E028C33742002CB0CF /* SummarizeData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeData.swift; sourceTree = "<group>"; };
 		9BBA93E228C355FF002CB0CF /* TextUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextUtil.swift; sourceTree = "<group>"; };
+		9BD3C43D28D9C63A00B3B594 /* HttpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpService.swift; sourceTree = "<group>"; };
+		9BD3C43F28D9D52100B3B594 /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
+		9BD3C44128D9D55000B3B594 /* HttpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +98,7 @@
 		9BBA939128BC6C6F002CB0CF /* TLDR */ = {
 			isa = PBXGroup;
 			children = (
+				9BD3C43C28D9C62700B3B594 /* Http */,
 				9BBA93DF28C33736002CB0CF /* SharedData */,
 				9BBA93D828C198CA002CB0CF /* CustomViews */,
 				9BBA93AE28BF6E61002CB0CF /* LaunchScreen */,
@@ -193,6 +200,16 @@
 			path = SharedData;
 			sourceTree = "<group>";
 		};
+		9BD3C43C28D9C62700B3B594 /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				9BD3C43D28D9C63A00B3B594 /* HttpService.swift */,
+				9BD3C43F28D9D52100B3B594 /* HttpError.swift */,
+				9BD3C44128D9D55000B3B594 /* HttpAPI.swift */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -265,8 +282,10 @@
 			files = (
 				9BBA93CD28C07632002CB0CF /* SummarizeView.swift in Sources */,
 				9BBA93B428BF6EC6002CB0CF /* LaunchViewController.swift in Sources */,
+				9BD3C44228D9D55000B3B594 /* HttpAPI.swift in Sources */,
 				9BBA93B928BF706D002CB0CF /* UIColor.swift in Sources */,
 				9BBA93B628BF6F1B002CB0CF /* LaunchView.swift in Sources */,
+				9BD3C44028D9D52100B3B594 /* HttpError.swift in Sources */,
 				9BBA93E328C355FF002CB0CF /* TextUtil.swift in Sources */,
 				9BBA93C328BF7A4F002CB0CF /* HomeView.swift in Sources */,
 				9BBA93D628C0CEB1002CB0CF /* UnderLineLabel.swift in Sources */,
@@ -281,6 +300,7 @@
 				9BBA93CB28C0762B002CB0CF /* SummarizeViewController.swift in Sources */,
 				9BBA93BE28BF78C5002CB0CF /* TimeUtil.swift in Sources */,
 				9BBA93B128BF6E7F002CB0CF /* BaseViewController.swift in Sources */,
+				9BD3C43E28D9C63A00B3B594 /* HttpService.swift in Sources */,
 				9BBA93C528BF7D12002CB0CF /* SizeUtil.swift in Sources */,
 				9BBA93DE28C1D416002CB0CF /* BaseData.swift in Sources */,
 				9BBA93C728BF9CA4002CB0CF /* UIButton.swift in Sources */,
