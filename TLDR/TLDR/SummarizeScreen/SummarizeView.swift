@@ -5,7 +5,6 @@
 //  Created by 유정주 on 2022/09/01.
 //
 
-import Foundation
 import UIKit
 
 final class SummarizeView: UIView {
