@@ -22,6 +22,7 @@ final class HttpService {
     static let shard: HttpService = HttpService()
     private init() { }
 
+    private let urlSession: URLSession = URLSession.shared
     private let domain: String = "https://www.tldr161718.site/"
     
     //GET
@@ -60,10 +61,7 @@ extension HttpService {
         do {
             guard let url = URL(string: url) else { throw HttpError.urlError }
             
-            var request: URLRequest = URLRequest(url: url)
-            request.httpMethod = "GET"
-            
-            let (data, response) = try await URLSession.shared.data(for: request)
+            let (data, response) = try await urlSession.data(from: url)
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode == 200 else {
                 throw HttpError.statusCodeError
             }
@@ -86,7 +84,7 @@ extension HttpService {
             request.addValue("application/json", forHTTPHeaderField: "Content-Type")
             request.httpBody = sendData
         
-            let (data, response) = try await URLSession.shared.data(for: request)
+            let (data, response) = try await urlSession.data(for: request)
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode == 200 else {
                 throw HttpError.statusCodeError
             }
