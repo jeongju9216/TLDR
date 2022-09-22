@@ -34,6 +34,9 @@
 		9BD3C43E28D9C63A00B3B594 /* HttpService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C43D28D9C63A00B3B594 /* HttpService.swift */; };
 		9BD3C44028D9D52100B3B594 /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C43F28D9D52100B3B594 /* HttpError.swift */; };
 		9BD3C44228D9D55000B3B594 /* HttpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C44128D9D55000B3B594 /* HttpAPI.swift */; };
+		9BD3C46728DC630D00B3B594 /* KeywordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C46628DC630D00B3B594 /* KeywordViewModel.swift */; };
+		9BD3C46A28DC63C200B3B594 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C46928DC63C200B3B594 /* Observable.swift */; };
+		9BD3C46D28DC6F6100B3B594 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C46C28DC6F6100B3B594 /* TestData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +69,9 @@
 		9BD3C43D28D9C63A00B3B594 /* HttpService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpService.swift; sourceTree = "<group>"; };
 		9BD3C43F28D9D52100B3B594 /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
 		9BD3C44128D9D55000B3B594 /* HttpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpAPI.swift; sourceTree = "<group>"; };
+		9BD3C46628DC630D00B3B594 /* KeywordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeywordViewModel.swift; sourceTree = "<group>"; };
+		9BD3C46928DC63C200B3B594 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		9BD3C46C28DC6F6100B3B594 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,21 +104,21 @@
 		9BBA939128BC6C6F002CB0CF /* TLDR */ = {
 			isa = PBXGroup;
 			children = (
-				9BD3C43C28D9C62700B3B594 /* Http */,
-				9BBA93DF28C33736002CB0CF /* SharedData */,
-				9BBA93D828C198CA002CB0CF /* CustomViews */,
+				9BD3C46B28DC6D4D00B3B594 /* Test */,
 				9BBA93AE28BF6E61002CB0CF /* LaunchScreen */,
 				9BBA93BF28BF78DF002CB0CF /* HomeScreen */,
 				9BBA93C928C0753C002CB0CF /* SummarizeScreen */,
 				9BBA93D728C198AC002CB0CF /* KeywordScreen */,
 				9BBA93AF28BF6E6F002CB0CF /* BaseGroup */,
-				9BBA93B728BF7060002CB0CF /* Extensions */,
 				9BBA93BC28BF78B5002CB0CF /* Utils */,
+				9BBA93B728BF7060002CB0CF /* Extensions */,
+				9BD3C43C28D9C62700B3B594 /* HttpService */,
+				9BBA93D828C198CA002CB0CF /* CustomViews */,
+				9BBA939B28BC6C70002CB0CF /* Assets.xcassets */,
+				9BBA93A028BC6C70002CB0CF /* Info.plist */,
 				9BBA939228BC6C6F002CB0CF /* AppDelegate.swift */,
 				9BBA939428BC6C6F002CB0CF /* SceneDelegate.swift */,
-				9BBA939B28BC6C70002CB0CF /* Assets.xcassets */,
 				9BBA939D28BC6C70002CB0CF /* LaunchScreen.storyboard */,
-				9BBA93A028BC6C70002CB0CF /* Info.plist */,
 			);
 			path = TLDR;
 			sourceTree = "<group>";
@@ -131,6 +137,7 @@
 			children = (
 				9BBA93B028BF6E7F002CB0CF /* BaseViewController.swift */,
 				9BBA93DD28C1D416002CB0CF /* BaseData.swift */,
+				9BD3C46928DC63C200B3B594 /* Observable.swift */,
 			);
 			path = BaseGroup;
 			sourceTree = "<group>";
@@ -180,6 +187,7 @@
 			children = (
 				9BBA93DB28C19969002CB0CF /* KeywordViewController.swift */,
 				9BBA93D928C19960002CB0CF /* KeywordView.swift */,
+				9BD3C46628DC630D00B3B594 /* KeywordViewModel.swift */,
 			);
 			path = KeywordScreen;
 			sourceTree = "<group>";
@@ -193,21 +201,22 @@
 			path = CustomViews;
 			sourceTree = "<group>";
 		};
-		9BBA93DF28C33736002CB0CF /* SharedData */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = SharedData;
-			sourceTree = "<group>";
-		};
-		9BD3C43C28D9C62700B3B594 /* Http */ = {
+		9BD3C43C28D9C62700B3B594 /* HttpService */ = {
 			isa = PBXGroup;
 			children = (
 				9BD3C43D28D9C63A00B3B594 /* HttpService.swift */,
 				9BD3C43F28D9D52100B3B594 /* HttpError.swift */,
 				9BD3C44128D9D55000B3B594 /* HttpAPI.swift */,
 			);
-			path = Http;
+			path = HttpService;
+			sourceTree = "<group>";
+		};
+		9BD3C46B28DC6D4D00B3B594 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				9BD3C46C28DC6F6100B3B594 /* TestData.swift */,
+			);
+			path = Test;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,11 +302,14 @@
 				9BBA93DC28C19969002CB0CF /* KeywordViewController.swift in Sources */,
 				9BBA939328BC6C6F002CB0CF /* AppDelegate.swift in Sources */,
 				9BBA93DA28C19960002CB0CF /* KeywordView.swift in Sources */,
+				9BD3C46A28DC63C200B3B594 /* Observable.swift in Sources */,
 				9BBA93C128BF7A41002CB0CF /* HomeViewController.swift in Sources */,
 				9BBA93D128C0ADBD002CB0CF /* LineView.swift in Sources */,
 				9BBA93D428C0B7F2002CB0CF /* UITextView.swift in Sources */,
 				9BBA939528BC6C6F002CB0CF /* SceneDelegate.swift in Sources */,
 				9BBA93CB28C0762B002CB0CF /* SummarizeViewController.swift in Sources */,
+				9BD3C46D28DC6F6100B3B594 /* TestData.swift in Sources */,
+				9BD3C46728DC630D00B3B594 /* KeywordViewModel.swift in Sources */,
 				9BBA93BE28BF78C5002CB0CF /* TimeUtil.swift in Sources */,
 				9BBA93B128BF6E7F002CB0CF /* BaseViewController.swift in Sources */,
 				9BD3C43E28D9C63A00B3B594 /* HttpService.swift in Sources */,

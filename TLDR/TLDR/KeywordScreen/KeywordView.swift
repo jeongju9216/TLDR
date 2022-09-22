@@ -18,10 +18,6 @@ final class KeywordView: UIView {
     private var textUnderLineLabel: UnderLineLabel!
     private var textView: UITextView!
         
-    //MARK: - Properties
-    private var keywords: [String] = []
-    private var text: String = ""
-    
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,15 +27,24 @@ final class KeywordView: UIView {
         super.init(coder: coder)
     }
     
-    //MARK: - Setup
-    func setup(keywords: [String], text: String) {
-        self.keywords = keywords
-        self.text = text
-        
-        setup()
+    //MARK: - Methods
+    func setText(_ text: String) {
+        textView.text = text
     }
     
-    private func setup() {
+    func setKeywords(_ keywords: Set<String>) {
+        var str: String = ""
+        keywords.forEach { str += "#\($0) " }
+        
+        keywordLabel.text = str
+    }
+    
+    func highlightKeywords(_ keywords: Set<String>) {
+        textView.highlightKeywords(keywords)
+    }
+    
+    //MARK: - Setup
+    func setup() {
         setupKeywordUnderLineLabel()
         setupKeywordLabel()
         
@@ -60,10 +65,6 @@ final class KeywordView: UIView {
     private func setupKeywordLabel() {
         keywordLabel = UILabel()
         
-        var str: String = ""
-        keywords.forEach { str += "#\($0) " }
-        
-        keywordLabel.text = str
         keywordLabel.font = UIFont.systemFont(ofSize: TextUtil.fontSize)
         keywordLabel.lineBreakMode = .byCharWrapping
         keywordLabel.numberOfLines = .zero
@@ -91,9 +92,7 @@ final class KeywordView: UIView {
         textView.backgroundColor = .backgroundColor
         textView.textContainerInset = UIEdgeInsets(top: 0, left: 10, bottom: 40, right: 10)
         
-        textView.text = self.text
         textView.applyLineHeight()
-        textView.highlightKeywords(keywords)
                 
         self.addSubview(textView)
         textView.pinWidth(constant: self.bounds.width)
