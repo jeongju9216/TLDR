@@ -27,13 +27,15 @@ final class HomeViewController: BaseViewController<HomeView> {
     @objc func clickedSumUpButton() {
         print("\(#line)-line, \(#function)")
         
-        //todo
+        //todo post summarize
+        //서버에 텍스트 보내기
         //서버에서 결과 받아오기
         
         let summarizeVC: SummarizeViewController = SummarizeViewController()
         //todo
         //결과값으로 전달함
-//        summarizeVC.summarizeData = //testData()
+        let testData = TestData()
+        summarizeVC.summarizeData = SummarizeData(text: testData.text, summarizeText: testData.summarize, keywords: testData.keywords)
         self.navigationController?.pushViewController(summarizeVC, animated: true)
     }
     
