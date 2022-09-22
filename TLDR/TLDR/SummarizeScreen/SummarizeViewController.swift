@@ -10,7 +10,7 @@ import UIKit
 final class SummarizeViewController: BaseViewController<SummarizeView> {
     
     //MARK: - Properties
-    var summarizeData: SummarizeData!
+    var summarizeData: SummarizeData = SummarizeData(text: "", summarizeText: "", keywords: [])
     
     //MARK: - Life Cycles
     override func viewDidLoad() {
