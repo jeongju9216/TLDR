@@ -8,10 +8,40 @@
 import UIKit
 
 final class BaseData {
-    static let shared: BaseData = BaseData()
-    init() { }
+    static var shared = BaseData()
+    private init() { }
     
-    let testText = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세"
-    let testSummarizeText = "동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라 만세 무궁화 삼천리 화려강산 대한 사람 대한으로 길이 보전하세"
-    let testKeywords: [String] = ["보전하세", "동해물", "백두산", "하느님", "우리나라", "대한", "무궁화"]
+    var appleID = ""
+    var bundleID = ""
+    var appStoreOpenUrlString: String { //앱 스토어 url
+        "itms-apps://itunes.apple.com/app/apple-store/\(appleID)"
+    }
+    
+    var currentVersion = "" //현재버전
+    var lastetVersion = "" //최신버전
+    var forcedUpdateVersion = "" //강제 업데이트 버전
+}
+
+extension BaseData {
+    var isNeedUpdate: Bool { //업데이트가 필요한가?
+        get {
+            compareVersion(curruent: currentVersion, compare: lastetVersion)
+        }
+    }
+    
+    var isNeedForcedUpdate: Bool { //강제 업데이트가 필요한가?
+        get {
+            compareVersion(curruent: currentVersion, compare: forcedUpdateVersion)
+        }
+    }
+    
+    private func compareVersion(curruent: String, compare: String) -> Bool {
+        let compareResult = curruent.compare(compare, options: .numeric)
+        switch compareResult {
+        case .orderedAscending: //current < compare
+            return true
+        case .orderedDescending, .orderedSame: //current >= compare
+            return false
+        }
+    }
 }
