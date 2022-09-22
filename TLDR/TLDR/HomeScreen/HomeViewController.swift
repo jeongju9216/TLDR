@@ -33,7 +33,7 @@ final class HomeViewController: BaseViewController<HomeView> {
         let summarizeVC: SummarizeViewController = SummarizeViewController()
         //todo
         //결과값으로 전달함
-        summarizeVC.summarizeData = testData()
+//        summarizeVC.summarizeData = //testData()
         self.navigationController?.pushViewController(summarizeVC, animated: true)
     }
     
@@ -53,10 +53,6 @@ final class HomeViewController: BaseViewController<HomeView> {
     }
     
     //MARK: - Methods
-    private func testData() -> SummarizeData {
-        return SummarizeData(text: BaseData.shared.testText, summarizeText: BaseData.shared.testSummarizeText, keywords: BaseData.shared.testKeywords)
-    }
-    
     private func addTargets() {
         self.layoutView.summarizeButton.addTarget(self, action: #selector(clickedSumUpButton), for: .touchUpInside)
         self.layoutView.hideKeyboardButton.addTarget(self, action: #selector(clickedHideKeyboardButton), for: .touchUpInside)
