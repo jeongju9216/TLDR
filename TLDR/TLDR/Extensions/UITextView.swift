@@ -12,7 +12,7 @@ extension UITextView {
         self.attributedText = NSAttributedString(string: self.text, attributes: TextUtil.textViewStyle)
     }
     
-    func highlightKeywords(_ keywords: [String], color: UIColor = .mainColor) {
+    func highlightKeywords(_ keywords: Set<String>, color: UIColor = .mainColor) {
         
         let attrString = NSMutableAttributedString(string: self.text, attributes: TextUtil.textViewStyle)
         
