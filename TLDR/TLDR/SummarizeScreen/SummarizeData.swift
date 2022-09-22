@@ -8,9 +8,9 @@
 import Foundation
 
 struct SummarizeData {
-    var text: String = "" //원본
-    var summarizeText: String = "" //요약 내용
-    var keywords: [String] = [] //핵심 키워드
+    let text: String //원본
+    let summarizeText: String //요약 내용
+    let keywords: Set<String> //핵심 키워드
 }
 
 enum SummarizeLangauge: String {
