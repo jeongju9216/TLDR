@@ -37,18 +37,6 @@ final class HttpService {
     }
     
     //POST
-    func postVersion(forced: String, lasted: String) async -> Response {
-        let param = ["forced": forced, "lasted": lasted]
-        let response = await requestPost(url: self.domain + HttpAPI.version.rawValue, param: param)
-        return response
-    }
-    
-    func postState(state: String, notice: String) async -> Response {
-        let param = ["state": state, "notice": notice]
-        let response = await requestPost(url: self.domain + HttpAPI.state.rawValue, param: param)
-        return response
-    }
-    
     func postSummarize(text: String, language: SummarizeLangauge) async -> Response {
         let param = ["text": text, "language": language.rawValue]
         let response = await requestPost(url: self.domain + HttpAPI.summarize.rawValue, param: param)

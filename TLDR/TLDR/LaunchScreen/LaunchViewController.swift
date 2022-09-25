@@ -13,30 +13,57 @@ final class LaunchViewController: BaseViewController<LaunchView> {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        Logger.debug("앱 시작")
         Task {
-            let versionResponse = await HttpService.shard.getVersion()
-            if versionResponse.result == .ok, let versionData = versionResponse.data {
-                setVersion(versionData)
-            }
+            let testJson = "{\"forced\":\"0.0.1\", \"lasted\":\"0.0.1\", \"appleID\" : \"123456\", \"bundleID\" : \"com.jeong9216.TLDR\"}"
+            let versionResponse = Response(result: .ok, message: "테스트", data: testJson)//await HttpService.shard.getVersion()
             
-            try await Task.sleep(nanoseconds: TimeUtil.nano2sec(0.5)) //런치 시간
-                    
-            let navigationVC: UINavigationController = UINavigationController(rootViewController: HomeViewController())
-            navigationVC.modalPresentationStyle = .fullScreen
-            self.present(navigationVC, animated: false)
+            do {
+                guard versionResponse.result == .ok else { throw HttpError.apiError }
+                
+                let versionData = try parsingVersionData(versionResponse)
+                setVersion(versionData)
+                
+                try await Task.sleep(nanoseconds: TimeUtil.nano2sec(0.5)) //런치 시간
+                
+                goHomeVC()
+            } catch {
+                Logger.error(error.localizedDescription)
+                self.showErroAlert()
+            }
         }
     }
     
-    private func setVersion(_ data: String) {
-        BaseData.shared.currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
+    //MARK: - Methods
+    private func parsingVersionData(_ response: Response) throws -> VersionData {
+        Logger.debug(response.data)
+
+        guard let json = response.data, let data = json.data(using: .utf8) else {
+            throw HttpError.jsonError
+        }
+
+        let versionData = try JSONDecoder().decode(VersionData.self, from: data)
+        Logger.info(versionData)
         
+        return versionData
     }
     
-    private func postVersion() async {
-        let forced: String = "1.0.0"
-        let lasted: String = "1.0.0"
+    private func setVersion(_ version: VersionData) {
+        BaseData.shared.currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         
-        let result = await HttpService.shard.postVersion(forced: forced, lasted: lasted)
-        print(result)
+        BaseData.shared.forcedUpdateVersion = version.forced
+        BaseData.shared.lastetVersion = version.lasted
+        
+        BaseData.shared.appleID = version.appleID
+        BaseData.shared.bundleID = version.bundleID
+    }
+    
+    private func goHomeVC() {
+        let navigationVC: UINavigationController = UINavigationController(rootViewController: HomeViewController())
+        navigationVC.modalPresentationStyle = .fullScreen
+
+        self.dismiss(animated: false)
+        
+        self.present(navigationVC, animated: false)
     }
 }
