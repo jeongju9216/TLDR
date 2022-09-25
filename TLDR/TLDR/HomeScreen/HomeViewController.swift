@@ -27,8 +27,6 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     //MARK: - Actions
     @objc func clickedSumUpButton() async {
-        print("\(#line)-line, \(#function)")
-        
         let testData = TestData()
         
         let text: String = testData.text//inputText
@@ -52,7 +50,6 @@ final class HomeViewController: BaseViewController<HomeView> {
     }
     
     @objc func clickedHideKeyboardButton() {
-        print("\(#line)-line, \(#function)")
         self.layoutView.showTopBar()
         self.layoutView.showSummarizeButton()
         
@@ -61,7 +58,6 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     //키보드 보였을 때
     @objc func keyboardWillShow(notification: NSNotification) {
-        print("\(#line)-line, \(#function)")
         self.layoutView.hideTopBar()
         self.layoutView.hideSummarizeButton()
     }
@@ -72,7 +68,7 @@ final class HomeViewController: BaseViewController<HomeView> {
             throw HttpError.jsonError
         }
         
-        let responseData = try JSONDecoder().decode(SummarizeResultData.self, from: data)
+        let responseData = try JSONDecoder().decode(SummarizeResponseData.self, from: data)
         let summarizeData = SummarizeData(text: text, summarizeText: responseData.summarize, keywords: Set(responseData.keywords))
         
         return summarizeData

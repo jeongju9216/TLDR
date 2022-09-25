@@ -19,7 +19,6 @@ final class TextUtil {
             style.minimumLineHeight = lineheight
             style.maximumLineHeight = lineheight
 
-            print("fontSize * lineHeight: \(fontSize * lineHeight)")
             return style
         }(),
         .font: UIFont.systemFont(ofSize: fontSize),

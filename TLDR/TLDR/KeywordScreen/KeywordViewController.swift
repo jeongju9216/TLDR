@@ -38,7 +38,6 @@ final class KeywordViewController: BaseViewController<KeywordView> {
     //MARK: - Methods
     private func bind() {
         keywordViewModel.keywords.bind { [weak self] selectedKeywords in
-            print("\(#line)-line, \(#function): \(selectedKeywords)")
             self?.layoutView.highlightKeywords(selectedKeywords)
         }
     }

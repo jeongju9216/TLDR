@@ -18,7 +18,6 @@ final class SizeUtil {
         
         let statusBarHeight: CGFloat = window?.windowScene?.statusBarManager?.statusBarFrame.height ?? 0
         
-        print("\(#line)-line, \(#function)")
         return statusBarHeight
     }
 }
