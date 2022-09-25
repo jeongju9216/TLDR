@@ -13,7 +13,7 @@ struct SummarizeData {
     let keywords: Set<String> //핵심 키워드
 }
 
-struct SummarizeResultData: Decodable {
+struct SummarizeResponseData: Decodable {
     let summarize: String
     let keywords: [String]
     let language: String
