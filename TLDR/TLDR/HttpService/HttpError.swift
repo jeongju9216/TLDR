@@ -11,4 +11,5 @@ enum HttpError: Error {
     case statusCodeError
     case urlError
     case jsonError
+    case apiError
 }
