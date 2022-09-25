@@ -13,6 +13,12 @@ struct SummarizeData {
     let keywords: Set<String> //핵심 키워드
 }
 
+struct SummarizeResultData: Decodable {
+    let summarize: String
+    let keywords: [String]
+    let language: String
+}
+
 enum SummarizeLangauge: String {
     case auto
     case en
