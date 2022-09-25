@@ -8,9 +8,16 @@
 import UIKit
 
 class BaseViewController<LayoutView: UIView>: UIViewController {
+    //MARK: - Views
     var layoutView: LayoutView {
         return view as! LayoutView
     }
+    
+    private var errorAlert: UIAlertController = {
+        let errorMessage = "에러가 발생했습니다.\n다시 시도해 주세요."
+        let alert = UIAlertController(title: "에러", message: errorMessage, preferredStyle: .alert)
+        return alert
+    }()
     
     //MARK: - Life Cycles
     override func loadView() {
@@ -28,5 +35,17 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         appearance.backgroundColor = .backgroundColor
         self.navigationItem.standardAppearance = appearance
         self.navigationItem.scrollEdgeAppearance = appearance
+    }
+    
+    func showErroAlert(message: String? = nil) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            if let message = message {
+                self.errorAlert.message = message
+            }
+            
+            self.present(self.errorAlert, animated: true)
+        }
     }
 }
