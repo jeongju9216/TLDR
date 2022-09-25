@@ -8,6 +8,8 @@
 import UIKit
 
 final class HomeViewController: BaseViewController<HomeView> {
+    //todo
+    //입력값 없으면 요약하기 버튼 비활성화
     
     //MARK: - Properties
     private var inputText: String = "" //입력한 글자
@@ -24,19 +26,29 @@ final class HomeViewController: BaseViewController<HomeView> {
     }
     
     //MARK: - Actions
-    @objc func clickedSumUpButton() {
+    @objc func clickedSumUpButton() async {
         print("\(#line)-line, \(#function)")
         
-        //todo post summarize
-        //서버에 텍스트 보내기
-        //서버에서 결과 받아오기
-        
-        let summarizeVC: SummarizeViewController = SummarizeViewController()
-        //todo
-        //결과값으로 전달함
         let testData = TestData()
-        summarizeVC.summarizeData = SummarizeData(text: testData.text, summarizeText: testData.summarize, keywords: testData.keywords)
-        self.navigationController?.pushViewController(summarizeVC, animated: true)
+        
+        let text: String = testData.text//inputText
+        let response = await HttpService.shard.postSummarize(text: text, language: .auto)
+        
+        do {
+            guard response.result == .ok else {
+                throw HttpError.apiError
+            }
+            
+            let summarizeData = try parsingSummarizeData(response, text: text)
+            
+            let summarizeVC: SummarizeViewController = SummarizeViewController()
+            
+            summarizeVC.summarizeData = summarizeData
+            
+            self.navigationController?.pushViewController(summarizeVC, animated: true)
+        } catch {
+            self.showErroAlert()
+        }
     }
     
     @objc func clickedHideKeyboardButton() {
@@ -55,6 +67,17 @@ final class HomeViewController: BaseViewController<HomeView> {
     }
     
     //MARK: - Methods
+    private func parsingSummarizeData(_ response: Response, text: String) throws -> SummarizeData {
+        guard let json = response.data, let data = json.data(using: .utf8) else {
+            throw HttpError.jsonError
+        }
+        
+        let responseData = try JSONDecoder().decode(SummarizeResultData.self, from: data)
+        let summarizeData = SummarizeData(text: text, summarizeText: responseData.summarize, keywords: Set(responseData.keywords))
+        
+        return summarizeData
+    }
+    
     private func addTargets() {
         self.layoutView.summarizeButton.addTarget(self, action: #selector(clickedSumUpButton), for: .touchUpInside)
         self.layoutView.hideKeyboardButton.addTarget(self, action: #selector(clickedHideKeyboardButton), for: .touchUpInside)
