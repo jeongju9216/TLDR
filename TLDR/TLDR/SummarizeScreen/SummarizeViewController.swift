@@ -24,9 +24,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     }
     
     //MARK: - Actions
-    @objc func clickedKeywordButton() {
-        print("\(#line)-line, \(#function)")
-    
+    @objc func clickedKeywordButton() {    
         let keywordVC: KeywordViewController = KeywordViewController()
         keywordVC.summarizeData = self.summarizeData //전달받은 데이터 그대로 넣기
         self.navigationController?.pushViewController(keywordVC, animated: true)
