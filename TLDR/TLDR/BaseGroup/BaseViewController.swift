@@ -14,7 +14,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     }
     
     private let errorMessage = "에러가 발생했습니다.\n다시 시도해 주세요."
-    private var errorAlert: UIAlertController = {
+    lazy private var errorAlert: UIAlertController = {
         let alert = UIAlertController(title: "에러", message: "", preferredStyle: .alert)
         return alert
     }()
