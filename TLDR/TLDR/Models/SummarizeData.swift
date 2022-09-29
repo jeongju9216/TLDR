@@ -15,12 +15,12 @@ struct SummarizeData {
 
 struct SummarizeResponseData: Decodable {
     let summarize: String
-    let keywords: [String]
+    let keywords: String
     let language: String
 }
 
 enum SummarizeLangauge: String {
     case auto
     case en
-    case kr
+    case ko
 }
