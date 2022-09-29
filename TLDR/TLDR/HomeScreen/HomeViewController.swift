@@ -80,7 +80,7 @@ final class HomeViewController: BaseViewController<HomeView> {
         
         let responseData = try JSONDecoder().decode(SummarizeResponseData.self, from: data)
         
-        let keywords: Set<String> = Set(responseData.keywords.components(separatedBy: "|"))
+        let keywords: [String] = ["전체"] + responseData.keywords.components(separatedBy: "|")
         
         let summarizeData = SummarizeData(text: text, summarizeText: responseData.summarize, keywords: keywords)
         
