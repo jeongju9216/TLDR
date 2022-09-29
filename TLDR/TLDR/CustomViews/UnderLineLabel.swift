@@ -15,7 +15,7 @@ final class UnderLineLabel: UIView {
     
     //MARK: - Properties
     private var title: String = ""
-    private var fontSize: CGFloat = 24
+    private var fontSize: CGFloat = 0
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -26,7 +26,7 @@ final class UnderLineLabel: UIView {
         super.init(coder: coder)
     }
     
-    convenience init(frame: CGRect = .zero, title: String, fontSize: CGFloat = 24) {
+    convenience init(frame: CGRect = .zero, title: String, fontSize: CGFloat = 21) {
         self.init(frame: frame)
         
         self.title = title
@@ -34,6 +34,10 @@ final class UnderLineLabel: UIView {
         
         setup()
         setupLineView()
+    }
+    
+    func changeTitle(_ title: String) {
+        self.label.text = title
     }
     
     //MARK: - Setup
