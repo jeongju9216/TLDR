@@ -26,30 +26,28 @@ final class HomeViewController: BaseViewController<HomeView> {
     }
     
     //MARK: - Actions
-    @objc func clickedSumUpButton() async {
+    @objc private func clickedSumUpButton() {
         let testData = TestData()
-        
         let text: String = testData.text//inputText
-        let response = await HttpService.shard.postSummarize(text: text, language: .auto)
         
-        do {
-            guard response.result == .ok else {
-                throw HttpError.apiError
+        Task {
+            let testJson = "{\"summarize\":\"\(testData.summarize)\",\"keywords\":\"경제협력|양해각서|경제|교류|한중|중국|글로벌\",\"language\":\"ko\"}"
+            let response = Response(result: .ok, message: "Test", data: testJson)//await HttpService.shard.postSummarize(text: text, language: .auto)
+            
+            do {
+                guard response.result == .ok else { throw HttpError.apiError }
+                
+                let summarizeData = try parsingSummarizeData(response, text: text)
+                
+                goSummarizeVC(summarizeData)
+            } catch {
+                Logger.error(error.localizedDescription)
+                self.showErroAlert()
             }
-            
-            let summarizeData = try parsingSummarizeData(response, text: text)
-            
-            let summarizeVC: SummarizeViewController = SummarizeViewController()
-            
-            summarizeVC.summarizeData = summarizeData
-            
-            self.navigationController?.pushViewController(summarizeVC, animated: true)
-        } catch {
-            self.showErroAlert()
         }
     }
     
-    @objc func clickedHideKeyboardButton() {
+    @objc private func clickedHideKeyboardButton() {
         self.layoutView.showTopBar()
         self.layoutView.showSummarizeButton()
         
@@ -63,13 +61,28 @@ final class HomeViewController: BaseViewController<HomeView> {
     }
     
     //MARK: - Methods
+    private func goSummarizeVC(_ summarizeData: SummarizeData) {
+        DispatchQueue.main.async {
+            let summarizeVC: SummarizeViewController = SummarizeViewController()
+            
+            summarizeVC.summarizeData = summarizeData
+            
+            self.navigationController?.pushViewController(summarizeVC, animated: true)
+        }
+    }
+    
     private func parsingSummarizeData(_ response: Response, text: String) throws -> SummarizeData {
         guard let json = response.data, let data = json.data(using: .utf8) else {
             throw HttpError.jsonError
         }
         
+        Logger.info(json)
+        
         let responseData = try JSONDecoder().decode(SummarizeResponseData.self, from: data)
-        let summarizeData = SummarizeData(text: text, summarizeText: responseData.summarize, keywords: Set(responseData.keywords))
+        
+        let keywords: Set<String> = Set(responseData.keywords.components(separatedBy: "|"))
+        
+        let summarizeData = SummarizeData(text: text, summarizeText: responseData.summarize, keywords: keywords)
         
         return summarizeData
     }
