@@ -14,6 +14,11 @@ final class LaunchViewController: BaseViewController<LaunchView> {
         super.viewDidLoad()
         
         Logger.debug("앱 시작")
+        launch()
+    }
+    
+    //MARK: - Methods
+    private func launch() {
         Task {
             let testJson = "{\"forced\":\"0.0.1\", \"lasted\":\"0.0.1\", \"appleID\" : \"123456\", \"bundleID\" : \"com.jeong9216.TLDR\"}"
             let versionResponse = Response(result: .ok, message: "테스트", data: testJson)
@@ -39,7 +44,6 @@ final class LaunchViewController: BaseViewController<LaunchView> {
         }
     }
     
-    //MARK: - Methods
     private func parsingVersionData(_ response: Response) throws -> VersionData {
         Logger.debug(response.data)
 
