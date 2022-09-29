@@ -19,4 +19,12 @@ extension UIColor {
     static var darkColor: UIColor {
         return UIColor(named: "DarkColor") ?? .black
     }
+    
+    static var selectedKeywordColor: UIColor {
+        return UIColor(named: "SelectedKeywordColor") ?? .black
+    }
+    
+    static var deselectedKeywordColor: UIColor {
+        return UIColor(named: "DeselectedKeywordColor") ?? .black
+    }
 }
