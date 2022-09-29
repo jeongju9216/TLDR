@@ -22,12 +22,20 @@ struct KeywordViewModel {
         self.keywords.value = keywords
     }
     
+    func setKeywords(_ keywords: [String]) {
+        self.keywords.value = Set(keywords)
+    }
+    
     func selectedKeyword(_ keyword: String) {
         self.keywords.value.insert(keyword)
     }
     
     //선택 해제한 키워드
-    func unselectedKeyword(_ keyword: String) {
+    func deselectedKeyword(_ keyword: String) {
         self.keywords.value.remove(keyword)
+    }
+    
+    func allRemove() {
+        self.keywords.value.removeAll()
     }
 }
