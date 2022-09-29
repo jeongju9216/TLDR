@@ -47,6 +47,7 @@ final class HttpService {
 extension HttpService {
     private func requestGet(url: String) async -> Response {
         do {
+            Logger.debug(url)
             guard let url = URL(string: url) else { throw HttpError.urlError }
             
             let (data, response) = try await urlSession.data(from: url)
@@ -63,6 +64,7 @@ extension HttpService {
     
     private func requestPost(url: String, param: [String: Any]) async -> Response {
         do {
+            Logger.debug(url)
             guard let sendData = try? JSONSerialization.data(withJSONObject: param, options: [.prettyPrinted]) else { throw HttpError.jsonError }
             
             guard let url = URL(string: url) else { throw HttpError.urlError }
