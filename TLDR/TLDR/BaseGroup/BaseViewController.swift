@@ -14,10 +14,6 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
     }
     
     private let errorMessage = "에러가 발생했습니다.\n다시 시도해 주세요."
-    lazy private var errorAlert: UIAlertController = {
-        let alert = UIAlertController(title: "에러", message: "", preferredStyle: .alert)
-        return alert
-    }()
     
     //MARK: - Life Cycles
     override func loadView() {
@@ -41,13 +37,15 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
 
+            let errorAlert = UIAlertController(title: "에러", message: "", preferredStyle: .alert)
+            
             let message = message ?? self.errorMessage
-            self.errorAlert.message = message
+            errorAlert.message = message
             
             let doneAction = UIAlertAction(title: "확인", style: .default, handler: action)
-            self.errorAlert.addAction(doneAction)
+            errorAlert.addAction(doneAction)
             
-            self.present(self.errorAlert, animated: true)
+            self.present(errorAlert, animated: true)
         }
     }
 }
