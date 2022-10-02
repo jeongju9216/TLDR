@@ -11,6 +11,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     
     //MARK: - Properties
     var summarizeData: SummarizeData = SummarizeData()
+    private var keywords: [String] = []
     private var textMode: TextMode = .summarize
     
     private var selectedKeywords: Set<String> = []
@@ -26,6 +27,8 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
         setupNavigationBar() //네비게이션 세팅
         self.layoutView.setup()
         self.layoutView.setText(summarizeData.summarizeText)
+        
+        keywords = summarizeData.summarizeKeywords
         
         addTargets()
         bind()
@@ -54,10 +57,15 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
             switch textMode {
             case .original:
                 self.layoutView.setText(self.summarizeData.text)
+                self.keywords = self.summarizeData.textKeywords
             case .summarize:
                 self.layoutView.setText(self.summarizeData.summarizeText)
+                self.keywords = self.summarizeData.summarizeKeywords
             }
 
+            self.layoutView.keywordCollectionView.reloadData()
+            self.selectFirstItem()
+            
             self.layoutView.setTextModeLayout(textMode)
             self.layoutView.highlightKeywords(self.selectedKeywords)
         }
@@ -70,7 +78,10 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     }
     
     private func selectFirstItem() {
-        self.keywordViewModel.setKeywords(summarizeData.keywords)
+        self.keywordViewModel.allRemove()
+        self.prevSelectIndex = 0
+
+        self.keywordViewModel.setKeywords(keywords)
         layoutView.keywordCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init())
     }
     
@@ -81,14 +92,13 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
 
 extension SummarizeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return summarizeData.keywords.count
+        return keywords.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.layoutView.keywordCollectionView.dequeueReusableCell(withReuseIdentifier: "keywordCellIdentifier", for: indexPath) as! KeywordCell
         
-        let keyword = summarizeData.keywords[indexPath.row]
-        cell.setKeyword(keyword)
+        cell.setKeyword(keywords[indexPath.row])
         
         return cell
     }
@@ -97,8 +107,8 @@ extension SummarizeViewController: UICollectionViewDataSource {
 extension SummarizeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            self.keywordViewModel.setKeywords(summarizeData.keywords)
-            for i in 1..<summarizeData.keywords.count {
+            self.keywordViewModel.setKeywords(keywords)
+            for i in 1..<keywords.count {
                 layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: i, section: 0), animated: false)
             }
         } else {
@@ -106,7 +116,7 @@ extension SummarizeViewController: UICollectionViewDelegate {
                 self.keywordViewModel.allRemove()
             }
             
-            self.keywordViewModel.selectedKeyword(summarizeData.keywords[indexPath.row])
+            self.keywordViewModel.selectedKeyword(keywords[indexPath.row])
             layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: 0, section: 0), animated: false)
         }
         
@@ -117,7 +127,7 @@ extension SummarizeViewController: UICollectionViewDelegate {
         if indexPath.row == 0 {
             self.keywordViewModel.allRemove()
         } else {
-            self.keywordViewModel.deselectedKeyword(summarizeData.keywords[indexPath.row])
+            self.keywordViewModel.deselectedKeyword(keywords[indexPath.row])
         }
     }
 }
@@ -126,7 +136,7 @@ extension SummarizeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let label: UILabel = UILabel()
-        label.text = summarizeData.keywords[indexPath.row]
+        label.text = keywords[indexPath.row]
         label.font = UIFont.systemFont(ofSize: 16)
         label.sizeToFit()
         
