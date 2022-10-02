@@ -15,7 +15,7 @@ enum Result: String, Codable {
 struct Response: Codable {
     let result: Result
     let message: String
-    let data: String?
+    let data: [String: String]?
 }
 
 final class HttpService {
@@ -23,7 +23,7 @@ final class HttpService {
     private init() { }
 
     private let urlSession: URLSession = URLSession.shared
-    private let domain: String = "https://www.tldr161718.site/"
+    private let domain: String = "http://tldr161718.site/"
     
     //GET
     func getVersion() async -> Response {
@@ -31,7 +31,7 @@ final class HttpService {
         return response
     }
     
-    func getStatus() async -> Response {
+    func getState() async -> Response {
         let response = await requestGet(url: self.domain + HttpAPI.state.rawValue)
         return response
     }
@@ -49,15 +49,15 @@ extension HttpService {
         do {
             Logger.debug(url)
             guard let url = URL(string: url) else { throw HttpError.urlError }
-            
+                        
             let (data, response) = try await urlSession.data(from: url)
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode == 200 else {
                 throw HttpError.statusCodeError
             }
-            
-            let output: Response = try JSONDecoder().decode(Response.self, from: data)
-            return output
+                
+            return try JSONDecoder().decode(Response.self, from: data)
         } catch {
+            Logger.error(error)
             return Response(result: .fail, message: error.localizedDescription, data: nil)
         }
     }
@@ -65,6 +65,7 @@ extension HttpService {
     private func requestPost(url: String, param: [String: Any]) async -> Response {
         do {
             Logger.debug(url)
+            Logger.debug(param)
             guard let sendData = try? JSONSerialization.data(withJSONObject: param, options: [.prettyPrinted]) else { throw HttpError.jsonError }
             
             guard let url = URL(string: url) else { throw HttpError.urlError }
@@ -75,13 +76,14 @@ extension HttpService {
             request.httpBody = sendData
         
             let (data, response) = try await urlSession.data(for: request)
+                                
             guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode == 200 else {
                 throw HttpError.statusCodeError
             }
             
-            let output: Response = try JSONDecoder().decode(Response.self, from: data)
-            return output
+            return try JSONDecoder().decode(Response.self, from: data)
         } catch {
+            Logger.error(error)
             return Response(result: .fail, message: error.localizedDescription, data: nil)
         }
     }
