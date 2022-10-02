@@ -28,17 +28,25 @@ final class HomeViewController: BaseViewController<HomeView> {
     //MARK: - Actions
     @objc private func clickedSumUpButton() {
         let testData = TestData()
-        let text: String = testData.text//inputText
-        
+        let text: String = inputText
+
         Task {
-            let testJson = "{\"summarize\":\"\(testData.summarize)\",\"keywords\":\"경제협력|양해각서|경제|교류|한중|중국|글로벌\",\"language\":\"ko\"}"
-            let response = Response(result: .ok, message: "Test", data: testJson)//await HttpService.shard.postSummarize(text: text, language: .auto)
+            //["코로나", "한중", "공급망", "협력", "강화에", "탄소중립", "교류를", "MOU"]
+            let testDict: [String: String] = [
+                "summarize" : testData.summarize,
+                "text_keywords" : "코로나|한중|공급망|",
+                "summarize_keywords" : "협력|강화에|탄소중립|",
+                "language" : "auto"
+            ]
+            
+//            let response = Response(result: .ok, message: "Test", data: testDict)
+            let response = await HttpService.shard.postSummarize(text: text, language: .auto)
             
             do {
                 guard response.result == .ok else { throw HttpError.apiError }
                 
                 let summarizeData = try parsingSummarizeData(response, text: text)
-                
+
                 goSummarizeVC(summarizeData)
             } catch {
                 Logger.error(error.localizedDescription)
@@ -72,18 +80,19 @@ final class HomeViewController: BaseViewController<HomeView> {
     }
     
     private func parsingSummarizeData(_ response: Response, text: String) throws -> SummarizeData {
-        guard let json = response.data, let data = json.data(using: .utf8) else {
+        guard let json = response.data else {
             throw HttpError.jsonError
         }
-        
+
         Logger.info(json)
+
+        let responseData: SummarizeResponseData = try SummarizeResponseData.decode(dictionary: json)
         
-        let responseData = try JSONDecoder().decode(SummarizeResponseData.self, from: data)
-        
-        let keywords: [String] = ["전체"] + responseData.keywords.components(separatedBy: "|")
-        
-        let summarizeData = SummarizeData(text: text, summarizeText: responseData.summarize, keywords: keywords)
-        
+        let textKeywords: [String] = ["전체"] + responseData.textKeywords.components(separatedBy: "|").dropLast()
+        let summarizeKeywords: [String] = ["전체"] + responseData.summarizeKeywords.components(separatedBy: "|").dropLast()
+
+        let summarizeData = SummarizeData(text: text, summarizeText: responseData.summarize, textKeywords: textKeywords, summarizeKeywords: summarizeKeywords)
+
         return summarizeData
     }
     
