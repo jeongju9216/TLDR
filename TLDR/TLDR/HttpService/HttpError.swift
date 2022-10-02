@@ -8,6 +8,7 @@
 import Foundation
 
 enum HttpError: Error {
+    case serverStateError(notice: String)
     case statusCodeError
     case urlError
     case jsonError
