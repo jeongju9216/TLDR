@@ -14,6 +14,8 @@ final class HomeViewController: BaseViewController<HomeView> {
     //MARK: - Properties
     private var inputText: String = "" //입력한 글자
     
+    private var homeVM: HomeViewModel = HomeViewModel()
+    
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,25 +31,26 @@ final class HomeViewController: BaseViewController<HomeView> {
     @objc private func clickedSumUpButton() {
         let testData = TestData()
         let text: String = inputText
+        
+        guard !text.isEmpty else {
+            self.showErroAlert(message: "요약할 내용이 없습니다.")
+            return
+        }
 
         Task {
-            //["코로나", "한중", "공급망", "협력", "강화에", "탄소중립", "교류를", "MOU"]
-            let testDict: [String: String] = [
-                "summarize" : testData.summarize,
-                "text_keywords" : "코로나|한중|공급망|",
-                "summarize_keywords" : "협력|강화에|탄소중립|",
-                "language" : "auto"
-            ]
-            
-//            let response = Response(result: .ok, message: "Test", data: testDict)
-            let response = await HttpService.shard.postSummarize(text: text, language: .auto)
+            let response = await homeVM.postSummarize(text: text, language: .auto)
             
             do {
-                guard response.result == .ok else { throw HttpError.apiError }
+                guard response.result == .ok else {
+                    throw HttpError.summarizeError(message: response.message)
+                }
                 
-                let summarizeData = try parsingSummarizeData(response, text: text)
-
+                let summarizeData = try homeVM.parsingSummarizeData(response, text: text)
+                
                 goSummarizeVC(summarizeData)
+            } catch HttpError.summarizeError(let message) {
+                Logger.error("error message: \(message)")
+                self.showErroAlert(message: message)
             } catch {
                 Logger.error(error.localizedDescription)
                 self.showErroAlert()
@@ -78,24 +81,7 @@ final class HomeViewController: BaseViewController<HomeView> {
             self.navigationController?.pushViewController(summarizeVC, animated: true)
         }
     }
-    
-    private func parsingSummarizeData(_ response: Response, text: String) throws -> SummarizeData {
-        guard let json = response.data else {
-            throw HttpError.jsonError
-        }
-
-        Logger.info(json)
-
-        let responseData: SummarizeResponseData = try SummarizeResponseData.decode(dictionary: json)
         
-        let textKeywords: [String] = ["전체"] + responseData.textKeywords.components(separatedBy: "|").dropLast()
-        let summarizeKeywords: [String] = ["전체"] + responseData.summarizeKeywords.components(separatedBy: "|").dropLast()
-
-        let summarizeData = SummarizeData(text: text, summarizeText: responseData.summarize, textKeywords: textKeywords, summarizeKeywords: summarizeKeywords)
-
-        return summarizeData
-    }
-    
     private func addTargets() {
         self.layoutView.summarizeButton.addTarget(self, action: #selector(clickedSumUpButton), for: .touchUpInside)
         self.layoutView.hideKeyboardButton.addTarget(self, action: #selector(clickedHideKeyboardButton), for: .touchUpInside)
