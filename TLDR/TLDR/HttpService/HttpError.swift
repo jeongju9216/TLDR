@@ -13,4 +13,5 @@ enum HttpError: Error {
     case urlError
     case jsonError
     case apiError
+    case summarizeError(message: String)
 }
