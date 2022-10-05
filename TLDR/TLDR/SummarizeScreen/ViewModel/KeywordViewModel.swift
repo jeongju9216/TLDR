@@ -9,33 +9,57 @@ import Foundation
 
 struct KeywordViewModel {
     //중복 제거를 위해 Set으로 선언
-    let keywords: Observable<Set<String>> = Observable([])
-    
+    let keywords: Observable<[String]> = Observable([])
+    let selectedKeywords: Observable<SelectedKeywordModel> = Observable(SelectedKeywordModel())
+        
     init() { }
-    
-    init(_ keywords: Set<String>) { //처음은 전체 키워드 넣기
+
+    //MARK: - keywords
+    func updateTotalKeywords(_ keywords: [String]) {
         self.keywords.value = keywords
     }
     
-    //선택한 키워드
-    func setKeywords(_ keywords: Set<String>) {
-        self.keywords.value = keywords
+    func getKeyword(index: Int) -> String {
+        return self.keywords.value[index]
     }
     
-    func setKeywords(_ keywords: [String]) {
-        self.keywords.value = Set(keywords)
+    func getTotalKeywords() -> [String] {
+        return self.keywords.value
     }
     
-    func selectedKeyword(_ keyword: String) {
-        self.keywords.value.insert(keyword)
+    func getTotalKeywordsCount() -> Int {
+        return keywords.value.count
+    }
+    
+    //MARK: - selectedKeywords
+    func selected(index: Int) {
+        selectedKeywords.value.insertKeyword(getKeyword(index: index), index: index)
+    }
+    
+    func selectedKeyword(_ keyword: String, index: Int) {
+        selectedKeywords.value.insertKeyword(keyword, index: index)
     }
     
     //선택 해제한 키워드
-    func deselectedKeyword(_ keyword: String) {
-        self.keywords.value.remove(keyword)
+    func deselected(index: Int) {
+        selectedKeywords.value.removeKeyword(getKeyword(index: index))
     }
     
-    func allRemove() {
-        self.keywords.value.removeAll()
+    func deselectedKeyword(_ keyword: String) {
+        selectedKeywords.value.removeKeyword(keyword)
+    }
+    
+    //"전체" 키워드 선택
+    func selectAll() {
+        selectedKeywords.value = SelectedKeywordModel(prevIndex: 0, keywords: Set(keywords.value))
+    }
+    
+    //전체 키워드 해제
+    func deselectAll() {
+        selectedKeywords.value.removeAll()
+    }
+    
+    func getPrevSelectedIndex() -> Int {
+        return selectedKeywords.value.prevIndex
     }
 }

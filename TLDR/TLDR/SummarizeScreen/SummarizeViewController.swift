@@ -11,80 +11,78 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     
     //MARK: - Properties
     var summarizeData: SummarizeData = SummarizeData()
-    private var keywords: [String] = []
-    private var textMode: TextMode = .summarize
     
-    private var selectedKeywords: Set<String> = []
-    private var prevSelectIndex: Int = 0
-    
-    private var keywordViewModel: KeywordViewModel = KeywordViewModel()
-    private var textModeViewModel: TextModeViewModel = TextModeViewModel()
+    private var keywordVM: KeywordViewModel = KeywordViewModel()
+    private var textModeVM: TextModeViewModel = TextModeViewModel()
 
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
                         
         setupNavigationBar() //네비게이션 세팅
+        
         self.layoutView.setup()
-        self.layoutView.setText(summarizeData.summarizeText)
-        
-        keywords = summarizeData.summarizeKeywords
-        
-        addTargets()
-        bind()
-        
         setupCollectionView()
-        selectFirstItem()
+        self.layoutView.setText(summarizeData.summarizeText)
+                
+        addTargets()
+        
+        bind()
     }
     
     //MARK: - Actions
     @objc private func clickedTextModeButton() {
-        textMode = (textMode == .original) ? .summarize : .original
-        textModeViewModel.setTextMode(textMode)
+        textModeVM.toggleTextMode()
     }
     
     //MARK: - Methods
     private func bind() {
-        keywordViewModel.keywords.bind { [weak self] selectedKeywords in
-            self?.selectedKeywords = selectedKeywords
-            self?.layoutView.highlightKeywords(selectedKeywords)
+        keywordVM.keywords.bind { [weak self] totalKeywords in
+            guard let self = self else {
+                return
+            }
+            Logger.debug(totalKeywords)
+            self.layoutView.keywordCollectionView.reloadData()
+            self.layoutView.keywordCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init())
         }
         
-        textModeViewModel.textMode.bind { [weak self] textMode in
+        keywordVM.selectedKeywords.bind { [weak self] selectedKeywords in
+            guard let self = self else {
+                return
+            }
+            
+            Logger.debug(selectedKeywords)
+            self.layoutView.highlightKeywords(selectedKeywords.keywords)
+        }
+        
+        textModeVM.textMode.bind { [weak self] textMode in
             guard let self = self else { return }
             Logger.info(textMode)
+            
+            self.keywordVM.deselectAll()
             
             switch textMode {
             case .original:
                 self.layoutView.setText(self.summarizeData.text)
-                self.keywords = self.summarizeData.textKeywords
+                self.keywordVM.updateTotalKeywords(self.summarizeData.textKeywords)
             case .summarize:
                 self.layoutView.setText(self.summarizeData.summarizeText)
-                self.keywords = self.summarizeData.summarizeKeywords
+                self.keywordVM.updateTotalKeywords(self.summarizeData.summarizeKeywords)
             }
-
-            self.layoutView.keywordCollectionView.reloadData()
-            self.selectFirstItem()
             
+            self.keywordVM.selectAll()
             self.layoutView.setTextModeLayout(textMode)
-            self.layoutView.highlightKeywords(self.selectedKeywords)
         }
     }
     
+    //MARK: - Setup
     private func setupCollectionView() {
         self.layoutView.keywordCollectionView.register(KeywordCell.classForCoder(), forCellWithReuseIdentifier: "keywordCellIdentifier")
         self.layoutView.keywordCollectionView.delegate = self
         self.layoutView.keywordCollectionView.dataSource = self
     }
     
-    private func selectFirstItem() {
-        self.keywordViewModel.allRemove()
-        self.prevSelectIndex = 0
-
-        self.keywordViewModel.setKeywords(keywords)
-        layoutView.keywordCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init())
-    }
-    
+        
     private func addTargets() {
         self.layoutView.textModeButton.addTarget(self, action: #selector(clickedTextModeButton), for: .touchUpInside)
     }
@@ -92,13 +90,13 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
 
 extension SummarizeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return keywords.count
+        return keywordVM.getTotalKeywordsCount()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = self.layoutView.keywordCollectionView.dequeueReusableCell(withReuseIdentifier: "keywordCellIdentifier", for: indexPath) as! KeywordCell
         
-        cell.setKeyword(keywords[indexPath.row])
+        cell.setKeyword(keywordVM.getTotalKeywords()[indexPath.row])
         
         return cell
     }
@@ -107,27 +105,26 @@ extension SummarizeViewController: UICollectionViewDataSource {
 extension SummarizeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            self.keywordViewModel.setKeywords(keywords)
-            for i in 1..<keywords.count {
+            self.keywordVM.selectAll()
+            for i in 1..<keywordVM.getTotalKeywordsCount() {
                 layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: i, section: 0), animated: false)
             }
         } else {
-            if prevSelectIndex == 0 {
-                self.keywordViewModel.allRemove()
+            Logger.debug(self.keywordVM.getPrevSelectedIndex())
+            if self.keywordVM.getPrevSelectedIndex() == 0 {
+                self.keywordVM.deselectAll()
+                layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: 0, section: 0), animated: false)
             }
             
-            self.keywordViewModel.selectedKeyword(keywords[indexPath.row])
-            layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: 0, section: 0), animated: false)
+            self.keywordVM.selected(index: indexPath.row)
         }
-        
-        prevSelectIndex = indexPath.row
     }
     
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
-            self.keywordViewModel.allRemove()
+            self.keywordVM.deselectAll()
         } else {
-            self.keywordViewModel.deselectedKeyword(keywords[indexPath.row])
+            self.keywordVM.deselected(index: indexPath.row)
         }
     }
 }
@@ -136,7 +133,7 @@ extension SummarizeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let label: UILabel = UILabel()
-        label.text = keywords[indexPath.row]
+        label.text = keywordVM.getKeyword(index: indexPath.row)
         label.font = UIFont.systemFont(ofSize: 16)
         label.sizeToFit()
         

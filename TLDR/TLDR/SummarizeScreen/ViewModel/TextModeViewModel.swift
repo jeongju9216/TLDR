@@ -8,20 +8,13 @@
 import Foundation
 
 struct TextModeViewModel {
-    var textMode: Observable<TextMode> = Observable(.summarize)
-    
+    let textMode: Observable<TextMode> = Observable(.summarize)
+
     init() { }
     
-    func setTextMode(_ textMode: TextMode) {
-        switch textMode {
-        case .summarize:
-            Logger.debug("Summarize Mode")
-        case .original:
-            Logger.debug("Original Mode")
-        default: break
-        }
-        
-        self.textMode.value = textMode
+    func toggleTextMode() {
+        let textMode = self.textMode.value
+        self.textMode.value = (textMode == .original) ? .summarize : .original
     }
 }
 
