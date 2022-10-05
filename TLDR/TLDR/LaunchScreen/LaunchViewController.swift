@@ -9,6 +9,9 @@ import UIKit
 
 final class LaunchViewController: BaseViewController<LaunchView> {
     
+    //MARK: - Properties
+    private var launchViewModel: LaunchViewModel = LaunchViewModel()
+    
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,21 +26,21 @@ final class LaunchViewController: BaseViewController<LaunchView> {
         Task {
             let testJson = "{\"forced\":\"0.0.1\", \"lasted\":\"0.0.1\", \"appleID\" : \"123456\", \"bundleID\" : \"com.jeong9216.TLDR\"}"
 //            let versionResponse = Response(result: .ok, message: "테스트", data: testJson)
-            let stateResponse = await HttpService.shard.getState()
-            let versionResponse = await HttpService.shard.getVersion()
+            let stateResponse = await launchViewModel.getServerState()
+            let versionResponse = await launchViewModel.getVersionInfo()
             
             do {
-                let stateData = try parsingStateData(stateResponse)
-                guard stateResponse.result == .ok, stateData.state == .ok else {
-                    throw HttpError.serverStateError(notice: stateData.notice)
-                }
-                
-                guard versionResponse.result == .ok else {
+                guard versionResponse.result == .ok, stateResponse.result == .ok else {
                     throw HttpError.apiError
                 }
                 
-                let versionData = try parsingVersionData(versionResponse)
-                setVersion(versionData)
+                let stateData = try launchViewModel.parsingStateData(stateResponse)
+                guard stateData.state == .ok else {
+                    throw HttpError.serverStateError(notice: stateData.notice)
+                }
+                
+                let versionData = try launchViewModel.parsingVersionData(versionResponse)
+                launchViewModel.setVersion(versionData)
                 
                 try await Task.sleep(nanoseconds: TimeUtil.nano2sec(0.5)) //런치 시간
                 
@@ -54,38 +57,6 @@ final class LaunchViewController: BaseViewController<LaunchView> {
                 })
             }
         }
-    }
-    
-    private func parsingStateData(_ response: Response) throws -> StateData {
-        Logger.debug(response.data)
-
-        guard let json = response.data else {
-            throw HttpError.jsonError
-        }
-        
-        return try StateData.decode(dictionary: json)
-    }
-    
-    private func parsingVersionData(_ response: Response) throws -> VersionData {
-        Logger.debug(response.data)
-
-        guard let json = response.data else {
-            throw HttpError.jsonError
-        }
-        
-        return try VersionData.decode(dictionary: json)
-    }
-    
-    private func setVersion(_ version: VersionData) {
-        Logger.info(version)
-        
-        BaseData.shared.currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
-        
-        BaseData.shared.forcedUpdateVersion = version.forced
-        BaseData.shared.lastetVersion = version.lasted
-        
-        BaseData.shared.appleID = version.appleID
-        BaseData.shared.bundleID = version.bundleID
     }
     
     private func goHomeVC() {
