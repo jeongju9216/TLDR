@@ -14,8 +14,8 @@ final class HomeView: UIView {
     private var topBarLineView: UIView!
     
     private var titleLabel: UILabel! //TLDR 라벨
-    private var resetButton: UIButton! //초기화 버튼
-    private var pasteButton: UIButton! //붙여넣기 버튼
+    var resetButton: UIButton! //초기화 버튼
+    var pasteButton: UIButton! //붙여넣기 버튼
     
     var textView: UITextView! //텍스트 입력창
     
@@ -38,6 +38,10 @@ final class HomeView: UIView {
     }
     
     //MARK: - Methods
+    func setEnabled(_ toggle: Bool) {
+        self.summarizeButton.isEnabled = toggle
+    }
+    
     //키보드 내려가면 탑바 보임
     func showTopBar() {
         textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 10, right: 15)
@@ -207,7 +211,8 @@ final class HomeView: UIView {
         hideKeyboardButton.titleLabel?.font = .boldSystemFont(ofSize: 32)
 
         self.addSubview(hideKeyboardButton)
-        hideKeyboardButton.pinWidth(constant: self.bounds.width)
+        hideKeyboardButton.pinLeft(to: self.leftAnchor)
+        hideKeyboardButton.pinRight(to: self.rightAnchor)
         hideKeyboardButton.pinHeight(constant: 35)
     }
 }
