@@ -37,7 +37,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
 
-            let errorAlert = UIAlertController(title: "에러", message: "", preferredStyle: .alert)
+            let errorAlert = UIAlertController(title: nil, message: "", preferredStyle: .alert)
             
             let message = message ?? self.errorMessage
             errorAlert.message = message
