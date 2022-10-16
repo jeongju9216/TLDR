@@ -34,6 +34,7 @@ final class HomeViewController: BaseViewController<HomeView> {
                 return
             }
             
+            self.layoutView.setText(text)
             self.layoutView.setEnabled(!text.isEmpty)
         }
     }
@@ -71,11 +72,13 @@ final class HomeViewController: BaseViewController<HomeView> {
     }
     
     @objc private func clickedPasteButton() {
-        
+        if let pasteString = UIPasteboard.general.string {
+            homeVM.updateText(homeVM.text.value + pasteString)
+        }
     }
     
     @objc private func clickedResetButton() {
-        homeVM.resetText()
+
     }
     
     //키보드 보였을 때
@@ -98,6 +101,8 @@ final class HomeViewController: BaseViewController<HomeView> {
     private func addTargets() {
         self.layoutView.summarizeButton.addTarget(self, action: #selector(clickedSumUpButton), for: .touchUpInside)
         self.layoutView.hideKeyboardButton.addTarget(self, action: #selector(clickedHideKeyboardButton), for: .touchUpInside)
+        self.layoutView.pasteButton.addTarget(self, action: #selector(clickedPasteButton), for: .touchUpInside)
+        self.layoutView.resetButton.addTarget(self, action: #selector(clickedResetButton), for: .touchUpInside)
     }
     
     private func addDelegate() {

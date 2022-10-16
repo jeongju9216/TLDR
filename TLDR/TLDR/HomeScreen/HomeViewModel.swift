@@ -8,12 +8,23 @@
 import Foundation
 
 struct HomeViewModel {
+    let text: Observable<String> = Observable("")
     
-    func postSummarize(text: String, language: SummarizeLangauge) async -> Response {
-        return await HttpService.shard.postSummarize(text: text, language: language)
+    init() { }
+    
+    func updateText(_ text: String) {
+        self.text.value = text
     }
     
-    func parsingSummarizeData(_ response: Response, text: String) throws -> SummarizeData {
+    func resetText() {
+        self.text.value = ""
+    }
+    
+    func postSummarize(language: SummarizeLangauge) async -> Response {
+        return await HttpService.shard.postSummarize(text: text.value, language: language)
+    }
+    
+    func parsingSummarizeData(_ response: Response) throws -> SummarizeData {
         guard let json = response.data else {
             throw HttpError.jsonError
         }
@@ -25,7 +36,7 @@ struct HomeViewModel {
         let textKeywords: [String] = ["전체"] + responseData.textKeywords.components(separatedBy: "|").dropLast()
         let summarizeKeywords: [String] = ["전체"] + responseData.summarizeKeywords.components(separatedBy: "|").dropLast()
 
-        let summarizeData = SummarizeData(text: text, summarizeText: responseData.summarize, textKeywords: textKeywords, summarizeKeywords: summarizeKeywords)
+        let summarizeData = SummarizeData(text: text.value, summarizeText: responseData.summarize, textKeywords: textKeywords, summarizeKeywords: summarizeKeywords)
 
         return summarizeData
     }

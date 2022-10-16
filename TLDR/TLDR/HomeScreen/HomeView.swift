@@ -38,6 +38,10 @@ final class HomeView: UIView {
     }
     
     //MARK: - Methods
+    func setText(_ text: String) {
+        self.textView.text = text
+    }
+    
     func setEnabled(_ toggle: Bool) {
         self.summarizeButton.isEnabled = toggle
     }
