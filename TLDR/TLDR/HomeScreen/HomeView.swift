@@ -23,8 +23,8 @@ final class HomeView: UIView {
     var hideKeyboardButton: UIButton! //키보드 숨김 버튼
     
     //MARK: - Properties
-    private var topBarHeight: CGFloat = 35
-    private var animationDuration: Double = 0.3
+    private var topBarHeight: CGFloat = 40
+    private var animationDuration: Double = 0.2
     
     //MARK: - Init
     override init(frame: CGRect) {
