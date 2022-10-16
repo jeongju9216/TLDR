@@ -78,7 +78,7 @@ final class HomeViewController: BaseViewController<HomeView> {
     }
     
     @objc private func clickedResetButton() {
-
+        homeVM.resetText()
     }
     
     //키보드 보였을 때
