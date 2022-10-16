@@ -11,7 +11,11 @@ final class HomeView: UIView {
     
     //MARK: - Views
     private var topBarView: UIView! //상단바(네비바 모양)
+    private var topBarLineView: UIView!
+    
     private var titleLabel: UILabel! //TLDR 라벨
+    private var resetButton: UIButton! //초기화 버튼
+    private var pasteButton: UIButton! //붙여넣기 버튼
     
     var textView: UITextView! //텍스트 입력창
     
@@ -19,10 +23,7 @@ final class HomeView: UIView {
     var hideKeyboardButton: UIButton! //키보드 숨김 버튼
     
     //MARK: - Properties
-    private var statusBarHeight: CGFloat = SizeUtil.statusBarHeight
-    private var topBarHeight: CGFloat {
-        return 40 + statusBarHeight
-    }
+    private var topBarHeight: CGFloat = 35
     private var animationDuration: Double = 0.3
     
     //MARK: - Init
@@ -55,11 +56,9 @@ final class HomeView: UIView {
         textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 300, right: 15)
         
         UIView.animate(withDuration: animationDuration, animations: {
-            let scale = CGAffineTransform(translationX: 0, y: -(self.topBarHeight))
+            let scale = CGAffineTransform(translationX: 0, y: -self.topBarHeight)
             self.topBarView.transform = scale
-            
-            let scale2 = CGAffineTransform(translationX: 0, y: -(self.topBarHeight - self.statusBarHeight))
-            self.textView.transform = scale2
+            self.textView.transform = scale
             
             self.topBarView.alpha = 0
         })
@@ -82,39 +81,84 @@ final class HomeView: UIView {
     //MARK: - Setup
     private func setup() {        
         setupTopBarView()
+        setupTopBarLineView()
+
         setupTitleLable()
+        setupPasteButton()
+        setupResetButton()
         
         setupSummarizeButton()
         setupHideKeyboardButton()
         
         setupTextView()
-        
+
         self.bringSubviewToFront(topBarView)
     }
     
     private func setupTopBarView() {
-        topBarView = UIView(frame: .init(x: 0, y: 0, width: self.bounds.width, height: topBarHeight))
+        topBarView = UIView(frame: .zero)
         
         topBarView.backgroundColor = .backgroundColor
         
-        topBarView.layer.masksToBounds = false
-        topBarView.layer.shadowColor = UIColor.label.cgColor
-        topBarView.layer.shadowOffset = .zero
-        topBarView.layer.shadowRadius = 1
-        topBarView.layer.shadowOpacity = 0.2
-                
         self.addSubview(topBarView)
+        topBarView.pinHeight(constant: topBarHeight)
+        topBarView.pinLeft(to: self.leftAnchor)
+        topBarView.pinRight(to: self.rightAnchor)
+        topBarView.pinTop(to: self.safeAreaLayoutGuide.topAnchor)
+    }
+    
+    private func setupTopBarLineView() {
+        topBarLineView = UIView(frame: .zero)
+        
+        topBarLineView.backgroundColor = .lightGray
+        topBarLineView.alpha = 0.2
+        
+        topBarView.addSubview(topBarLineView)
+        topBarLineView.pinHeight(constant: 1)
+        topBarLineView.pinLeft(to: self.leftAnchor)
+        topBarLineView.pinRight(to: self.rightAnchor)
+        topBarLineView.pinBottom(to: self.topBarView.bottomAnchor)
     }
     
     private func setupTitleLable() {
-        titleLabel = UILabel(frame: .init(x: 0, y: statusBarHeight, width: self.bounds.width, height: topBarHeight - statusBarHeight))
+        titleLabel = UILabel()
         
         titleLabel.text = "TL;DR"
-        titleLabel.textColor = .label
+        titleLabel.textColor = .mainColor
         titleLabel.font = UIFont.boldSystemFont(ofSize: 18)
         titleLabel.textAlignment = .center
         
         topBarView.addSubview(titleLabel)
+        titleLabel.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor, offset: 20)
+        titleLabel.pinBottom(to: topBarView.bottomAnchor, offset: -5)
+    }
+    
+    private func setupResetButton() {
+        resetButton = UIButton(type: .custom)
+        
+        resetButton.setTitle("Reset", for: .normal)
+        resetButton.setTitleColor(.label, for: .normal)
+        resetButton.setTitleColor(.lightGray, for: .highlighted)
+        resetButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        resetButton.titleLabel?.textAlignment = .center
+        
+        topBarView.addSubview(resetButton)
+        resetButton.pinRight(to: pasteButton.leftAnchor, offset: -15)
+        resetButton.pinBottom(to: topBarView.bottomAnchor, offset: 0)
+    }
+    
+    private func setupPasteButton() {
+        pasteButton = UIButton(type: .custom)
+        
+        pasteButton.setTitle("Paste", for: .normal)
+        pasteButton.setTitleColor(.label, for: .normal)
+        pasteButton.setTitleColor(.lightGray, for: .highlighted)
+        pasteButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        pasteButton.titleLabel?.textAlignment = .center
+        
+        topBarView.addSubview(pasteButton)
+        pasteButton.pinRight(to: self.safeAreaLayoutGuide.rightAnchor, offset: -20)
+        pasteButton.pinBottom(to: topBarView.bottomAnchor, offset: 0)
     }
     
     private func setupTextView() {
@@ -127,7 +171,8 @@ final class HomeView: UIView {
         textView.typingAttributes = TextUtil.textViewStyle
         
         self.addSubview(textView)
-        textView.pinWidth(constant: self.bounds.width)
+        textView.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor)
+        textView.pinRight(to: self.safeAreaLayoutGuide.rightAnchor)
         textView.pinTop(to: self.topBarView.bottomAnchor)
         textView.pinBottom(to: self.summarizeButton.topAnchor)
     }
@@ -145,8 +190,10 @@ final class HomeView: UIView {
         summarizeButton.titleLabel?.font = .boldSystemFont(ofSize: 21)
         
         self.addSubview(summarizeButton)
-        summarizeButton.pinWidth(constant: self.bounds.width)
+        
         summarizeButton.pinHeight(constant: 80)
+        summarizeButton.pinLeft(to: self.leftAnchor)
+        summarizeButton.pinRight(to: self.rightAnchor)
         summarizeButton.pinBottom(to: self.bottomAnchor)
     }
     
