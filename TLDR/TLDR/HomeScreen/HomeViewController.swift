@@ -12,8 +12,6 @@ final class HomeViewController: BaseViewController<HomeView> {
     //입력값 없으면 요약하기 버튼 비활성화
     
     //MARK: - Properties
-    private var inputText: String = "" //입력한 글자
-    
     private var homeVM: HomeViewModel = HomeViewModel()
     
     //MARK: - Life Cycles
@@ -25,27 +23,34 @@ final class HomeViewController: BaseViewController<HomeView> {
         addTargets()
         addObservers()
         addDelegate()
+        
+        bind()
+    }
+    
+    //MARK: - Methods
+    private func bind() {
+        homeVM.text.bind { [weak self] text in
+            guard let self = self else {
+                return
+            }
+            
+            self.layoutView.setEnabled(!text.isEmpty)
+        }
     }
     
     //MARK: - Actions
     @objc private func clickedSumUpButton() {
         let testData = TestData()
-        let text: String = inputText
-        
-        guard !text.isEmpty else {
-            self.showErroAlert(message: "요약할 내용이 없습니다.")
-            return
-        }
 
         Task {
-            let response = await homeVM.postSummarize(text: text, language: .auto)
+            let response = await homeVM.postSummarize(language: .auto)
             
             do {
                 guard response.result == .ok else {
                     throw HttpError.summarizeError(message: response.message)
                 }
                 
-                let summarizeData = try homeVM.parsingSummarizeData(response, text: text)
+                let summarizeData = try homeVM.parsingSummarizeData(response)
                 
                 goSummarizeVC(summarizeData)
             } catch HttpError.summarizeError(let message) {
@@ -63,6 +68,14 @@ final class HomeViewController: BaseViewController<HomeView> {
         self.layoutView.showSummarizeButton()
         
         self.layoutView.textView.endEditing(true)
+    }
+    
+    @objc private func clickedPasteButton() {
+        
+    }
+    
+    @objc private func clickedResetButton() {
+        homeVM.resetText()
     }
     
     //키보드 보였을 때
@@ -99,6 +112,6 @@ final class HomeViewController: BaseViewController<HomeView> {
 extension HomeViewController: UITextViewDelegate {
     //입력이 완료되었을 때 값 넣기
     func textViewDidEndEditing(_ textView: UITextView) {
-        self.inputText = textView.text
+        self.homeVM.updateText(textView.text)
     }
 }
