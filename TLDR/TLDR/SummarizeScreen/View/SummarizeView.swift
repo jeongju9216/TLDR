@@ -68,8 +68,8 @@ final class SummarizeView: UIView {
         
         self.addSubview(keywordCollectionView)
         keywordCollectionView.pinHeight(constant: 60)
-        keywordCollectionView.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor)
-        keywordCollectionView.pinRight(to: self.safeAreaLayoutGuide.rightAnchor)
+        keywordCollectionView.pinLeft(to: self.leftAnchor)
+        keywordCollectionView.pinRight(to: self.rightAnchor)
         keywordCollectionView.pinTop(to: self.safeAreaLayoutGuide.topAnchor)
     }
 
@@ -105,7 +105,8 @@ final class SummarizeView: UIView {
         textView.applyLineHeight()
         
         self.addSubview(textView)
-        textView.pinWidth(constant: self.bounds.width)
+        textView.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor)
+        textView.pinRight(to: self.safeAreaLayoutGuide.rightAnchor)
         textView.pinTop(to: self.titleUnderLineLabel.bottomAnchor, offset: 10)
         textView.pinBottom(to: self.bottomAnchor)
     }
