@@ -41,6 +41,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
             guard let self = self else {
                 return
             }
+            
             Logger.debug(totalKeywords)
             self.layoutView.keywordCollectionView.reloadData()
             self.layoutView.keywordCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init())
