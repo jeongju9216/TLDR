@@ -17,14 +17,18 @@ final class HomeViewController: BaseViewController<HomeView> {
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-     
-        self.navigationController?.navigationBar.isHidden = true //커스텀 네비게이션 사용함
-        
+             
         addTargets()
         addObservers()
         addDelegate()
         
         bind()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.navigationBar.isHidden = true //커스텀 네비게이션 사용함
     }
     
     //MARK: - Methods

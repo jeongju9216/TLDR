@@ -44,6 +44,7 @@ final class HomeView: UIView {
     
     func setEnabled(_ toggle: Bool) {
         self.summarizeButton.isEnabled = toggle
+        self.summarizeButton.alpha = toggle ? 1.0 : 0.8
     }
     
     //키보드 내려가면 탑바 보임
