@@ -23,7 +23,7 @@ final class HttpService {
     private init() { }
 
     private let urlSession: URLSession = URLSession.shared
-    private let domain: String = "http://tldr161718.site/"
+    private let domain: String = "https://tldr161718.site/" //"http://44.210.126.152/"//
     
     //GET
     func getVersion() async -> Response {
