@@ -15,32 +15,32 @@ final class Logger {
         return formatter.string(from: Date())
     }
     
-    static func debug<T>(_ object: T?, line: Int = #line, funcName: String = #function) {
+    static func debug<T>(_ object: T?, line: Int = #line, funcName: String = #function, fileName: String = #fileID) {
         #if DEBUG
         if let obj = object {
-            print("[DEBUG] \(date) (\(line)): \(funcName): \(obj)")
+            print("[DEBUG] \(date) \(fileName)(\(line)): \(funcName): \(obj)")
         } else {
-            print("[DEBUG] \(date) (\(line)): \(funcName): nil")
+            print("[DEBUG] \(date) \(fileName)(\(line)): \(funcName): nil")
         }
         #endif
     }
     
-    static func info<T>(_ object: T?, line: Int = #line, funcName: String = #function) {
+    static func info<T>(_ object: T?, line: Int = #line, funcName: String = #function, fileName: String = #fileID) {
         #if DEBUG
         if let obj = object {
-            print("[INFO] \(date) (\(line)): \(funcName): \(obj)")
+            print("[INFO] \(date) \(fileName)(\(line)): \(funcName): \(obj)")
         } else {
-            print("[INFO] \(date) (\(line)): \(funcName): nil")
+            print("[INFO] \(date) \(fileName)(\(line)): \(funcName): nil")
         }
         #endif
     }
     
-    static func error<T>(_ object: T?, line: Int = #line, funcName: String = #function) {
+    static func error<T>(_ object: T?, line: Int = #line, funcName: String = #function, fileName: String = #fileID) {
         #if DEBUG
         if let obj = object {
-            print("[ERROR] \(date) (\(line)): \(funcName): \(obj)")
+            print("[ERROR] \(date) \(fileName)(\(line)): \(funcName): \(obj)")
         } else {
-            print("[ERROR] \(date) (\(line)): \(funcName): nil")
+            print("[ERROR] \(date) \(fileName)(\(line)): \(funcName): nil")
         }
         #endif
     }
