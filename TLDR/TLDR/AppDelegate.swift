@@ -31,8 +31,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
-//    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
-//        return .portrait
-//    }
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        //아이패드만 화면 회전 가능
+        if UIDevice.current.userInterfaceIdiom == UIUserInterfaceIdiom.pad {
+            return .all
+        } else { //아이폰은 세로 고정
+            return .portrait
+        }
+    }
 }
 
