@@ -8,9 +8,6 @@
 import UIKit
 
 final class HomeViewController: BaseViewController<HomeView> {
-    //todo
-    //입력값 없으면 요약하기 버튼 비활성화
-    
     //MARK: - Properties
     private var homeVM: HomeViewModel = HomeViewModel()
     
