@@ -9,6 +9,28 @@ import Foundation
 
 struct LaunchViewModel {
     
+    func checkState() async throws {
+        let response = await getServerState()
+        guard response.result == .ok else {
+            throw HttpError.apiError
+        }
+        
+        let data = try parsingStateData(response)
+        guard data.state == .ok else {
+            throw HttpError.serverStateError(notice: data.notice)
+        }
+    }
+
+    func checkVersion() async throws {
+        let response = await getVersionInfo()
+        guard response.result == .ok else {
+            throw HttpError.apiError
+        }
+        
+        let data = try parsingVersionData(response)
+        setVersion(data)
+    }
+    
     func getServerState() async -> Response {
         return await HttpService.shard.getState()
     }
