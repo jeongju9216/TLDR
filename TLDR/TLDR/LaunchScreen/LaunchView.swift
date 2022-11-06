@@ -10,7 +10,8 @@ import UIKit
 final class LaunchView: UIView {
     
     //MARK: - Views
-    private var titleLabel: UILabel!
+    //가운데 앱 이름
+    private var titleLabel: UILabel = .init()
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -28,9 +29,8 @@ final class LaunchView: UIView {
         setupTitleLable()
     }
     
+    //titleLabel 초기화
     private func setupTitleLable() {
-        titleLabel = UILabel()
-        
         titleLabel.text = "TL;DR"
         titleLabel.textColor = .mainColor
         titleLabel.font = UIFont.boldSystemFont(ofSize: 32)
