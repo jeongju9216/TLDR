@@ -9,54 +9,25 @@ import Foundation
 
 struct LaunchViewModel {
     
-    func checkState() async throws {
-        let response = await getServerState()
-        guard response.result == .ok else {
-            throw HttpError.apiError
+    let stateData: Observable<StateData?> = Observable(nil)
+    
+    func launch() {
+        Task {
+            let serverStateData: StateData = await getServerStateData()
+            
+            let versionData: VersionData = await getVersionData()
+            setVersion(versionData)
+            
+            stateData.value = serverStateData
         }
-        
-        let data = try parsingStateData(response)
-        guard data.state == .ok else {
-            throw HttpError.serverStateError(notice: data.notice)
-        }
-    }
-
-    func checkVersion() async throws {
-        let response = await getVersionInfo()
-        guard response.result == .ok else {
-            throw HttpError.apiError
-        }
-        
-        let data = try parsingVersionData(response)
-        setVersion(data)
     }
     
-    func getServerState() async -> Response {
-        return await HttpService.shard.getState()
+    func getServerStateData() async -> StateData {
+        return await FirebaseService.shared.fetchState()
     }
     
-    func getVersionInfo() async -> Response {
-        return await HttpService.shard.getVersion()
-    }
-    
-    func parsingStateData(_ response: Response) throws -> StateData {
-        Logger.debug(response.data)
-
-        guard let json = response.data else {
-            throw HttpError.jsonError
-        }
-        
-        return try StateData.decode(dictionary: json)
-    }
-    
-    func parsingVersionData(_ response: Response) throws -> VersionData {
-        Logger.debug(response.data)
-
-        guard let json = response.data else {
-            throw HttpError.jsonError
-        }
-        
-        return try VersionData.decode(dictionary: json)
+    func getVersionData() async -> VersionData {
+        return await FirebaseService.shared.fetchVersion()
     }
     
     func setVersion(_ version: VersionData) {

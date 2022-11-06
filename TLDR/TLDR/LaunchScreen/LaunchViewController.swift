@@ -18,37 +18,41 @@ final class LaunchViewController: BaseViewController<LaunchView> {
         
         Logger.debug("앱 시작")
         
-        launch()
+        bind()
+        launchVM.launch()
     }
     
     //MARK: - Methods
-    private func launch() {
-        Task {
-            do {
-                try await launchVM.checkState() //서버 State 체크
-                try await launchVM.checkVersion() //버전 체크
-                
-                try await Task.sleep(nanoseconds: TimeUtil.nano2sec(0.5)) //런치 시간
-                
-                goHomeVC()
-            } catch HttpError.serverStateError(let notice) {
-                Logger.error(notice)
-                self.showErroAlert(message: notice, action: { _ in
-                    exit(0)
-                })
-            } catch {
-                Logger.error("\(error) / \(error.localizedDescription)")
-                self.showErroAlert(action: { _ in
-                    exit(0)
-                })
+    private func bind() {
+        launchVM.stateData.bind { [weak self] stateData in
+            guard let self = self,
+                  let stateData = stateData else {
+                return
             }
+            
+            guard stateData.state == .ok else {
+                self.showErrorAlert(message: stateData.notice) { _ in
+                    exit(0)
+                }
+
+                return
+            }
+            
+            self.goHomeVC()
         }
     }
     
     private func goHomeVC() {
-        let navigationVC: UINavigationController = UINavigationController(rootViewController: HomeViewController())
-        navigationVC.modalPresentationStyle = .fullScreen
-        
-        self.present(navigationVC, animated: false)
+        Task {
+            do {
+                try await Task.sleep(nanoseconds: TimeUtil.nano2sec(0.5)) //런치 시간
+            } catch {
+            }
+            
+            let navigationVC: UINavigationController = UINavigationController(rootViewController: HomeViewController())
+            navigationVC.modalPresentationStyle = .fullScreen
+            
+            self.present(navigationVC, animated: false)
+        }
     }
 }
