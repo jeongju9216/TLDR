@@ -33,7 +33,7 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         self.navigationItem.scrollEdgeAppearance = appearance
     }
     
-    func showErroAlert(message: String? = nil, action: ((UIAlertAction) -> Void)? = nil) {
+    func showErrorAlert(message: String? = nil, action: ((UIAlertAction) -> Void)? = nil) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
 
