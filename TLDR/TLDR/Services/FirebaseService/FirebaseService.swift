@@ -24,17 +24,36 @@ final class FirebaseService {
         firebaseRef = Database.database().reference()
     }
     
+    func fetchState() async -> (Bool, String) {
+        do {
+            let snapshot = try await firebaseRef.child("state").getData()
+            let snapData = snapshot.value as? [String: Any]
+            
+            let result = snapData?["result"] as? String ?? "failed"
+            let notice = snapData?["notice"] as? String ?? ""
+            Logger.info("result: \(result) / notice: \(notice)")
+            
+            return (result.lowercased() == "ok", notice)
+        } catch {
+            Logger.error("\(error.localizedDescription)")
+            return (false, "failed")
+        }
+    }
+
     func fetchVersion() async -> (String, String) {
         do {
-            let snapshot = try await firebaseRef.child("version/data").getData()
+            let snapshot = try await firebaseRef.child("version").getData()
             let snapData = snapshot.value as? [String: String]
 
-            let versions: (String, String) = (snapData?["lasted"] ?? "0.0.0", snapData?["forced"] ?? "0.0.0")
-            Logger.info("[fetchVersion] versions: \(versions)")
+            let lastedVersion = snapData?["lasted"] ?? "0.0.0"
+            let forcedVersion = snapData?["forced"] ?? "0.0.0"
+            
+            let versions: (String, String) = (lastedVersion, forcedVersion)
+            Logger.info("versions: \(versions)")
 
             return versions
         } catch {
-            Logger.error("[fetchVersion] Error: \(error.localizedDescription)")
+            Logger.error("\(error.localizedDescription)")
             return ("0.0.0", "0.0.0")
         }
     }
