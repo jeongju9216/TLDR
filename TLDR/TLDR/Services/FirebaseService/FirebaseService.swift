@@ -16,45 +16,60 @@ final class FirebaseService {
     private var firebaseRef: DatabaseReference!
     
     //MARK: - Methods
+    func initFirebase() {
+        configureFirebase()
+        initFirebaseRef()
+    }
+    
     func configureFirebase() {
         FirebaseApp.configure()
     }
     
-    func initDatabase() {
+    func initFirebaseRef() {
         firebaseRef = Database.database().reference()
     }
     
-    func fetchState() async -> (Bool, String) {
+    func fetchState() async -> StateData {
+        var snapshot: DataSnapshot?
         do {
-            let snapshot = try await firebaseRef.child("state").getData()
-            let snapData = snapshot.value as? [String: Any]
-            
-            let result = snapData?["result"] as? String ?? "failed"
-            let notice = snapData?["notice"] as? String ?? ""
-            Logger.info("result: \(result) / notice: \(notice)")
-            
-            return (result.lowercased() == "ok", notice)
+            snapshot = try await firebaseRef.child("state").getData()
         } catch {
             Logger.error("\(error.localizedDescription)")
-            return (false, "failed")
         }
+        
+        let snapData = snapshot?.value as? [String: String]
+        
+        let result = snapData?["result"] ?? "fail"
+        let notice = snapData?["notice"] ?? ""
+        Logger.info("result: \(result) / notice: \(notice)")
+        
+        let stateData = StateData(state: Result(rawValue: result) ?? .fail,
+                                  notice: notice)
+        
+        return stateData
     }
 
-    func fetchVersion() async -> (String, String) {
+    func fetchVersion() async -> VersionData {
+        var snapshot: DataSnapshot?
         do {
-            let snapshot = try await firebaseRef.child("version").getData()
-            let snapData = snapshot.value as? [String: String]
-
-            let lastedVersion = snapData?["lasted"] ?? "0.0.0"
-            let forcedVersion = snapData?["forced"] ?? "0.0.0"
-            
-            let versions: (String, String) = (lastedVersion, forcedVersion)
-            Logger.info("versions: \(versions)")
-
-            return versions
+            snapshot = try await firebaseRef.child("version").getData()
         } catch {
             Logger.error("\(error.localizedDescription)")
-            return ("0.0.0", "0.0.0")
         }
+        
+        let snapData = snapshot?.value as? [String: String]
+
+        let forced = snapData?["forced"] ?? "0.0.0"
+        let lasted = snapData?["lasted"] ?? "0.0.0"
+        let appleID = snapData?["appleID"] ?? ""
+        let bundleID = snapData?["bundleID"] ?? ""
+        
+        let versionData: VersionData = VersionData(forced: forced,
+                                                   lasted: lasted,
+                                                   appleID: appleID,
+                                                   bundleID: bundleID)
+        
+        Logger.info("versions: \(versionData)")
+        return versionData
     }
 }
