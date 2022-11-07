@@ -7,6 +7,8 @@
 
 import Foundation
 
+//todo
+//Wrap 클래스로 struct 최적화 하기
 struct SummarizeData {
     let text: String //원본
     let summarizeText: String //요약 내용

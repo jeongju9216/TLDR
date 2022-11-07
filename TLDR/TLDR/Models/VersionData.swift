@@ -7,6 +7,8 @@
 
 import Foundation
 
+//todo
+//Wrap 클래스로 struct 최적화 하기
 struct VersionData: Decodable {
     let forced: String //강제 업데이트 버전
     let lasted: String //최신 버전
