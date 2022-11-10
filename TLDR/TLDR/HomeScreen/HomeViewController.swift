@@ -45,12 +45,16 @@ final class HomeViewController: BaseViewController<HomeView> {
         
     //MARK: - Actions
     //요약 버튼 클릭
-    @objc private func clickedSummarizeButton() {        
+    @objc private func clickedSummarizeButton() {
+        LoadingIndicator.showLoading(self)
+        
         Task {
             do {
                 let summarizeData: SummarizeData = try await homeVM.summarizeText()
                 
                 goSummarizeVC(summarizeData)
+                
+                LoadingIndicator.hideLoading(self)
             } catch HttpError.summarizeError(let message) {
                 Logger.error("error message: \(message)")
                 self.showErrorAlert(message: message)
