@@ -9,12 +9,14 @@ import Foundation
 
 struct KeywordViewModel {
     //중복 제거를 위해 Set으로 선언
+    //MARK: - Properties
     let keywords: Observable<[String]> = Observable([])
     let selectedKeywords: Observable<SelectedKeywordModel> = Observable(SelectedKeywordModel())
         
     init() { }
 
-    //MARK: - keywords
+    //MARK: - Methods
+    //MARK: Keyword
     func updateTotalKeywords(_ keywords: [String]) {
         self.keywords.value = keywords
     }
@@ -31,7 +33,7 @@ struct KeywordViewModel {
         return keywords.value.count
     }
     
-    //MARK: - selectedKeywords
+    //MARK: selectedKeywords
     func selected(index: Int) {
         selectedKeywords.value.insertKeyword(getKeyword(index: index), index: index)
     }
