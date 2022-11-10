@@ -8,16 +8,26 @@
 import Foundation
 
 struct HomeViewModel {
+    
+    //MARK: - Properties
     let text: Observable<String> = Observable("")
     
     init() { }
     
-    func updateText(_ text: String) {
-        self.text.value = text
-    }
-    
-    func resetText() {
-        self.text.value = ""
+    //MARK: - Methods
+    func summarizeText() async throws -> SummarizeData {
+        //서버에 summarize 요청 보내기
+        let response = await postSummarize(language: .auto)
+        
+        //ok가 아니라면 에러 throw
+        guard response.result == .ok else {
+            throw HttpError.summarizeError(message: response.message)
+        }
+        
+        //response 파싱
+        let summarizeData = try parsingSummarizeData(response)
+        
+        return summarizeData
     }
     
     func postSummarize(language: SummarizeLangauge) async -> Response {
@@ -66,4 +76,13 @@ struct HomeViewModel {
 
         return summarizeData
     }
+    
+    func updateText(_ text: String) {
+        self.text.value = text
+    }
+    
+    func resetText() {
+        self.text.value = ""
+    }
+
 }

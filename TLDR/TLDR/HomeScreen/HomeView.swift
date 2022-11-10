@@ -73,14 +73,14 @@ final class HomeView: UIView {
         })
     }
     
-    //키보드 올라가면 요약하기 버튼 숨김
+    //키보드 올라가면 요약하기 버튼 보임
     func showSummarizeButton() {
         UIView.animate(withDuration: animationDuration, animations: {
             self.summarizeButton.alpha = 1
         })
     }
     
-    //키보드 올라가면 요약하기 버튼 보임
+    //키보드 올라가면 요약하기 버튼 숨김
     func hideSummarizeButton() {
         UIView.animate(withDuration: animationDuration, animations: {
             self.summarizeButton.alpha = 0
