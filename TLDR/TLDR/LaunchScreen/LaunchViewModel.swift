@@ -9,8 +9,10 @@ import Foundation
 
 struct LaunchViewModel {
     
+    //MARK: - Properties
     let stateData: Observable<StateData?> = Observable(nil)
     
+    //MARK: - Methods
     func launch() {
         Task {
             let serverStateData: StateData = await getServerStateData()
