@@ -10,12 +10,21 @@ import UIKit
 final class SummarizeViewController: BaseViewController<SummarizeView> {
     
     //MARK: - Properties
-    var summarizeData: SummarizeData = SummarizeData()
-    
+    private var summrizeVM: SummarizeViewModel = SummarizeViewModel()
     private var keywordVM: KeywordViewModel = KeywordViewModel()
     private var textModeVM: TextModeViewModel = TextModeViewModel()
-
+    
     //MARK: - Life Cycles
+    init(summarizeData: SummarizeData) {
+        super.init(nibName: nil, bundle: nil)
+        
+        self.summrizeVM.updateData(summarizeData)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                         
@@ -23,7 +32,6 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
         
         self.layoutView.setup()
         setupCollectionView()
-        self.layoutView.setText(summarizeData.summarizeText)
                 
         addTargets()
         
@@ -37,6 +45,15 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     
     //MARK: - Methods
     private func bind() {
+        summrizeVM.data.bind { [weak self] data in
+            guard let self = self else {
+                return
+            }
+            
+            Logger.debug(data)
+            self.layoutView.setText(data.summarizeText)
+        }
+        
         keywordVM.keywords.bind { [weak self] totalKeywords in
             guard let self = self else {
                 return
@@ -64,11 +81,11 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
             
             switch textMode {
             case .original:
-                self.layoutView.setText(self.summarizeData.text)
-                self.keywordVM.updateTotalKeywords(self.summarizeData.textKeywords)
+                self.layoutView.setText(self.summrizeVM.getOriginalText())
+                self.keywordVM.updateTotalKeywords(self.summrizeVM.getOriginalKeywords())
             case .summarize:
-                self.layoutView.setText(self.summarizeData.summarizeText)
-                self.keywordVM.updateTotalKeywords(self.summarizeData.summarizeKeywords)
+                self.layoutView.setText(self.summrizeVM.getSummarizeText())
+                self.keywordVM.updateTotalKeywords(self.summrizeVM.getSummarizeKeywords())
             }
             
             self.keywordVM.selectAll()
