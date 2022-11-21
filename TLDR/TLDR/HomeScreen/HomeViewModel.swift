@@ -69,12 +69,20 @@ struct HomeViewModel {
 
         let responseData: SummarizeResponseData = try SummarizeResponseData.decode(dictionary: json)
         
-        let textKeywords: [String] = ["전체"] + responseData.textKeywords.components(separatedBy: "|").filter { !$0.isEmpty }
-        let summarizeKeywords: [String] = ["전체"] + responseData.summarizeKeywords.components(separatedBy: "|").filter { !$0.isEmpty }
+        let textKeywords: [String] = ["전체"] + parsingKeywords(responseData.textKeywords)
+        let summarizeKeywords: [String] = ["전체"] + parsingKeywords(responseData.summarizeKeywords)
 
-        let summarizeData = SummarizeData(text: text.value, summarizeText: responseData.summarize, textKeywords: textKeywords, summarizeKeywords: summarizeKeywords)
+        let summarizeData = SummarizeData(text: text.value,
+                                          summarizeText: responseData.summarize,
+                                          textKeywords: textKeywords,
+                                          summarizeKeywords: summarizeKeywords)
 
         return summarizeData
+    }
+    
+    private func parsingKeywords(_ keywords: String) -> [String] {
+        return keywords.components(separatedBy: "|")
+                       .filter { !$0.isEmpty }
     }
     
     func updateText(_ text: String) {
