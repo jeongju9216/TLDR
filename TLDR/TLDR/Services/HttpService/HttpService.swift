@@ -23,18 +23,7 @@ final class HttpService {
     private init() { }
 
     private let urlSession: URLSession = URLSession.shared
-    private let domain: String = "https://tldr161718.site/" //"http://44.210.126.152/"//
-    
-    //GET
-    func getVersion() async -> Response {
-        let response = await requestGet(url: self.domain + HttpAPI.version.rawValue)
-        return response
-    }
-    
-    func getState() async -> Response {
-        let response = await requestGet(url: self.domain + HttpAPI.state.rawValue)
-        return response
-    }
+    private let domain: String = "https://tldr161718.site/"
     
     //POST
     func postSummarize(text: String, language: SummarizeLangauge) async -> Response {
@@ -66,9 +55,13 @@ extension HttpService {
         do {
             Logger.debug(url)
             Logger.debug(param)
-            guard let sendData = try? JSONSerialization.data(withJSONObject: param, options: [.prettyPrinted]) else { throw HttpError.jsonError }
+            guard let sendData = try? JSONSerialization.data(withJSONObject: param, options: [.prettyPrinted]) else {
+                throw HttpError.jsonError
+            }
             
-            guard let url = URL(string: url) else { throw HttpError.urlError }
+            guard let url = URL(string: url) else {
+                throw HttpError.urlError
+            }
             
             var request: URLRequest = URLRequest(url: url)
             request.httpMethod = "POST"
