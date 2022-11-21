@@ -53,8 +53,6 @@ final class HomeViewController: BaseViewController<HomeView> {
                 let summarizeData: SummarizeData = try await homeVM.summarizeText()
                 
                 goSummarizeVC(summarizeData)
-                
-                LoadingIndicator.hideLoading(self)
             } catch HttpError.summarizeError(let message) {
                 Logger.error("error message: \(message)")
                 self.showErrorAlert(message: message)
@@ -62,6 +60,8 @@ final class HomeViewController: BaseViewController<HomeView> {
                 Logger.error(error.localizedDescription)
                 self.showErrorAlert()
             }
+            
+            LoadingIndicator.hideLoading(self)
         }
     }
     
