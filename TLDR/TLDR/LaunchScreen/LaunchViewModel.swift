@@ -20,7 +20,11 @@ struct LaunchViewModel {
             let versionData: VersionData = await getVersionData()
             setVersion(versionData)
             
+            await setPolicyURL()
+            
             stateData.value = serverStateData
+            
+            Logger.debug(BaseData.shared.policyURL)
         }
     }
     
@@ -42,5 +46,9 @@ struct LaunchViewModel {
         
         BaseData.shared.appleID = version.appleID
         BaseData.shared.bundleID = version.bundleID
+    }
+    
+    func setPolicyURL() async {
+        BaseData.shared.policyURL = await FirebaseService.shared.fetchPolicyURL()
     }
 }
