@@ -14,6 +14,7 @@ final class HomeView: UIView {
     private var topBarLineView: UIView!
     
     private var titleLabel: UILabel! //TLDR 라벨
+    var infoButton: UIButton! //앱 정보 버튼
     var resetButton: UIButton! //초기화 버튼
     var pasteButton: UIButton! //붙여넣기 버튼
     
@@ -93,6 +94,7 @@ final class HomeView: UIView {
         setupTopBarLineView()
 
         setupTitleLable()
+        setupInfoButton()
         setupPasteButton()
         setupResetButton()
         
@@ -140,6 +142,17 @@ final class HomeView: UIView {
         topBarView.addSubview(titleLabel)
         titleLabel.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor, offset: 20)
         titleLabel.pinBottom(to: topBarView.bottomAnchor, offset: -5)
+    }
+    
+    private func setupInfoButton() {
+        infoButton = UIButton(type: .custom)
+        
+        infoButton.setImage(.init(systemName: "info.circle"), for: .normal)
+        infoButton.tintColor = .mainColor
+        
+        topBarView.addSubview(infoButton)
+        infoButton.pinLeft(to: titleLabel.rightAnchor, offset: 5)
+        infoButton.pinBottom(to: titleLabel.bottomAnchor)
     }
     
     private func setupResetButton() {
