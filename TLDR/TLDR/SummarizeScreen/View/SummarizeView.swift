@@ -46,6 +46,13 @@ final class SummarizeView: UIView {
         }
     }
     
+    func reloadCollectionView() {
+        keywordCollectionView.reloadData()
+        keywordCollectionView.selectItem(at: IndexPath(row: 0, section: 0),
+                                         animated: false,
+                                         scrollPosition: .init())
+    }
+    
     //MARK: - Setup
     func setup() {
         setupKeywordCollectionView()
