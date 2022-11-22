@@ -72,4 +72,17 @@ final class FirebaseService {
         Logger.info("versions: \(versionData)")
         return versionData
     }
+    
+    func fetchPolicyURL() async -> String {
+        var snapshot: DataSnapshot?
+        do {
+            snapshot = try await firebaseRef.child("policyURL").getData()
+        } catch {
+            Logger.error("\(error.localizedDescription)")
+        }
+        
+        let policyURL = snapshot?.value as? String ?? ""
+        
+        return policyURL
+    }
 }
