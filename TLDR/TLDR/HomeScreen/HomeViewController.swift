@@ -65,6 +65,11 @@ final class HomeViewController: BaseViewController<HomeView> {
         }
     }
     
+    @objc private func clickedInfoButton() {
+        let infoVC: InfoViewController = InfoViewController()
+        self.present(infoVC, animated: true)
+    }
+    
     //붙여넣기 버튼
     @objc private func clickedPasteButton() {
         //클립보드에서 복사한 텍스트 가져오기
@@ -107,6 +112,9 @@ final class HomeViewController: BaseViewController<HomeView> {
         //매개변수 3개 이상은 세로로 분리
         self.layoutView.summarizeButton.addTarget(self,
                                                   action: #selector(clickedSummarizeButton),
+                                                  for: .touchUpInside)
+        self.layoutView.infoButton.addTarget(self,
+                                                  action: #selector(clickedInfoButton),
                                                   for: .touchUpInside)
         self.layoutView.hideKeyboardButton.addTarget(self,
                                                      action: #selector(clickedHideKeyboardButton),
