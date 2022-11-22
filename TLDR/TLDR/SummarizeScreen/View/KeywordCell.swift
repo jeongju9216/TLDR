@@ -9,6 +9,7 @@ import UIKit
 
 final class KeywordCell: UICollectionViewCell {
     //MARK: - Views
+    static let id: String = String(describing: KeywordCell.self)
     private var label: UILabel!
     
     //MARK: - Properties
