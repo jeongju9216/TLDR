@@ -17,7 +17,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     //MARK: - Life Cycles
     init(summarizeData: SummarizeData) {
         super.init(nibName: nil, bundle: nil)
-        
+                
         self.summrizeVM.updateData(summarizeData)
     }
     
@@ -27,12 +27,10 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                        
+            
         setupNavigationBar() //네비게이션 세팅
-        
-        self.layoutView.setup()
         setupCollectionView()
-                
+        
         addTargets()
         
         bind()

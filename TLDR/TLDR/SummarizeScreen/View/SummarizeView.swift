@@ -21,10 +21,12 @@ final class SummarizeView: UIView {
     //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setup()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        setup()
     }
     
     //MARK: - Methods
@@ -77,7 +79,7 @@ final class SummarizeView: UIView {
         keywordCollectionView.pinHeight(constant: 60)
         keywordCollectionView.pinLeft(to: self.leftAnchor)
         keywordCollectionView.pinRight(to: self.rightAnchor)
-        keywordCollectionView.pinTop(to: self.safeAreaLayoutGuide.topAnchor)
+        keywordCollectionView.pinTop(to: self.safeAreaLayoutGuide.topAnchor, offset: 5)
     }
 
     private func setupTitleUnderLineLabel() {
@@ -87,7 +89,7 @@ final class SummarizeView: UIView {
         titleUnderLineLabel.pinHeight(constant: 30)
         titleUnderLineLabel.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor, offset: 15)
         titleUnderLineLabel.pinRight(to: self.safeAreaLayoutGuide.rightAnchor, offset: -15)
-        titleUnderLineLabel.pinTop(to: self.keywordCollectionView.bottomAnchor, offset: 20)
+        titleUnderLineLabel.pinTop(to: self.keywordCollectionView.bottomAnchor, offset: 5)
     }
     
     private func setupTextModeButton() {
