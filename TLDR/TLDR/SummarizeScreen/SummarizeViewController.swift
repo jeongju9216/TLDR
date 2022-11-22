@@ -60,8 +60,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
             }
             
             Logger.debug(totalKeywords)
-            self.layoutView.keywordCollectionView.reloadData()
-            self.layoutView.keywordCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .init())
+            self.layoutView.reloadCollectionView()
         }
         
         keywordVM.selectedKeywords.bind { [weak self] selectedKeywords in
@@ -74,7 +73,10 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
         }
         
         textModeVM.textMode.bind { [weak self] textMode in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
+            
             Logger.info(textMode)
             
             self.keywordVM.deselectAll()
@@ -95,14 +97,16 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     
     //MARK: - Setup
     private func setupCollectionView() {
-        self.layoutView.keywordCollectionView.register(KeywordCell.classForCoder(), forCellWithReuseIdentifier: "keywordCellIdentifier")
+        self.layoutView.keywordCollectionView.register(KeywordCell.classForCoder(), forCellWithReuseIdentifier: KeywordCell.id)
         self.layoutView.keywordCollectionView.delegate = self
         self.layoutView.keywordCollectionView.dataSource = self
     }
     
         
     private func addTargets() {
-        self.layoutView.textModeButton.addTarget(self, action: #selector(clickedTextModeButton), for: .touchUpInside)
+        self.layoutView.textModeButton.addTarget(self,
+                                                 action: #selector(clickedTextModeButton),
+                                                 for: .touchUpInside)
     }
 }
 
@@ -112,7 +116,7 @@ extension SummarizeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.layoutView.keywordCollectionView.dequeueReusableCell(withReuseIdentifier: "keywordCellIdentifier", for: indexPath) as! KeywordCell
+        let cell = self.layoutView.keywordCollectionView.dequeueReusableCell(withReuseIdentifier: KeywordCell.id, for: indexPath) as! KeywordCell
         
         cell.setKeyword(keywordVM.getTotalKeywords()[indexPath.row])
         
@@ -125,13 +129,15 @@ extension SummarizeViewController: UICollectionViewDelegate {
         if indexPath.row == 0 {
             self.keywordVM.selectAll()
             for i in 1..<keywordVM.getTotalKeywordsCount() {
-                layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: i, section: 0), animated: false)
+                layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: i, section: 0),
+                                                              animated: false)
             }
         } else {
             Logger.debug(self.keywordVM.getPrevSelectedIndex())
             if self.keywordVM.getPrevSelectedIndex() == 0 {
                 self.keywordVM.deselectAll()
-                layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: 0, section: 0), animated: false)
+                layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: 0, section: 0),
+                                                              animated: false)
             }
             
             self.keywordVM.selected(index: indexPath.row)
