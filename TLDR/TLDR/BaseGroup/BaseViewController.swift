@@ -21,18 +21,13 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         self.view.backgroundColor = .backgroundColor
     }
     
-    //MARK: - Methods
-    func setupNavigationBar() {
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationController?.navigationBar.tintColor = .label
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .backgroundColor
-        self.navigationItem.standardAppearance = appearance
-        self.navigationItem.scrollEdgeAppearance = appearance
+        self.navigationController?.navigationBar.isHidden = true
     }
     
+    //MARK: - Methods
     func showAlert(title: String? = "알림", message: String = "", action: ((UIAlertAction) -> Void)? = nil) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {
