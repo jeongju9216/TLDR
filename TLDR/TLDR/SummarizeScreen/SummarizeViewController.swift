@@ -41,7 +41,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     }
     
     @objc private func clickedBackButton() {
-        dismiss(animated: true)
+        self.navigationController?.popViewController(animated: true)
     }
     
     //MARK: - Methods
