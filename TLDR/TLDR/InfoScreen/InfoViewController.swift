@@ -25,11 +25,11 @@ final class InfoViewController: BaseViewController<InfoView> {
     }
     
     @objc private func clickedUpdateButton() {
-        infoVM.openAppStore()
+        infoVM.openURL(BaseData.shared.appStoreOpenUrlString)
     }
     
     @objc private func clickedPolicyButton() {
-        
+        infoVM.openURL(BaseData.shared.policyURL)
     }
     
     //MARK: - Methods

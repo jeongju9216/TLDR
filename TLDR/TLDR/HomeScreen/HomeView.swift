@@ -10,8 +10,7 @@ import UIKit
 final class HomeView: UIView {
     
     //MARK: - Views
-    private var topBarView: UIView! //상단바(네비바 모양)
-    private var topBarLineView: UIView!
+    private var topBarView: TopBarView!
     
     private var titleLabel: UILabel! //TLDR 라벨
     var infoButton: UIButton! //앱 정보 버튼
@@ -24,7 +23,6 @@ final class HomeView: UIView {
     var hideKeyboardButton: UIButton! //키보드 숨김 버튼
     
     //MARK: - Properties
-    private var topBarHeight: CGFloat = 40
     private var animationDuration: Double = 0.2
     
     //MARK: - Init
@@ -66,7 +64,7 @@ final class HomeView: UIView {
         textView.textContainerInset = UIEdgeInsets(top: 15, left: 15, bottom: 300, right: 15)
         
         UIView.animate(withDuration: animationDuration, animations: {
-            let scale = CGAffineTransform(translationX: 0, y: -self.topBarHeight)
+            let scale = CGAffineTransform(translationX: 0, y: -self.topBarView.height)
             self.topBarView.transform = scale
             self.textView.transform = scale
             
@@ -91,7 +89,6 @@ final class HomeView: UIView {
     //MARK: - Setup
     private func setup() {        
         setupTopBarView()
-        setupTopBarLineView()
 
         setupTitleLable()
         setupInfoButton()
@@ -107,28 +104,13 @@ final class HomeView: UIView {
     }
     
     private func setupTopBarView() {
-        topBarView = UIView(frame: .zero)
-        
-        topBarView.backgroundColor = .backgroundColor
+        topBarView = TopBarView(frame: .zero)
         
         self.addSubview(topBarView)
-        topBarView.pinHeight(constant: topBarHeight)
+        topBarView.pinHeight(constant: topBarView.height)
         topBarView.pinLeft(to: self.leftAnchor)
         topBarView.pinRight(to: self.rightAnchor)
         topBarView.pinTop(to: self.safeAreaLayoutGuide.topAnchor)
-    }
-    
-    private func setupTopBarLineView() {
-        topBarLineView = UIView(frame: .zero)
-        
-        topBarLineView.backgroundColor = .lightGray
-        topBarLineView.alpha = 0.2
-        
-        topBarView.addSubview(topBarLineView)
-        topBarLineView.pinHeight(constant: 1)
-        topBarLineView.pinLeft(to: self.leftAnchor)
-        topBarLineView.pinRight(to: self.rightAnchor)
-        topBarLineView.pinBottom(to: self.topBarView.bottomAnchor)
     }
     
     private func setupTitleLable() {

@@ -133,6 +133,8 @@ final class InfoView: UIView {
         policyButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         policyButton.setTitleColor(.systemBlue, for: .normal)
         
+        policyButton.alpha = 0.8
+        
         self.addSubview(policyButton)
         policyButton.pinBottom(to: updateButton.topAnchor, offset: -5)
         policyButton.pinCenterX(to: updateButton.centerXAnchor)

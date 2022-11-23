@@ -21,28 +21,48 @@ class BaseViewController<LayoutView: UIView>: UIViewController {
         self.view.backgroundColor = .backgroundColor
     }
     
-    //MARK: - Methods
-    func setupNavigationBar() {
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.navigationController?.navigationBar.tintColor = .label
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = .backgroundColor
-        self.navigationItem.standardAppearance = appearance
-        self.navigationItem.scrollEdgeAppearance = appearance
+        self.navigationController?.navigationBar.isHidden = true
     }
     
+    //MARK: - Methods
+    func showAlert(title: String? = "알림", message: String = "", action: ((UIAlertAction) -> Void)? = nil) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else {
+                return
+            }
+
+            let alert = UIAlertController(title: title,
+                                               message: message,
+                                               preferredStyle: .alert)
+                        
+            let doneAction = UIAlertAction(title: "확인",
+                                           style: .default,
+                                           handler: action)
+            alert.addAction(doneAction)
+            
+            self.present(alert, animated: true)
+        }
+    }
+
     func showErrorAlert(message: String? = nil, action: ((UIAlertAction) -> Void)? = nil) {
         DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
+            guard let self = self else {
+                return
+            }
 
-            let errorAlert = UIAlertController(title: nil, message: "", preferredStyle: .alert)
+            let errorAlert = UIAlertController(title: nil,
+                                               message: "",
+                                               preferredStyle: .alert)
             
             let message = message ?? self.errorMessage
             errorAlert.message = message
             
-            let doneAction = UIAlertAction(title: "확인", style: .default, handler: action)
+            let doneAction = UIAlertAction(title: "확인",
+                                           style: .default,
+                                           handler: action)
             errorAlert.addAction(doneAction)
             
             self.present(errorAlert, animated: true)
