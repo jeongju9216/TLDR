@@ -92,5 +92,4 @@ struct HomeViewModel {
     func resetText() {
         self.text.value = ""
     }
-
 }

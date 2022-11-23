@@ -16,12 +16,16 @@ final class HomeViewController: BaseViewController<HomeView> {
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-             
-        addTargets()
-        addObservers()
-        addDelegate()
         
-        bind()
+        if BaseData.shared.isNeedForcedUpdate {
+            forceUpdate()
+        } else {
+            addTargets()
+            addObservers()
+            addDelegate()
+            
+            bind()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,7 +111,18 @@ final class HomeViewController: BaseViewController<HomeView> {
             self.navigationController?.pushViewController(summarizeVC, animated: true)
         }
     }
-        
+    
+    private func forceUpdate() {
+        self.showAlert(title: "업데이트",
+                       message: "새로운 버전으로 업데이트를 해야합니다.\n확인을 누르면 앱스토어로 이동합니다.",
+                       action: { _ in
+            if let url = URL(string: BaseData.shared.appStoreOpenUrlString) {
+                UIApplication.shared.open(url)
+                exit(0)
+            }
+        })
+    }
+            
     private func addTargets() {
         //매개변수 3개 이상은 세로로 분리
         self.layoutView.summarizeButton.addTarget(self,
