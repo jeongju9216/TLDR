@@ -8,11 +8,12 @@
 import UIKit
 
 struct InfoViewModel {
-    func openAppStore() {
-        guard let url = URL(string: BaseData.shared.appStoreOpenUrlString) else {
-            return
+    func openURL(_ url: String) {
+        Logger.debug(url)
+        if let url = URL(string: url)  {
+            UIApplication.shared.open(url)
+        } else {
+            Logger.error("URL 에러")
         }
-        
-        UIApplication.shared.open(url, options: [:])
     }
 }
