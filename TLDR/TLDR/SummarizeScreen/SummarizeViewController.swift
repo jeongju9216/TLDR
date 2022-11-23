@@ -28,7 +28,6 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     override func viewDidLoad() {
         super.viewDidLoad()
             
-        setupNavigationBar() //네비게이션 세팅
         setupCollectionView()
         
         addTargets()
@@ -39,6 +38,10 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     //MARK: - Actions
     @objc private func clickedTextModeButton() {
         textModeVM.toggleTextMode()
+    }
+    
+    @objc private func clickedBackButton() {
+        dismiss(animated: true)
     }
     
     //MARK: - Methods
@@ -104,6 +107,9 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     private func addTargets() {
         self.layoutView.textModeButton.addTarget(self,
                                                  action: #selector(clickedTextModeButton),
+                                                 for: .touchUpInside)
+        self.layoutView.backButton.addTarget(self,
+                                                 action: #selector(clickedBackButton),
                                                  for: .touchUpInside)
     }
 }

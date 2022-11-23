@@ -10,6 +10,9 @@ import UIKit
 final class SummarizeView: UIView {
     
     //MARK: - Views
+    private var topBarView: TopBarView!
+    var backButton: UIButton!
+    
     //핵심 키워드
     var keywordCollectionView: UICollectionView!
     
@@ -57,11 +60,38 @@ final class SummarizeView: UIView {
     
     //MARK: - Setup
     func setup() {
+        setupTopBarView()
+        setupBackButton()
+        
         setupKeywordCollectionView()
         
         setupTitleUnderLineLabel()
         setupTextModeButton()
         setupSummarizeTextView()
+    }
+    
+    private func setupTopBarView() {
+        topBarView = TopBarView(frame: .zero)
+        
+        self.addSubview(topBarView)
+        topBarView.pinHeight(constant: topBarView.height)
+        topBarView.pinLeft(to: self.leftAnchor)
+        topBarView.pinRight(to: self.rightAnchor)
+        topBarView.pinTop(to: self.safeAreaLayoutGuide.topAnchor)
+    }
+    
+    private func setupBackButton() {
+        backButton = UIButton(type: .custom)
+        
+        backButton.setImage(.init(systemName: "chevron.backward",
+                                  withConfiguration: UIImage.SymbolConfiguration(pointSize: 21, weight: .medium)),
+                            for: .normal)
+        backButton.tintColor = .label
+        backButton.imageView?.contentMode = .scaleAspectFit
+        
+        self.addSubview(backButton)
+        backButton.pinBottom(to: topBarView.bottomAnchor, offset: -10)
+        backButton.pinLeft(to: topBarView.leftAnchor, offset: 10)
     }
     
     private func setupKeywordCollectionView() {
@@ -79,7 +109,7 @@ final class SummarizeView: UIView {
         keywordCollectionView.pinHeight(constant: 60)
         keywordCollectionView.pinLeft(to: self.leftAnchor)
         keywordCollectionView.pinRight(to: self.rightAnchor)
-        keywordCollectionView.pinTop(to: self.safeAreaLayoutGuide.topAnchor, offset: 5)
+        keywordCollectionView.pinTop(to: self.topBarView.bottomAnchor, offset: 5)
     }
 
     private func setupTitleUnderLineLabel() {
