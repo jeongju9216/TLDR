@@ -28,13 +28,6 @@ final class HomeViewController: BaseViewController<HomeView> {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        //커스텀 네비게이션 사용함
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
     //MARK: - Methods
     private func bind() {
         homeVM.text.bind { [weak self] text in
