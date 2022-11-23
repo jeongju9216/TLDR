@@ -52,6 +52,7 @@ final class LaunchViewController: BaseViewController<LaunchView> {
             let navigationVC: UINavigationController = UINavigationController(rootViewController: HomeViewController())
             navigationVC.modalPresentationStyle = .fullScreen
             
+            self.dismiss(animated: false)
             self.present(navigationVC, animated: false)
         }
     }
