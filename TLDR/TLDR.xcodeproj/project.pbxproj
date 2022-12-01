@@ -50,7 +50,6 @@
 		9BD3C44028D9D52100B3B594 /* HttpError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C43F28D9D52100B3B594 /* HttpError.swift */; };
 		9BD3C44228D9D55000B3B594 /* HttpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C44128D9D55000B3B594 /* HttpAPI.swift */; };
 		9BD3C46A28DC63C200B3B594 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C46928DC63C200B3B594 /* Observable.swift */; };
-		9BD3C46D28DC6F6100B3B594 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C46C28DC6F6100B3B594 /* TestData.swift */; };
 		9BD3C4A128E0743600B3B594 /* VersionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C4A028E0743600B3B594 /* VersionData.swift */; };
 		9BD3C4A728E07C9500B3B594 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C4A628E07C9500B3B594 /* Logger.swift */; };
 /* End PBXBuildFile section */
@@ -100,7 +99,6 @@
 		9BD3C43F28D9D52100B3B594 /* HttpError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpError.swift; sourceTree = "<group>"; };
 		9BD3C44128D9D55000B3B594 /* HttpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpAPI.swift; sourceTree = "<group>"; };
 		9BD3C46928DC63C200B3B594 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		9BD3C46C28DC6F6100B3B594 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		9BD3C4A028E0743600B3B594 /* VersionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionData.swift; sourceTree = "<group>"; };
 		9BD3C4A628E07C9500B3B594 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -165,7 +163,6 @@
 			children = (
 				9B42D4F32917A29D0053DBF3 /* Services */,
 				9BD3C49F28E0737B00B3B594 /* Models */,
-				9BD3C46B28DC6D4D00B3B594 /* Test */,
 				9BBA93AE28BF6E61002CB0CF /* LaunchScreen */,
 				9BBA93BF28BF78DF002CB0CF /* HomeScreen */,
 				9BBA93C928C0753C002CB0CF /* SummarizeScreen */,
@@ -295,14 +292,6 @@
 			path = HttpService;
 			sourceTree = "<group>";
 		};
-		9BD3C46B28DC6D4D00B3B594 /* Test */ = {
-			isa = PBXGroup;
-			children = (
-				9BD3C46C28DC6F6100B3B594 /* TestData.swift */,
-			);
-			path = Test;
-			sourceTree = "<group>";
-		};
 		9BD3C49F28E0737B00B3B594 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -421,7 +410,6 @@
 				9BBA939528BC6C6F002CB0CF /* SceneDelegate.swift in Sources */,
 				9BBA93CB28C0762B002CB0CF /* SummarizeViewController.swift in Sources */,
 				9BC961AE28E99EC300DBF323 /* Decodable.swift in Sources */,
-				9BD3C46D28DC6F6100B3B594 /* TestData.swift in Sources */,
 				9BBA93BE28BF78C5002CB0CF /* TimeUtil.swift in Sources */,
 				9B42D518291BAABC0053DBF3 /* SummarizeViewModel.swift in Sources */,
 				9BBA93B128BF6E7F002CB0CF /* BaseViewController.swift in Sources */,
@@ -584,7 +572,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeong9216.TLDR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -613,7 +601,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeong9216.TLDR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

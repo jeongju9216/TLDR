@@ -110,8 +110,9 @@ final class HomeViewController: BaseViewController<HomeView> {
                        message: "새로운 버전으로 업데이트를 해야합니다.\n확인을 누르면 앱스토어로 이동합니다.",
                        action: { _ in
             if let url = URL(string: BaseData.shared.appStoreOpenUrlString) {
-                UIApplication.shared.open(url)
-                exit(0)
+                UIApplication.shared.open(url, options: [:]) { _ in
+                    exit(0)
+                }
             }
         })
     }
