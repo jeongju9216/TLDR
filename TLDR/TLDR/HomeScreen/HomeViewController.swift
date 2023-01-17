@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 final class HomeViewController: BaseViewController<HomeView> {
     
     //MARK: - Properties
