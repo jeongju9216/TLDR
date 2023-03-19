@@ -15,3 +15,8 @@ struct VersionData: Decodable {
     let appleID: String //앱 애플 아이디
     let bundleID: String //번들 아이디
 }
+
+struct StateData: Codable {
+    let state: Result //서버 상태 정상: ok, 비정상: fail
+    let notice: String //서버 공지(안내 메시지)
+}

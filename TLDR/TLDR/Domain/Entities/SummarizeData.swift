@@ -30,20 +30,6 @@ struct SummarizeData {
     }
 }
 
-struct SummarizeResponseData: Codable {
-    let summarize: String
-    let textKeywords: String
-    let summarizeKeywords: String
-    let language: String
-    
-    enum CodingKeys: String, CodingKey {
-        case summarize
-        case textKeywords = "text_keywords"
-        case summarizeKeywords = "summarize_keywords"
-        case language
-    }
-}
-
 enum SummarizeLangauge: String {
     case auto //서버에서 자동 인식
     case en //영어로 번역
