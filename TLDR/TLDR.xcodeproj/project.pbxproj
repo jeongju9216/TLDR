@@ -669,7 +669,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WPX8MV29XR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TLDR/Info.plist;
+				INFOPLIST_FILE = TLDR/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
@@ -698,7 +698,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WPX8MV29XR;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = TLDR/Info.plist;
+				INFOPLIST_FILE = TLDR/Resource/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
