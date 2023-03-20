@@ -73,6 +73,15 @@
       }
     },
     {
+      "identity" : "jeonglogger",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jeongju9216/JeongLogger.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "3402163ace32a4748962030cc0cfaae9ad6ddfbb"
+      }
+    },
+    {
       "identity" : "leveldb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/leveldb.git",
