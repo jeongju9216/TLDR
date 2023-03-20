@@ -7,43 +7,50 @@
 
 import Foundation
 
-struct HomeViewModel {
+enum HomeViewModelActions {
+    case summarize(String)
+}
+
+enum HomeViewModelActionOutputs {
+    case summarize(SummarizeData)
     
-    //MARK: - Properties
-    let text: Observable<String> = Observable("")
+    func value() -> Any {
+        switch self {
+        case .summarize(let summarizeData):
+            return summarizeData
+        }
+    }
+}
+
+struct HomeViewModel {
+    //todo: 의존성 주입
+    private let summarizeUseCase: SummarizeUseCase = SummarizeUseCase(repository: SummarizeRepository())
     
     init() { }
     
-    //MARK: - Methods
-    func summarizeText() async throws -> SummarizeData {
-        //서버에 summarize 요청 보내기
-        let response = await postSummarize(language: .auto)
-        
-        //ok가 아니라면 에러 throw
-        guard response.result == .ok else {
-            throw HttpError.summarizeError(message: response.message)
+    func action(_ actions: HomeViewModelActions) async throws -> HomeViewModelActionOutputs {
+        switch actions {
+        case .summarize(let text):
+            return try await .summarize(summarize(text: text))
         }
-        
-        //response 파싱
-        let summarizeData = try parsingSummarizeData(response)
-        
-        return summarizeData
     }
-    
-    func postSummarize(language: SummarizeLangauge) async -> Response {
-        let newText: String = createSentences()
-        
-        return await HttpService.shard.postSummarize(text: newText, language: language)
+}
+
+//MARK: - Actions
+extension HomeViewModel {
+    private func summarize(text: String, language: SummarizeLangauge = .auto) async throws -> SummarizeData {
+        let requestValue = SummarizeRequestValue(text: createSentences(text), language: language)
+        return try await summarizeUseCase.excute(requestValue: requestValue)
     }
     
     /**
      서버로 보낼 문장을 만듭니다.
      개행으로 끝나는 문장에 온점이 없는 경우 온점을 붙입니다.
      */
-    func createSentences() -> String {
+    private func createSentences(_ text: String) -> String {
         var newText: String = ""
         
-        let strings = text.value.components(separatedBy: "\n")
+        let strings = text.components(separatedBy: "\n")
         for string in strings {
             guard !string.isEmpty else {
                 newText += "\n"
@@ -58,38 +65,5 @@ struct HomeViewModel {
         }
         
         return newText
-    }
-    
-    func parsingSummarizeData(_ response: Response) throws -> SummarizeData {
-        guard let json = response.data else {
-            throw HttpError.jsonError
-        }
-
-        Logger.info(json)
-
-        let responseData: SummarizeResponseData = try SummarizeResponseData.decode(dictionary: json)
-        
-        let textKeywords: [String] = ["전체"] + parsingKeywords(responseData.textKeywords)
-        let summarizeKeywords: [String] = ["전체"] + parsingKeywords(responseData.summarizeKeywords)
-
-        let summarizeData = SummarizeData(text: text.value,
-                                          summarizeText: responseData.summarize,
-                                          textKeywords: textKeywords,
-                                          summarizeKeywords: summarizeKeywords)
-
-        return summarizeData
-    }
-    
-    private func parsingKeywords(_ keywords: String) -> [String] {
-        return keywords.components(separatedBy: "|")
-                       .filter { !$0.isEmpty }
-    }
-    
-    func updateText(_ text: String) {
-        self.text.value = text
-    }
-    
-    func resetText() {
-        self.text.value = ""
     }
 }

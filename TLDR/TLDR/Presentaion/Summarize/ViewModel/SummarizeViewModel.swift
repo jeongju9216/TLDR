@@ -10,7 +10,7 @@ import Foundation
 struct SummarizeViewModel {
     
     //MARK: - Properties
-    let data: Observable<SummarizeData> = Observable(SummarizeData())
+    let data: Observable<SummarizeData> = Observable(SummarizeData(text: "", summarizeText: "", textKeywords: [], summarizeKeywords: []))
     
     init() { }
     
