@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import JeongLogger
 
 enum HttpAPI: String {
     case summarize
@@ -31,7 +32,7 @@ final class HttpService {
     
     func requestGet(url: String) async -> Response {
         do {
-            Logger.debug(url)
+            JeongLogger.log(url)
             guard let url = URL(string: url) else { throw HttpError.urlError }
                         
             let (data, response) = try await urlSession.data(from: url)
@@ -41,15 +42,15 @@ final class HttpService {
                 
             return try JSONDecoder().decode(Response.self, from: data)
         } catch {
-            Logger.error(error)
+            JeongLogger.error(error)
             return Response(result: .fail, message: error.localizedDescription, data: nil)
         }
     }
     
     func requestPost(url: String, param: [String: Any]) async -> Response {
         do {
-            Logger.debug(url)
-            Logger.debug(param)
+            JeongLogger.log(url)
+            JeongLogger.log(param)
             guard let sendData = try? JSONSerialization.data(withJSONObject: param, options: [.prettyPrinted]) else {
                 throw HttpError.jsonError
             }
@@ -71,7 +72,7 @@ final class HttpService {
             
             return try JSONDecoder().decode(Response.self, from: data)
         } catch {
-            Logger.error(error)
+            JeongLogger.error(error)
             return Response(result: .fail, message: error.localizedDescription, data: nil)
         }
     }

@@ -49,12 +49,12 @@
 		9BD3C44228D9D55000B3B594 /* HttpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C44128D9D55000B3B594 /* HttpAPI.swift */; };
 		9BD3C46A28DC63C200B3B594 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C46928DC63C200B3B594 /* Observable.swift */; };
 		9BD3C4A128E0743600B3B594 /* VersionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C4A028E0743600B3B594 /* VersionData.swift */; };
-		9BD3C4A728E07C9500B3B594 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C4A628E07C9500B3B594 /* Logger.swift */; };
 		9BFEE7EF29C72C18009BB2FB /* SummarizeDataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEE7EE29C72C18009BB2FB /* SummarizeDataDTO.swift */; };
 		9BFEE80429C83A73009BB2FB /* SummarizeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEE80329C83A73009BB2FB /* SummarizeRepository.swift */; };
 		9BFEE80829C83ACA009BB2FB /* SummarizeRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEE80729C83ACA009BB2FB /* SummarizeRepositoryProtocol.swift */; };
 		9BFEE80B29C83DB5009BB2FB /* SummarizeUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEE80A29C83DB5009BB2FB /* SummarizeUseCaseProtocol.swift */; };
 		9BFEE80E29C83E04009BB2FB /* SummarizeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEE80D29C83E04009BB2FB /* SummarizeUseCase.swift */; };
+		9BFEE81429C899D3009BB2FB /* JeongLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 9BFEE81329C899D3009BB2FB /* JeongLogger */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,7 +101,6 @@
 		9BD3C44128D9D55000B3B594 /* HttpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpAPI.swift; sourceTree = "<group>"; };
 		9BD3C46928DC63C200B3B594 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9BD3C4A028E0743600B3B594 /* VersionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionData.swift; sourceTree = "<group>"; };
-		9BD3C4A628E07C9500B3B594 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		9BFEE7EE29C72C18009BB2FB /* SummarizeDataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeDataDTO.swift; sourceTree = "<group>"; };
 		9BFEE80329C83A73009BB2FB /* SummarizeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeRepository.swift; sourceTree = "<group>"; };
 		9BFEE80729C83ACA009BB2FB /* SummarizeRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeRepositoryProtocol.swift; sourceTree = "<group>"; };
@@ -114,6 +113,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9BFEE81429C899D3009BB2FB /* JeongLogger in Frameworks */,
 				9B42D4F22917A26C0053DBF3 /* FirebaseDatabase in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -202,7 +202,6 @@
 			children = (
 				9BBA939228BC6C6F002CB0CF /* AppDelegate.swift */,
 				9BBA939428BC6C6F002CB0CF /* SceneDelegate.swift */,
-				9BD3C4A628E07C9500B3B594 /* Logger.swift */,
 				9BBA93DD28C1D416002CB0CF /* BaseData.swift */,
 			);
 			path = Application;
@@ -474,6 +473,7 @@
 			name = TLDR;
 			packageProductDependencies = (
 				9B42D4F12917A26C0053DBF3 /* FirebaseDatabase */,
+				9BFEE81329C899D3009BB2FB /* JeongLogger */,
 			);
 			productName = TLDR;
 			productReference = 9BBA938F28BC6C6F002CB0CF /* TLDR.app */;
@@ -505,6 +505,7 @@
 			mainGroup = 9BBA938628BC6C6F002CB0CF;
 			packageReferences = (
 				9B42D4F02917A26C0053DBF3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				9BFEE81229C899D3009BB2FB /* XCRemoteSwiftPackageReference "JeongLogger" */,
 			);
 			productRefGroup = 9BBA939028BC6C6F002CB0CF /* Products */;
 			projectDirPath = "";
@@ -571,7 +572,6 @@
 				9B5F94E6292D011900AA97A5 /* InfoView.swift in Sources */,
 				9BFEE7EF29C72C18009BB2FB /* SummarizeDataDTO.swift in Sources */,
 				9BD3C43E28D9C63A00B3B594 /* HttpService.swift in Sources */,
-				9BD3C4A728E07C9500B3B594 /* Logger.swift in Sources */,
 				9BBA93C528BF7D12002CB0CF /* SizeUtil.swift in Sources */,
 				9BBA93DE28C1D416002CB0CF /* BaseData.swift in Sources */,
 				9BBA93C728BF9CA4002CB0CF /* UIButton.swift in Sources */,
@@ -798,6 +798,14 @@
 				kind = branch;
 			};
 		};
+		9BFEE81229C899D3009BB2FB /* XCRemoteSwiftPackageReference "JeongLogger" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/jeongju9216/JeongLogger.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -805,6 +813,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9B42D4F02917A26C0053DBF3 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseDatabase;
+		};
+		9BFEE81329C899D3009BB2FB /* JeongLogger */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9BFEE81229C899D3009BB2FB /* XCRemoteSwiftPackageReference "JeongLogger" */;
+			productName = JeongLogger;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
