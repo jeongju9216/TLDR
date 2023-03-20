@@ -26,24 +26,15 @@ final class BaseData {
 
 extension BaseData {
     var isNeedUpdate: Bool { //업데이트가 필요한가?
-        get {
-            compareVersion(curruent: currentVersion, compare: lastetVersion)
-        }
+        compareVersion(curruent: currentVersion, compare: lastetVersion)
     }
     
     var isNeedForcedUpdate: Bool { //강제 업데이트가 필요한가?
-        get {
-            compareVersion(curruent: currentVersion, compare: forcedUpdateVersion)
-        }
+        compareVersion(curruent: currentVersion, compare: forcedUpdateVersion)
     }
     
     private func compareVersion(curruent: String, compare: String) -> Bool {
         let compareResult = curruent.compare(compare, options: .numeric)
-        switch compareResult {
-        case .orderedAscending: //current < compare
-            return true
-        case .orderedDescending, .orderedSame: //current >= compare
-            return false
-        }
+        return compareResult == .orderedAscending
     }
 }
