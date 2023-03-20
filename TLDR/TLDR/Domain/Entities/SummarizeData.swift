@@ -15,13 +15,6 @@ struct SummarizeData {
     let textKeywords: [String]
     let summarizeKeywords: [String] //핵심 키워드
     
-    init() {
-        self.text = ""
-        self.summarizeText = ""
-        self.textKeywords = []
-        self.summarizeKeywords = []
-    }
-    
     init(text: String, summarizeText: String, textKeywords: [String], summarizeKeywords: [String]) {
         self.text = text
         self.summarizeText = summarizeText
