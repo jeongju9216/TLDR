@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import JeongLogger
 
 final class SummarizeRepository: SummarizeRepositoryProtocol {
     func summarize(reqeustValue: SummarizeRequestValue) async throws -> SummarizeData {
@@ -27,7 +28,7 @@ extension SummarizeRepository {
             throw HttpError.jsonError
         }
 
-        Logger.info(json)
+        JeongLogger.log(json, level: .info)
 
         let responseData: SummarizeDataDTO = try SummarizeDataDTO.decode(dictionary: json)
         

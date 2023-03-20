@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JeongLogger
 
 final class SummarizeViewController: BaseViewController<SummarizeView> {
     
@@ -50,8 +51,8 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
             guard let self = self else {
                 return
             }
-            
-            Logger.debug(data)
+
+            JeongLogger.log(data)
             self.layoutView.setText(data.summarizeText)
         }
         
@@ -60,7 +61,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
                 return
             }
             
-            Logger.debug(totalKeywords)
+            JeongLogger.log(totalKeywords)
             self.layoutView.reloadCollectionView()
         }
         
@@ -69,7 +70,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
                 return
             }
             
-            Logger.debug(selectedKeywords)
+            JeongLogger.log(selectedKeywords)
             self.layoutView.highlightKeywords(selectedKeywords.keywords)
         }
         
@@ -78,7 +79,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
                 return
             }
             
-            Logger.info(textMode)
+            JeongLogger.log(textMode)
             
             self.keywordVM.deselectAll()
             
@@ -137,7 +138,7 @@ extension SummarizeViewController: UICollectionViewDelegate {
                                                               animated: false)
             }
         } else {
-            Logger.debug(self.keywordVM.getPrevSelectedIndex())
+            JeongLogger.log(self.keywordVM.getPrevSelectedIndex())
             if self.keywordVM.getPrevSelectedIndex() == 0 {
                 self.keywordVM.deselectAll()
                 layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: 0, section: 0),

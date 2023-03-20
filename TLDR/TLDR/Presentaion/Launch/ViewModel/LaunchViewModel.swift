@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import JeongLogger
 
 struct LaunchViewModel {
     
@@ -23,8 +24,6 @@ struct LaunchViewModel {
             await setPolicyURL()
             
             stateData.value = serverStateData
-            
-            Logger.debug(BaseData.shared.policyURL)
         }
     }
     
@@ -37,7 +36,7 @@ struct LaunchViewModel {
     }
     
     func setVersion(_ version: VersionData) {
-        Logger.info(version)
+        JeongLogger.log(version, level: .info)
         
         BaseData.shared.currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         

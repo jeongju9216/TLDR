@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import JeongLogger
 
 final class LaunchViewController: BaseViewController<LaunchView> {
     
@@ -15,8 +16,6 @@ final class LaunchViewController: BaseViewController<LaunchView> {
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Logger.debug("앱 시작")
         
         bind()
         launchVM.launch()

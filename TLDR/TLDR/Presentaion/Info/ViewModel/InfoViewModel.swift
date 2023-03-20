@@ -6,14 +6,15 @@
 //
 
 import UIKit
+import JeongLogger
 
 struct InfoViewModel {
     func openURL(_ url: String) {
-        Logger.debug(url)
+        JeongLogger.log(url)
         if let url = URL(string: url)  {
             UIApplication.shared.open(url)
         } else {
-            Logger.error("URL 에러")
+            JeongLogger.error("URL 에러")
         }
     }
 }

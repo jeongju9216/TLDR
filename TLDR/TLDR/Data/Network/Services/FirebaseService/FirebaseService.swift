@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import JeongLogger
 
 final class FirebaseService {
     static let shared: FirebaseService = FirebaseService()
@@ -34,14 +35,14 @@ final class FirebaseService {
         do {
             snapshot = try await firebaseRef.child("state").getData()
         } catch {
-            Logger.error("\(error.localizedDescription)")
+            JeongLogger.error(error.localizedDescription)
         }
         
         let snapData = snapshot?.value as? [String: String]
         
         let result = snapData?["result"] ?? "fail"
         let notice = snapData?["notice"] ?? ""
-        Logger.info("result: \(result) / notice: \(notice)")
+        JeongLogger.log("result: \(result) / notice: \(notice)")
         
         let stateData = StateData(state: Result(rawValue: result) ?? .fail,
                                   notice: notice)
@@ -54,7 +55,7 @@ final class FirebaseService {
         do {
             snapshot = try await firebaseRef.child("version").getData()
         } catch {
-            Logger.error("\(error.localizedDescription)")
+            JeongLogger.error(error.localizedDescription)
         }
         
         let snapData = snapshot?.value as? [String: String]
@@ -69,7 +70,7 @@ final class FirebaseService {
                                                    appleID: appleID,
                                                    bundleID: bundleID)
         
-        Logger.info("versions: \(versionData)")
+        JeongLogger.log("versions: \(versionData)")
         return versionData
     }
     
@@ -78,7 +79,7 @@ final class FirebaseService {
         do {
             snapshot = try await firebaseRef.child("policyURL").getData()
         } catch {
-            Logger.error("\(error.localizedDescription)")
+            JeongLogger.error(error.localizedDescription)
         }
         
         let policyURL = snapshot?.value as? String ?? ""
