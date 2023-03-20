@@ -7,8 +7,3 @@
 
 import Foundation
 
-enum HttpAPI: String {
-    case version
-    case state
-    case summarize
-}

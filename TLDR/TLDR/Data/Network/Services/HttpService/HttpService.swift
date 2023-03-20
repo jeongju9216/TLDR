@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum HttpAPI: String {
+    case summarize
+}
+
 enum Result: String, Codable {
     case ok = "ok"
     case fail = "fail"
@@ -19,22 +23,13 @@ struct Response: Codable {
 }
 
 final class HttpService {
-    static let shard: HttpService = HttpService()
+    static let shared: HttpService = HttpService()
     private init() { }
 
     private let urlSession: URLSession = URLSession.shared
-    private let domain: String = "https://tldr161718.site/"
+    let domain: String = "https://tldr161718.site/"
     
-    //POST
-    func postSummarize(text: String, language: SummarizeLangauge) async -> Response {
-        let param = ["text": text, "language": language.rawValue]
-        let response = await requestPost(url: self.domain + HttpAPI.summarize.rawValue, param: param)
-        return response
-    }
-}
-
-extension HttpService {
-    private func requestGet(url: String) async -> Response {
+    func requestGet(url: String) async -> Response {
         do {
             Logger.debug(url)
             guard let url = URL(string: url) else { throw HttpError.urlError }
@@ -51,7 +46,7 @@ extension HttpService {
         }
     }
     
-    private func requestPost(url: String, param: [String: Any]) async -> Response {
+    func requestPost(url: String, param: [String: Any]) async -> Response {
         do {
             Logger.debug(url)
             Logger.debug(param)
