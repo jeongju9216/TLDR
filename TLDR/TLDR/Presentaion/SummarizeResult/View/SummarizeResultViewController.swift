@@ -11,19 +11,19 @@ import JeongLogger
 final class SummarizeResultViewController: BaseViewController<SummarizeResultView> {
     
     //MARK: - Properties
-    private var summrizeVM: SummarizeResultViewModel = SummarizeResultViewModel()
     private var keywordVM: KeywordViewModel = KeywordViewModel()
+    private let summarizeResult: SummarizeResult
     private var isShowSummarizeResult = true
     
     //MARK: - Life Cycles
-    init(summarizeData: SummarizeResult) {
+    init(summarizeResult: SummarizeResult) {
+        self.summarizeResult = summarizeResult
+        
         super.init(nibName: nil, bundle: nil)
-                
-        self.summrizeVM.updateData(summarizeData)
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError()
     }
     
     override func viewDidLoad() {
@@ -50,15 +50,6 @@ final class SummarizeResultViewController: BaseViewController<SummarizeResultVie
     
     //MARK: - Methods
     private func bind() {
-        summrizeVM.data.bind { [weak self] data in
-            guard let self = self else {
-                return
-            }
-
-            JeongLogger.log(data)
-            self.layoutView.setText(data.summarizeText)
-        }
-        
         keywordVM.keywords.bind { [weak self] totalKeywords in
             guard let self = self else {
                 return
@@ -81,13 +72,17 @@ final class SummarizeResultViewController: BaseViewController<SummarizeResultVie
     private func updateData() {
         keywordVM.deselectAll()
         
+        let currentText = isShowSummarizeResult ? summarizeResult.summarizeText
+                                                : summarizeResult.text
+        let currentKeywords = isShowSummarizeResult ? summarizeResult.summarizeKeywords
+                                                    : summarizeResult.textKeywords
+        
+        layoutView.setText(currentText)
+        keywordVM.updateTotalKeywords(currentKeywords)
+        
         if isShowSummarizeResult {
-            layoutView.setText(summrizeVM.getSummarizeText())
-            keywordVM.updateTotalKeywords(summrizeVM.getSummarizeKeywords())
             layoutView.showSummarizeResult()
         } else {
-            layoutView.setText(summrizeVM.getOriginalText())
-            keywordVM.updateTotalKeywords(summrizeVM.getOriginalKeywords())
             layoutView.showOriginalText()
         }
         

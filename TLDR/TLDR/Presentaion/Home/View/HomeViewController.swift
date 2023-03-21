@@ -37,9 +37,9 @@ final class HomeViewController: BaseViewController<HomeView> {
         
         Task {
             do {
-                let summarizeData: SummarizeResult = try await homeVM.action(.summarize(currentText)).value() as! SummarizeResult
+                let summarizeResult: SummarizeResult = try await homeVM.action(.summarize(currentText)).value() as! SummarizeResult
                 
-                goSummarizeVC(summarizeData)
+                goSummarizeVC(summarizeResult)
             } catch HttpError.summarizeError(let message) {
                 JeongLogger.error("error message: \(message)")
                 self.showErrorAlert(message: message)
@@ -103,10 +103,10 @@ final class HomeViewController: BaseViewController<HomeView> {
         layoutView.setEnabled(!text.isEmpty) //입력 안 하면 비활성화
     }
 
-    private func goSummarizeVC(_ summarizeData: SummarizeResult) {
+    private func goSummarizeVC(_ summarizeResult: SummarizeResult) {
         DispatchQueue.main.async {
             //summarizeData 전달하면서 VC 생성
-            let summarizeVC: SummarizeResultViewController = SummarizeResultViewController(summarizeData: summarizeData)
+            let summarizeVC = SummarizeResultViewController(summarizeResult: summarizeResult)
             
             self.navigationController?.pushViewController(summarizeVC, animated: true)
         }
