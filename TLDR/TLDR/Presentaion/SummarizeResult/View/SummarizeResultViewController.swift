@@ -8,12 +8,12 @@
 import UIKit
 import JeongLogger
 
-final class SummarizeResultViewController: BaseViewController<SummarizeView> {
+final class SummarizeResultViewController: BaseViewController<SummarizeResultView> {
     
     //MARK: - Properties
     private var summrizeVM: SummarizeResultViewModel = SummarizeResultViewModel()
     private var keywordVM: KeywordViewModel = KeywordViewModel()
-    private var textModeVM: TextModeViewModel = TextModeViewModel()
+    private var isShowSummarizeResult = true
     
     //MARK: - Life Cycles
     init(summarizeData: SummarizeResult) {
@@ -34,11 +34,14 @@ final class SummarizeResultViewController: BaseViewController<SummarizeView> {
         addTargets()
         
         bind()
+        
+        updateData()
     }
     
     //MARK: - Actions
     @objc private func clickedTextModeButton() {
-        textModeVM.toggleTextMode()
+        isShowSummarizeResult.toggle()
+        updateData()
     }
     
     @objc private func clickedBackButton() {
@@ -73,28 +76,22 @@ final class SummarizeResultViewController: BaseViewController<SummarizeView> {
             JeongLogger.log(selectedKeywords)
             self.layoutView.highlightKeywords(selectedKeywords.keywords)
         }
+    }
+    
+    private func updateData() {
+        keywordVM.deselectAll()
         
-        textModeVM.textMode.bind { [weak self] textMode in
-            guard let self = self else {
-                return
-            }
-            
-            JeongLogger.log(textMode)
-            
-            self.keywordVM.deselectAll()
-            
-            switch textMode {
-            case .original:
-                self.layoutView.setText(self.summrizeVM.getOriginalText())
-                self.keywordVM.updateTotalKeywords(self.summrizeVM.getOriginalKeywords())
-            case .summarize:
-                self.layoutView.setText(self.summrizeVM.getSummarizeText())
-                self.keywordVM.updateTotalKeywords(self.summrizeVM.getSummarizeKeywords())
-            }
-            
-            self.keywordVM.selectAll()
-            self.layoutView.setTextModeLayout(textMode)
+        if isShowSummarizeResult {
+            layoutView.setText(summrizeVM.getSummarizeText())
+            keywordVM.updateTotalKeywords(summrizeVM.getSummarizeKeywords())
+            layoutView.showSummarizeResult()
+        } else {
+            layoutView.setText(summrizeVM.getOriginalText())
+            keywordVM.updateTotalKeywords(summrizeVM.getOriginalKeywords())
+            layoutView.showOriginalText()
         }
+        
+        keywordVM.selectAll()
     }
     
     //MARK: - Setup

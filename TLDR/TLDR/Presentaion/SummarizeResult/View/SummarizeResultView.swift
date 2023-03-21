@@ -1,5 +1,5 @@
 //
-//  SummarizeView.swift
+//  SummarizeResultView.swift
 //  TLDR
 //
 //  Created by 유정주 on 2022/09/01.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SummarizeView: UIView {
+final class SummarizeResultView: UIView {
     
     //MARK: - Views
     private var topBarView: TopBarView!
@@ -41,14 +41,14 @@ final class SummarizeView: UIView {
         textView.highlightKeywords(keywords)
     }
     
-    func setTextModeLayout(_ textMode: TextMode) {
-        if textMode == .original {
-            titleUnderLineLabel.changeTitle("원본 내용")
-            textModeButton.setTitle("요약 보기", for: .normal)
-        } else {
-            titleUnderLineLabel.changeTitle("요약 내용")
-            textModeButton.setTitle("원본 보기", for: .normal)
-        }
+    func showSummarizeResult() {
+        titleUnderLineLabel.changeTitle("요약 내용")
+        textModeButton.setTitle("원본 보기", for: .normal)
+    }
+    
+    func showOriginalText() {
+        titleUnderLineLabel.changeTitle("원본 내용")
+        textModeButton.setTitle("요약 보기", for: .normal)
     }
     
     func reloadCollectionView() {
