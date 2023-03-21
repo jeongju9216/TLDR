@@ -213,7 +213,7 @@
 				9BBA93B028BF6E7F002CB0CF /* BaseViewController.swift */,
 				9BFEE7F029C72D78009BB2FB /* Launch */,
 				9BFEE7F129C72D8D009BB2FB /* Home */,
-				9BFEE7F229C72D8F009BB2FB /* Summarize */,
+				9BFEE7F229C72D8F009BB2FB /* SummarizeResult */,
 				9BFEE7F329C72D93009BB2FB /* Info */,
 				9BBA93D828C198CA002CB0CF /* CustomViews */,
 				9BFEE7EB29C72ADE009BB2FB /* Utils */,
@@ -325,13 +325,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		9BFEE7F229C72D8F009BB2FB /* Summarize */ = {
+		9BFEE7F229C72D8F009BB2FB /* SummarizeResult */ = {
 			isa = PBXGroup;
 			children = (
 				9BFEE7F929C72E10009BB2FB /* View */,
 				9BFEE7F829C72E0E009BB2FB /* ViewModel */,
 			);
-			path = Summarize;
+			path = SummarizeResult;
 			sourceTree = "<group>";
 		};
 		9BFEE7F329C72D93009BB2FB /* Info */ = {
