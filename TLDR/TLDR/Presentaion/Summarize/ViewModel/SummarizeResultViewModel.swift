@@ -7,15 +7,15 @@
 
 import Foundation
 
-struct SummarizeViewModel {
+struct SummarizeResultViewModel {
     
     //MARK: - Properties
-    let data: Observable<SummarizeData> = Observable(SummarizeData(text: "", summarizeText: "", textKeywords: [], summarizeKeywords: []))
+    let data: Observable<SummarizeResult> = Observable(SummarizeResult(text: "", summarizeText: "", textKeywords: [], summarizeKeywords: []))
     
     init() { }
     
     //MARK: - Methods
-    func updateData(_ data: SummarizeData) {
+    func updateData(_ data: SummarizeResult) {
         self.data.value = data
     }
     

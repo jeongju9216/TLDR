@@ -1,5 +1,5 @@
 //
-//  SummarizeViewController.swift
+//  SummarizeResultViewController.swift
 //  TLDR
 //
 //  Created by 유정주 on 2022/09/01.
@@ -8,15 +8,15 @@
 import UIKit
 import JeongLogger
 
-final class SummarizeViewController: BaseViewController<SummarizeView> {
+final class SummarizeResultViewController: BaseViewController<SummarizeView> {
     
     //MARK: - Properties
-    private var summrizeVM: SummarizeViewModel = SummarizeViewModel()
+    private var summrizeVM: SummarizeResultViewModel = SummarizeResultViewModel()
     private var keywordVM: KeywordViewModel = KeywordViewModel()
     private var textModeVM: TextModeViewModel = TextModeViewModel()
     
     //MARK: - Life Cycles
-    init(summarizeData: SummarizeData) {
+    init(summarizeData: SummarizeResult) {
         super.init(nibName: nil, bundle: nil)
                 
         self.summrizeVM.updateData(summarizeData)
@@ -115,7 +115,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     }
 }
 
-extension SummarizeViewController: UICollectionViewDataSource {
+extension SummarizeResultViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return keywordVM.getTotalKeywordsCount()
     }
@@ -129,7 +129,7 @@ extension SummarizeViewController: UICollectionViewDataSource {
     }
 }
 
-extension SummarizeViewController: UICollectionViewDelegate {
+extension SummarizeResultViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             self.keywordVM.selectAll()
@@ -158,7 +158,7 @@ extension SummarizeViewController: UICollectionViewDelegate {
     }
 }
 
-extension SummarizeViewController: UICollectionViewDelegateFlowLayout {
+extension SummarizeResultViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let label: UILabel = UILabel()

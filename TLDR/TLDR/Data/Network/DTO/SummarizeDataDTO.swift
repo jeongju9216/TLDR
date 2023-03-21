@@ -20,7 +20,7 @@ struct SummarizeDataDTO: Codable {
         case language
     }
     
-    func toEntity(originalText: String) -> SummarizeData {
+    func toEntity(originalText: String) -> SummarizeResult {
         return .init(text: originalText,
                      summarizeText: summarize,
                      textKeywords: ["전체"] + parsingKeywords(textKeywords),
