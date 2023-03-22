@@ -1,5 +1,5 @@
 //
-//  SummarizeViewController.swift
+//  SummarizeResultViewController.swift
 //  TLDR
 //
 //  Created by 유정주 on 2022/09/01.
@@ -8,22 +8,22 @@
 import UIKit
 import JeongLogger
 
-final class SummarizeViewController: BaseViewController<SummarizeView> {
+final class SummarizeResultViewController: BaseViewController<SummarizeResultView> {
     
     //MARK: - Properties
-    private var summrizeVM: SummarizeViewModel = SummarizeViewModel()
     private var keywordVM: KeywordViewModel = KeywordViewModel()
-    private var textModeVM: TextModeViewModel = TextModeViewModel()
+    private let summarizeResult: SummarizeResult
+    private var isShowSummarizeResult = true
     
     //MARK: - Life Cycles
-    init(summarizeData: SummarizeData) {
+    init(summarizeResult: SummarizeResult) {
+        self.summarizeResult = summarizeResult
+        
         super.init(nibName: nil, bundle: nil)
-                
-        self.summrizeVM.updateData(summarizeData)
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError()
     }
     
     override func viewDidLoad() {
@@ -34,11 +34,14 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
         addTargets()
         
         bind()
+        
+        updateData()
     }
     
     //MARK: - Actions
     @objc private func clickedTextModeButton() {
-        textModeVM.toggleTextMode()
+        isShowSummarizeResult.toggle()
+        updateData()
     }
     
     @objc private func clickedBackButton() {
@@ -47,15 +50,6 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     
     //MARK: - Methods
     private func bind() {
-        summrizeVM.data.bind { [weak self] data in
-            guard let self = self else {
-                return
-            }
-
-            JeongLogger.log(data)
-            self.layoutView.setText(data.summarizeText)
-        }
-        
         keywordVM.keywords.bind { [weak self] totalKeywords in
             guard let self = self else {
                 return
@@ -73,28 +67,26 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
             JeongLogger.log(selectedKeywords)
             self.layoutView.highlightKeywords(selectedKeywords.keywords)
         }
+    }
+    
+    private func updateData() {
+        keywordVM.deselectAll()
         
-        textModeVM.textMode.bind { [weak self] textMode in
-            guard let self = self else {
-                return
-            }
-            
-            JeongLogger.log(textMode)
-            
-            self.keywordVM.deselectAll()
-            
-            switch textMode {
-            case .original:
-                self.layoutView.setText(self.summrizeVM.getOriginalText())
-                self.keywordVM.updateTotalKeywords(self.summrizeVM.getOriginalKeywords())
-            case .summarize:
-                self.layoutView.setText(self.summrizeVM.getSummarizeText())
-                self.keywordVM.updateTotalKeywords(self.summrizeVM.getSummarizeKeywords())
-            }
-            
-            self.keywordVM.selectAll()
-            self.layoutView.setTextModeLayout(textMode)
+        let currentText = isShowSummarizeResult ? summarizeResult.summarizeText
+                                                : summarizeResult.text
+        let currentKeywords = isShowSummarizeResult ? summarizeResult.summarizeKeywords
+                                                    : summarizeResult.textKeywords
+        
+        layoutView.setText(currentText)
+        keywordVM.updateTotalKeywords(currentKeywords)
+        
+        if isShowSummarizeResult {
+            layoutView.showSummarizeResult()
+        } else {
+            layoutView.showOriginalText()
         }
+        
+        keywordVM.selectAll()
     }
     
     //MARK: - Setup
@@ -115,7 +107,7 @@ final class SummarizeViewController: BaseViewController<SummarizeView> {
     }
 }
 
-extension SummarizeViewController: UICollectionViewDataSource {
+extension SummarizeResultViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return keywordVM.getTotalKeywordsCount()
     }
@@ -129,7 +121,7 @@ extension SummarizeViewController: UICollectionViewDataSource {
     }
 }
 
-extension SummarizeViewController: UICollectionViewDelegate {
+extension SummarizeResultViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             self.keywordVM.selectAll()
@@ -158,7 +150,7 @@ extension SummarizeViewController: UICollectionViewDelegate {
     }
 }
 
-extension SummarizeViewController: UICollectionViewDelegateFlowLayout {
+extension SummarizeResultViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let label: UILabel = UILabel()

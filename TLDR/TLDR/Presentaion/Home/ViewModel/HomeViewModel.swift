@@ -12,7 +12,7 @@ enum HomeViewModelActions {
 }
 
 enum HomeViewModelActionOutputs {
-    case summarize(SummarizeData)
+    case summarize(SummarizeResult)
     
     func value() -> Any {
         switch self {
@@ -38,7 +38,7 @@ struct HomeViewModel {
 
 //MARK: - Actions
 extension HomeViewModel {
-    private func summarize(text: String, language: SummarizeLangauge = .auto) async throws -> SummarizeData {
+    private func summarize(text: String, language: SummarizeLangauge = .auto) async throws -> SummarizeResult {
         let requestValue = SummarizeRequestValue(text: createSentences(text), language: language)
         return try await summarizeUseCase.excute(requestValue: requestValue)
     }

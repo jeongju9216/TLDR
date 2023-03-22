@@ -9,7 +9,7 @@ import Foundation
 import JeongLogger
 
 final class SummarizeRepository: SummarizeRepositoryProtocol {
-    func summarize(reqeustValue: SummarizeRequestValue) async throws -> SummarizeData {
+    func summarize(reqeustValue: SummarizeRequestValue) async throws -> SummarizeResult {
         let param = ["text": reqeustValue.text, "language": reqeustValue.language.rawValue]
         
         let urlString = HttpService.shared.domain + HttpAPI.summarize.rawValue
@@ -23,7 +23,7 @@ final class SummarizeRepository: SummarizeRepositoryProtocol {
 
 //MARK: - Parsing Response
 extension SummarizeRepository {
-    private func parsingSummarizeData(_ response: Response, originalText: String) throws -> SummarizeData {
+    private func parsingSummarizeData(_ response: Response, originalText: String) throws -> SummarizeResult {
         guard let json = response.data else {
             throw HttpError.jsonError
         }
