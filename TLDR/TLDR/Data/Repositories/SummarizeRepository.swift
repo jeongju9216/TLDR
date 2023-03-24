@@ -8,14 +8,31 @@
 import Foundation
 import JeongLogger
 
+final class WrappedSummarizeResult {
+    let summarizeResult: SummarizeResult
+    init(summarizeResult: SummarizeResult) {
+        self.summarizeResult = summarizeResult
+    }
+}
+
 final class SummarizeRepository: SummarizeRepositoryProtocol {
-    func summarize(reqeustValue: SummarizeRequestValue) async throws -> SummarizeResult {
-        let param = ["text": reqeustValue.text, "language": reqeustValue.language.rawValue]
+    private var memoryCache = NSCache<NSString, WrappedSummarizeResult>()
+}
+
+//MARK: - API Call
+extension SummarizeRepository {
+    func summarize(requestValue: SummarizeRequestValue) async throws -> SummarizeResult {
+        if let cache = memoryCache.object(forKey: NSString(string: requestValue.text)) {
+            return cache.summarizeResult
+        }
+        
+        let param = ["text": requestValue.text, "language": requestValue.language.rawValue]
         
         let urlString = HttpService.shared.domain + HttpAPI.summarize.rawValue
         let response = await HttpService.shared.requestPost(url: urlString, param: param)
         
-        let summarizeData = try parsingSummarizeData(response, originalText: reqeustValue.text)
+        let summarizeData = try parsingSummarizeData(response, originalText: requestValue.text)
+        memoryCache.setObject(.init(summarizeResult: summarizeData), forKey: NSString(string: requestValue.text))
         
         return summarizeData
     }
