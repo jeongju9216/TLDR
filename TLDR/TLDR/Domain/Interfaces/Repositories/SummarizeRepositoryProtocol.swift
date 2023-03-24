@@ -13,5 +13,5 @@ struct SummarizeRequestValue {
 }
 
 protocol SummarizeRepositoryProtocol {
-    func summarize(reqeustValue: SummarizeRequestValue) async throws -> SummarizeResult
+    func summarize(requestValue: SummarizeRequestValue) async throws -> SummarizeResult
 }

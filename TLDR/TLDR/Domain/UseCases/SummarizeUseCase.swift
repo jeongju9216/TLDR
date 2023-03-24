@@ -15,6 +15,6 @@ struct SummarizeUseCase: SummarizeUseCaseProtocol {
     }
     
     func excute(requestValue: SummarizeRequestValue) async throws -> SummarizeResult {
-        return try await repository.summarize(reqeustValue: requestValue)
+        return try await repository.summarize(requestValue: requestValue)
     }
 }
