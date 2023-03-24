@@ -8,10 +8,6 @@
 import UIKit
 
 final class InfoViewController: BaseViewController<InfoView> {
-    
-    //MARK: - Properties
-    private let infoVM: InfoViewModel = InfoViewModel()
-    
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +21,11 @@ final class InfoViewController: BaseViewController<InfoView> {
     }
     
     @objc private func clickedUpdateButton() {
-        infoVM.openURL(BaseData.shared.appStoreOpenUrlString)
+        openURL(BaseData.shared.appStoreOpenUrlString)
     }
     
     @objc private func clickedPolicyButton() {
-        infoVM.openURL(BaseData.shared.policyURL)
+        openURL(BaseData.shared.policyURL)
     }
     
     //MARK: - Methods
@@ -43,6 +39,12 @@ final class InfoViewController: BaseViewController<InfoView> {
         self.layoutView.policyButton.addTarget(self,
                                               action: #selector(clickedPolicyButton),
                                               for: .touchUpInside)
+    }
+    
+    private func openURL(_ url: String) {
+        guard let url = URL(string: url) else { return }
+        
+        UIApplication.shared.open(url)
     }
 }
 
