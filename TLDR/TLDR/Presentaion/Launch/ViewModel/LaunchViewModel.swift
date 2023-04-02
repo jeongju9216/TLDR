@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import JeongLogger
 
 struct LaunchViewModel {
     
@@ -35,9 +34,7 @@ struct LaunchViewModel {
         return await FirebaseService.shared.fetchVersion()
     }
     
-    func setVersion(_ version: VersionData) {
-        JeongLogger.log(version, level: .info)
-        
+    func setVersion(_ version: VersionData) {        
         BaseData.shared.currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as! String
         
         BaseData.shared.forcedUpdateVersion = version.forced

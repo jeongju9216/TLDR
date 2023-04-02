@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseViewController<LayoutView: UIView>: UIViewController {
+class BaseViewController<LayoutView: UIView>: UIViewController, Loggable {    
     //MARK: - Views
     var layoutView: LayoutView {
         return view as! LayoutView
