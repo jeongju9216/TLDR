@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import JeongLogger
 
 final class WrappedSummarizeResult {
     let summarizeResult: SummarizeResult
@@ -15,7 +14,7 @@ final class WrappedSummarizeResult {
     }
 }
 
-final class SummarizeRepository: SummarizeRepositoryProtocol {
+final class SummarizeRepository: SummarizeRepositoryProtocol, Loggable {
     //todo: NSCache -> URLCache로 변경하기
     //Response를 캐싱할 수 있기 때문에 구조체 Wrapping 과정도 줄일 수 있고, 의도에도 적절함
     //또한, 메모리 캐시와 디스크 캐시를 함께 지원한다는 장점도 있음
@@ -48,7 +47,7 @@ extension SummarizeRepository {
             throw HttpError.jsonError
         }
 
-        JeongLogger.log(json, level: .info)
+        log(.info, json)
 
         let responseData: SummarizeDataDTO = try SummarizeDataDTO.decode(dictionary: json)
         

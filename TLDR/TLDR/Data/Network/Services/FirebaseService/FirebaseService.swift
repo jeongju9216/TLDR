@@ -7,11 +7,10 @@
 
 import UIKit
 import Firebase
-import JeongLogger
 
-final class FirebaseService {
+final class FirebaseService: Loggable {
     static let shared: FirebaseService = FirebaseService()
-    init() { }
+    private init() { }
 
     //MARK: - Properties
     private var firebaseRef: DatabaseReference!
@@ -35,14 +34,14 @@ final class FirebaseService {
         do {
             snapshot = try await firebaseRef.child("state").getData()
         } catch {
-            JeongLogger.error(error.localizedDescription)
+            log(.error, error.localizedDescription)
         }
         
         let snapData = snapshot?.value as? [String: String]
         
         let result = snapData?["result"] ?? "fail"
         let notice = snapData?["notice"] ?? ""
-        JeongLogger.log("result: \(result) / notice: \(notice)")
+        log(.default, "result: \(result) / notice: \(notice)")
         
         let stateData = StateData(state: Result(rawValue: result) ?? .fail,
                                   notice: notice)
@@ -55,7 +54,7 @@ final class FirebaseService {
         do {
             snapshot = try await firebaseRef.child("version").getData()
         } catch {
-            JeongLogger.error(error.localizedDescription)
+            log(.error, error.localizedDescription)
         }
         
         let snapData = snapshot?.value as? [String: String]
@@ -70,7 +69,7 @@ final class FirebaseService {
                                                    appleID: appleID,
                                                    bundleID: bundleID)
         
-        JeongLogger.log("versions: \(versionData)")
+        log(.default, "versions: \(versionData)")
         return versionData
     }
     
@@ -79,7 +78,7 @@ final class FirebaseService {
         do {
             snapshot = try await firebaseRef.child("policyURL").getData()
         } catch {
-            JeongLogger.error(error.localizedDescription)
+            log(.error, error.localizedDescription)
         }
         
         let policyURL = snapshot?.value as? String ?? ""

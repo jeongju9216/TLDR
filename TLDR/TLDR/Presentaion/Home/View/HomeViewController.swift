@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import JeongLogger
 
 final class HomeViewController: BaseViewController<HomeView> {
     
@@ -41,10 +40,10 @@ final class HomeViewController: BaseViewController<HomeView> {
                 
                 goSummarizeVC(summarizeResult)
             } catch HttpError.summarizeError(let message) {
-                JeongLogger.error("error message: \(message)")
+                log(.error, "error message: \(message)")
                 self.showErrorAlert(message: message)
             } catch {
-                JeongLogger.error(error.localizedDescription)
+                log(.error, "error: \(error.localizedDescription)")
                 self.showErrorAlert()
             }
             

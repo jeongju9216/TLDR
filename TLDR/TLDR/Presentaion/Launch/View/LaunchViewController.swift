@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import JeongLogger
 
 final class LaunchViewController: BaseViewController<LaunchView> {
     
