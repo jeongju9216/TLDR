@@ -16,6 +16,7 @@ extension SummarizeResultEntity {
         return NSFetchRequest<SummarizeResultEntity>(entityName: "SummarizeResultEntity")
     }
 
+    @NSManaged public var createdAt: Date?
     @NSManaged public var text: String?
     @NSManaged public var summarizeText: String?
     @NSManaged public var textKeywords: [String]?
