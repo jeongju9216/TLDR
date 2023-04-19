@@ -23,14 +23,17 @@ final class CoreDataStorage {
         return container
     }()
     
+    //메인 thread
+    lazy var context: NSManagedObjectContext = {
+        persistentContainer.viewContext
+    }()
+    
     //백그라운드 thread
     lazy var backgroundContext: NSManagedObjectContext = {
         persistentContainer.newBackgroundContext()
     }()
 
-    //메인 thread
     func saveContext() {
-        let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
