@@ -47,6 +47,8 @@
 		9BD3C44228D9D55000B3B594 /* HttpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C44128D9D55000B3B594 /* HttpAPI.swift */; };
 		9BD3C46A28DC63C200B3B594 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C46928DC63C200B3B594 /* Observable.swift */; };
 		9BD3C4A128E0743600B3B594 /* VersionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C4A028E0743600B3B594 /* VersionData.swift */; };
+		9BFE60AC29EFA55300283B67 /* SummarizeResult.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BFE60AA29EFA55300283B67 /* SummarizeResult.xcdatamodeld */; };
+		9BFE60AE29EFA8A500283B67 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFE60AD29EFA8A500283B67 /* CoreDataStorage.swift */; };
 		9BFEE7EF29C72C18009BB2FB /* SummarizeDataDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEE7EE29C72C18009BB2FB /* SummarizeDataDTO.swift */; };
 		9BFEE80429C83A73009BB2FB /* SummarizeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEE80329C83A73009BB2FB /* SummarizeRepository.swift */; };
 		9BFEE80829C83ACA009BB2FB /* SummarizeRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEE80729C83ACA009BB2FB /* SummarizeRepositoryProtocol.swift */; };
@@ -97,6 +99,8 @@
 		9BD3C44128D9D55000B3B594 /* HttpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpAPI.swift; sourceTree = "<group>"; };
 		9BD3C46928DC63C200B3B594 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9BD3C4A028E0743600B3B594 /* VersionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionData.swift; sourceTree = "<group>"; };
+		9BFE60AB29EFA55300283B67 /* SummarizeResult.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SummarizeResult.xcdatamodel; sourceTree = "<group>"; };
+		9BFE60AD29EFA8A500283B67 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		9BFEE7EE29C72C18009BB2FB /* SummarizeDataDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeDataDTO.swift; sourceTree = "<group>"; };
 		9BFEE80329C83A73009BB2FB /* SummarizeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeRepository.swift; sourceTree = "<group>"; };
 		9BFEE80729C83ACA009BB2FB /* SummarizeRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeRepositoryProtocol.swift; sourceTree = "<group>"; };
@@ -201,6 +205,15 @@
 			path = HttpService;
 			sourceTree = "<group>";
 		};
+		9BFE60A929EFA4C100283B67 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				9BFE60AA29EFA55300283B67 /* SummarizeResult.xcdatamodeld */,
+				9BFE60AD29EFA8A500283B67 /* CoreDataStorage.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 		9BFEE7E329C72A43009BB2FB /* Application */ = {
 			isa = PBXGroup;
 			children = (
@@ -240,6 +253,7 @@
 		9BFEE7E629C72A56009BB2FB /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				9BFE60A929EFA4C100283B67 /* CoreData */,
 				9BFEE7E929C72AB2009BB2FB /* Repositories */,
 				9BFEE7E829C72AA9009BB2FB /* Network */,
 			);
@@ -554,11 +568,13 @@
 				9BBA93C128BF7A41002CB0CF /* HomeViewController.swift in Sources */,
 				9BBA93D128C0ADBD002CB0CF /* LineView.swift in Sources */,
 				9BBA93D428C0B7F2002CB0CF /* UITextView.swift in Sources */,
+				9BFE60AC29EFA55300283B67 /* SummarizeResult.xcdatamodeld in Sources */,
 				9BFEE80E29C83E04009BB2FB /* SummarizeUseCase.swift in Sources */,
 				9B42D4F62917A2DD0053DBF3 /* FirebaseService.swift in Sources */,
 				9BBA939528BC6C6F002CB0CF /* SceneDelegate.swift in Sources */,
 				9BBA93CB28C0762B002CB0CF /* SummarizeResultViewController.swift in Sources */,
 				9BC961AE28E99EC300DBF323 /* Decodable.swift in Sources */,
+				9BFE60AE29EFA8A500283B67 /* CoreDataStorage.swift in Sources */,
 				9BBA93BE28BF78C5002CB0CF /* TimeUtil.swift in Sources */,
 				9BBA93B128BF6E7F002CB0CF /* BaseViewController.swift in Sources */,
 				9B5F94E6292D011900AA97A5 /* InfoView.swift in Sources */,
@@ -812,6 +828,19 @@
 			productName = JeongLogger;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		9BFE60AA29EFA55300283B67 /* SummarizeResult.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9BFE60AB29EFA55300283B67 /* SummarizeResult.xcdatamodel */,
+			);
+			currentVersion = 9BFE60AB29EFA55300283B67 /* SummarizeResult.xcdatamodel */;
+			path = SummarizeResult.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9BBA938728BC6C6F002CB0CF /* Project object */;
 }
