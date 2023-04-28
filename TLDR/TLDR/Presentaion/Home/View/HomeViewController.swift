@@ -11,6 +11,7 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     //MARK: - Properties
     private var homeVM: HomeViewModel = HomeViewModel()
+    private var summarizeResultStorage = SummarizeResultStorage()
     
     private var currentText: String {
         return layoutView.textView.text
@@ -19,6 +20,8 @@ final class HomeViewController: BaseViewController<HomeView> {
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print(summarizeResultStorage.fetch())
         
         if BaseData.shared.isNeedForcedUpdate {
             forceUpdate()

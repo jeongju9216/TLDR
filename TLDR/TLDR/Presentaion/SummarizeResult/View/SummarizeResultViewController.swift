@@ -35,6 +35,8 @@ final class SummarizeResultViewController: BaseViewController<SummarizeResultVie
         bind()
         
         updateData()
+        
+        
     }
     
     //MARK: - Actions
