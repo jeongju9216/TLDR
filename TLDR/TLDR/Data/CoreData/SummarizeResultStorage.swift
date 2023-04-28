@@ -28,12 +28,35 @@ struct SummarizeResultStorage: Loggable {
         return []
     }
     
+    func fetch(text: String) -> SummarizeResult? {
+        let filter = filteredRequestUsingText(text)
+        do {
+            let queryEntities = try CoreDataStorage.shared.backgroundContext.fetch(filter)
+            
+            if let item = queryEntities.first as? EntityType {
+                return createSummarizeResult(item)
+            }
+        } catch {
+
+        }
+        
+        return nil
+    }
+    
     func save(_ summarizeResult: SummarizeResult) {
         do {
             try saveObjectUsing(summarizeResult: summarizeResult, context: CoreDataStorage.shared.context)
+            
+            try CoreDataStorage.shared.context.save()
         } catch {
             
         }
+    }
+    
+    private func filteredRequestUsingText(_ text: String) -> NSFetchRequest<NSFetchRequestResult> {
+        let fetchRequest: NSFetchRequest<NSFetchRequestResult> = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "text = %@", "\(text)")
+        return fetchRequest
     }
 }
 

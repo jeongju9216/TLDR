@@ -10,9 +10,11 @@ import CoreData
 final class CoreDataStorage {
     static let shared = CoreDataStorage()
     
+    private init() { }
+    
     // MARK: - Core Data stack
     private lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "CloneStore")
+        let container = NSPersistentContainer(name: "CoreData")
         container.loadPersistentStores { _, error in
             if let error = error as NSError? {
                 // TODO: - Log to Crashlytics
