@@ -26,12 +26,12 @@ final class SummarizeRepository: SummarizeRepositoryProtocol, Loggable {
 extension SummarizeRepository {
     func summarize(requestValue: SummarizeRequestValue) async throws -> SummarizeResult {
         if let cache = memoryCache.object(forKey: NSString(string: requestValue.text)) {
-            log(.debug ,"fetch Data from Memory Cache")
+            jlog(.debug ,"fetch Data from Memory Cache")
             return cache.summarizeResult
         }
         
         if let diskCache = summarizeResultStorage.fetch(text: requestValue.text) {
-            log(.debug ,"fetch Data from Disk Cache")
+            jlog(.debug ,"fetch Data from Disk Cache")
             return diskCache
         }
         
@@ -55,7 +55,7 @@ extension SummarizeRepository {
             throw HttpError.jsonError
         }
 
-        log(.info, json)
+        jlog(.debug, json)
 
         let responseData: SummarizeDataDTO = try SummarizeDataDTO.decode(dictionary: json)
         

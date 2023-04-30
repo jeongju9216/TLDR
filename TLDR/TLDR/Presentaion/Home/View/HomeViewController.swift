@@ -43,10 +43,10 @@ final class HomeViewController: BaseViewController<HomeView> {
                 
                 goSummarizeVC(summarizeResult)
             } catch HttpError.summarizeError(let message) {
-                log(.error, "error message: \(message)")
+                jlog(.error, "error message: \(message)")
                 self.showErrorAlert(message: message)
             } catch {
-                log(.error, "error: \(error.localizedDescription)")
+                jlog(.error, "error: \(error.localizedDescription)")
                 self.showErrorAlert()
             }
             
