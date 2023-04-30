@@ -10,16 +10,16 @@ import OSLog
 import JeongLogger
 
 protocol Loggable {
-    func log(_ level: OSLogType, _ log: String)
+    func jlog(_ level: OSLogType, _ log: String)
 }
 
 
 extension Loggable {
-    func log(_ level: OSLogType = .default, _ log: String) {
+    func jlog(_ level: OSLogType, _ log: String) {
         JeongLogger.log(log, level: level)
     }
     
-    func log<T>(_ level: OSLogType = .default, _ object: T?) {
+    func jlog<T>(_ level: OSLogType, _ object: T?) {
         JeongLogger.log(object, level: level)
     }
 }

@@ -31,7 +31,7 @@ final class HttpService: Loggable {
     
     func requestGet(url: String) async -> Response {
         do {
-            log(.default, url)
+            jlog(.debug, url)
             guard let url = URL(string: url) else { throw HttpError.urlError }
                         
             let (data, response) = try await urlSession.data(from: url)
@@ -41,15 +41,15 @@ final class HttpService: Loggable {
                 
             return try JSONDecoder().decode(Response.self, from: data)
         } catch {
-            log(.error, error)
+            jlog(.error, error)
             return Response(result: .fail, message: error.localizedDescription, data: nil)
         }
     }
     
     func requestPost(url: String, param: [String: Any]) async -> Response {
         do {
-            log(.default, url)
-            log(.default, param)
+            jlog(.debug, url)
+            jlog(.debug, param)
             guard let sendData = try? JSONSerialization.data(withJSONObject: param, options: [.prettyPrinted]) else {
                 throw HttpError.jsonError
             }
@@ -71,7 +71,7 @@ final class HttpService: Loggable {
             
             return try JSONDecoder().decode(Response.self, from: data)
         } catch {
-            log(.error, error)
+            jlog(.error, error)
             return Response(result: .fail, message: error.localizedDescription, data: nil)
         }
     }

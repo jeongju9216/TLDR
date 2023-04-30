@@ -34,14 +34,14 @@ final class FirebaseService: Loggable {
         do {
             snapshot = try await firebaseRef.child("state").getData()
         } catch {
-            log(.error, error.localizedDescription)
+            jlog(.error, error.localizedDescription)
         }
         
         let snapData = snapshot?.value as? [String: String]
         
         let result = snapData?["result"] ?? "fail"
         let notice = snapData?["notice"] ?? ""
-        log(.default, "result: \(result) / notice: \(notice)")
+        jlog(.default, "result: \(result) / notice: \(notice)")
         
         let stateData = StateData(state: Result(rawValue: result) ?? .fail,
                                   notice: notice)
@@ -54,7 +54,7 @@ final class FirebaseService: Loggable {
         do {
             snapshot = try await firebaseRef.child("version").getData()
         } catch {
-            log(.error, error.localizedDescription)
+            jlog(.error, error.localizedDescription)
         }
         
         let snapData = snapshot?.value as? [String: String]
@@ -69,7 +69,7 @@ final class FirebaseService: Loggable {
                                                    appleID: appleID,
                                                    bundleID: bundleID)
         
-        log(.default, "versions: \(versionData)")
+        jlog(.default, "versions: \(versionData)")
         return versionData
     }
     
@@ -78,7 +78,7 @@ final class FirebaseService: Loggable {
         do {
             snapshot = try await firebaseRef.child("policyURL").getData()
         } catch {
-            log(.error, error.localizedDescription)
+            jlog(.error, error.localizedDescription)
         }
         
         let policyURL = snapshot?.value as? String ?? ""

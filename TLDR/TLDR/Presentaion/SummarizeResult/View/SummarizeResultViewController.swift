@@ -129,7 +129,7 @@ extension SummarizeResultViewController: UICollectionViewDelegate {
                                                               animated: false)
             }
         } else {
-            log(.debug, self.keywordVM.getPrevSelectedIndex())
+            jlog(.debug, self.keywordVM.getPrevSelectedIndex())
             if self.keywordVM.getPrevSelectedIndex() == 0 {
                 self.keywordVM.deselectAll()
                 layoutView.keywordCollectionView.deselectItem(at: IndexPath(row: 0, section: 0),
