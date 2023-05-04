@@ -16,7 +16,7 @@ final class HomeView: UIView {
     var infoButton: UIButton! //앱 정보 버튼
     var resetButton: UIButton! //초기화 버튼
     var pasteButton: UIButton! //붙여넣기 버튼
-    var recentButton: UIButton! //최근 기록 버튼
+    var recentSummaryButton: UIButton! //최근 기록 버튼
     
     var textView: UITextView! //텍스트 입력창
     
@@ -140,17 +140,17 @@ final class HomeView: UIView {
     }
     
     private func setupRecentButton() {
-        recentButton = UIButton(type: .custom)
+        recentSummaryButton = UIButton(type: .custom)
         
-        recentButton.setTitle("Recent", for: .normal)
-        recentButton.setTitleColor(.label, for: .normal)
-        recentButton.setTitleColor(.lightGray, for: .highlighted)
-        recentButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
-        recentButton.titleLabel?.textAlignment = .center
+        recentSummaryButton.setTitle("Recent", for: .normal)
+        recentSummaryButton.setTitleColor(.label, for: .normal)
+        recentSummaryButton.setTitleColor(.lightGray, for: .highlighted)
+        recentSummaryButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        recentSummaryButton.titleLabel?.textAlignment = .center
         
-        topBarView.addSubview(recentButton)
-        recentButton.pinRight(to: resetButton.leftAnchor, offset: -15)
-        recentButton.pinBottom(to: topBarView.bottomAnchor, offset: 0)
+        topBarView.addSubview(recentSummaryButton)
+        recentSummaryButton.pinRight(to: resetButton.leftAnchor, offset: -15)
+        recentSummaryButton.pinBottom(to: topBarView.bottomAnchor, offset: 0)
     }
     
     private func setupResetButton() {

@@ -11,7 +11,6 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     //MARK: - Properties
     private var homeVM: HomeViewModel = HomeViewModel()
-    private var summarizeResultStorage = SummarizeResultStorage()
     
     private var currentText: String {
         return layoutView.textView.text
@@ -20,9 +19,7 @@ final class HomeViewController: BaseViewController<HomeView> {
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(summarizeResultStorage.fetch())
-        
+                
         if BaseData.shared.isNeedForcedUpdate {
             forceUpdate()
         } else {
@@ -57,6 +54,20 @@ final class HomeViewController: BaseViewController<HomeView> {
     @objc private func clickedInfoButton() {
         let infoVC: InfoViewController = InfoViewController()
         present(infoVC, animated: true)
+    }
+    
+    @objc private func clickedRecentSummaryButton() {
+        Task {
+            do {
+                let recentSummaries = try await homeVM.action(.recentSummary).value() as! [SummarizeResult]
+                print("recentSummaries: \(recentSummaries)")
+                for recentSummary in recentSummaries {
+                    print(recentSummary)
+                }
+            } catch {
+                
+            }
+        }
     }
     
     //붙여넣기 버튼
@@ -121,6 +132,7 @@ final class HomeViewController: BaseViewController<HomeView> {
         layoutView.hideKeyboardButton.addTarget(self, action: #selector(clickedHideKeyboardButton), for: .touchUpInside)
         layoutView.pasteButton.addTarget(self, action: #selector(clickedPasteButton), for: .touchUpInside)
         layoutView.resetButton.addTarget(self, action: #selector(clickedResetButton), for: .touchUpInside)
+        layoutView.recentSummaryButton.addTarget(self, action: #selector(clickedRecentSummaryButton), for: .touchUpInside)
     }
     
     private func addDelegate() {
