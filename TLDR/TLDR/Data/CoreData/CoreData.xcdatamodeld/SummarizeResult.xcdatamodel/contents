@@ -2,9 +2,9 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22E261" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="SummarizeResultEntity" representedClassName="SummarizeResultEntity" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="summarizeKeywords" optional="YES" attributeType="Transformable" valueTransformerName="" customClassName="[String]"/>
+        <attribute name="summarizeKeywords" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
         <attribute name="summarizeText" optional="YES" attributeType="String"/>
         <attribute name="text" optional="YES" attributeType="String"/>
-        <attribute name="textKeywords" optional="YES" attributeType="Transformable" customClassName="[String]"/>
+        <attribute name="textKeywords" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="[String]"/>
     </entity>
 </model>

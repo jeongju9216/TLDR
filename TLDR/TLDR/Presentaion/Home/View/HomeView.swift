@@ -16,6 +16,7 @@ final class HomeView: UIView {
     var infoButton: UIButton! //앱 정보 버튼
     var resetButton: UIButton! //초기화 버튼
     var pasteButton: UIButton! //붙여넣기 버튼
+    var recentSummaryButton: UIButton! //최근 기록 버튼
     
     var textView: UITextView! //텍스트 입력창
     
@@ -94,6 +95,7 @@ final class HomeView: UIView {
         setupInfoButton()
         setupPasteButton()
         setupResetButton()
+        setupRecentButton()
         
         setupSummarizeButton()
         setupHideKeyboardButton()
@@ -135,6 +137,20 @@ final class HomeView: UIView {
         topBarView.addSubview(infoButton)
         infoButton.pinLeft(to: titleLabel.rightAnchor, offset: 5)
         infoButton.pinBottom(to: titleLabel.bottomAnchor)
+    }
+    
+    private func setupRecentButton() {
+        recentSummaryButton = UIButton(type: .custom)
+        
+        recentSummaryButton.setTitle("Recent", for: .normal)
+        recentSummaryButton.setTitleColor(.label, for: .normal)
+        recentSummaryButton.setTitleColor(.lightGray, for: .highlighted)
+        recentSummaryButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        recentSummaryButton.titleLabel?.textAlignment = .center
+        
+        topBarView.addSubview(recentSummaryButton)
+        recentSummaryButton.pinRight(to: resetButton.leftAnchor, offset: -15)
+        recentSummaryButton.pinBottom(to: topBarView.bottomAnchor, offset: 0)
     }
     
     private func setupResetButton() {
