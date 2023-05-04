@@ -14,33 +14,37 @@ struct SummarizeResultStorage: Loggable {
     
     //코어데이터에 저장된 통신 결과 앱들 반환
     func fetch() -> [SummarizeResult] {
-        do {
-            let request: NSFetchRequest<EntityType> = EntityType.fetchRequest()
-            
-            let fetchData = try CoreDataStorage.shared.backgroundContext.fetch(request)
-            let summarizeResults = fetchData.compactMap { createSummarizeResult($0) }
-            
-            return summarizeResults
-        } catch {
-            //todo: 에러 핸들링
-        }
-        
-        return []
+        let summarizeResults = fetchEntity().compactMap { createSummarizeResult($0) }
+        return summarizeResults
     }
     
     func fetch(text: String) -> SummarizeResult? {
         let filter = filteredRequestUsingText(text)
+        
+        if let item = fetchEntity(filter: filter).first {
+            return createSummarizeResult(item)
+        }
+        
+        return nil
+    }
+
+    private func fetchEntity(filter: NSFetchRequest<NSFetchRequestResult>? = nil) -> [EntityType] {
         do {
-            let queryEntities = try CoreDataStorage.shared.backgroundContext.fetch(filter)
-            
-            if let item = queryEntities.first as? EntityType {
-                return createSummarizeResult(item)
+            if let filter = filter {
+                let queryEntities = try CoreDataStorage.shared.backgroundContext.fetch(filter)
+                return queryEntities as? [EntityType] ?? []
+            } else {
+                let request: NSFetchRequest<EntityType> = EntityType.fetchRequest()
+                
+                let fetchData = try CoreDataStorage.shared.backgroundContext.fetch(request)
+                
+                return fetchData
             }
         } catch {
 
         }
-        
-        return nil
+
+        return []
     }
     
     func save(_ summarizeResult: SummarizeResult) {
@@ -50,6 +54,21 @@ struct SummarizeResultStorage: Loggable {
             try CoreDataStorage.shared.context.save()
         } catch {
             
+        }
+    }
+    
+    func deleteAll() {
+        //write 연산은 sync 수행
+        CoreDataStorage.shared.backgroundContext.performAndWait {
+            do {
+                fetchEntity().forEach {
+                    CoreDataStorage.shared.backgroundContext.delete($0)
+                }
+                
+                try CoreDataStorage.shared.backgroundContext.save()
+            } catch {
+
+            }
         }
     }
     
