@@ -81,6 +81,7 @@ struct SummarizeResultStorage: Loggable {
 
 extension SummarizeResultStorage {
     private func saveObjectUsing(summarizeResult: SummarizeResult, context: NSManagedObjectContext) throws {
+        
         guard let entity = NSEntityDescription.entity(forEntityName: entityName, in: context) else {
             return
         }

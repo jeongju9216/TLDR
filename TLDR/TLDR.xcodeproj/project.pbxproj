@@ -21,6 +21,11 @@
 		9B5F94E6292D011900AA97A5 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F94E5292D011900AA97A5 /* InfoView.swift */; };
 		9B5F94E8292D012000AA97A5 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F94E7292D012000AA97A5 /* InfoViewController.swift */; };
 		9B5F94EC292DCD8B00AA97A5 /* TopBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B5F94EB292DCD8B00AA97A5 /* TopBarView.swift */; };
+		9B811E702A053FA6008A660E /* RecentSummaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B811E6E2A053FA6008A660E /* RecentSummaryCollectionViewCell.swift */; };
+		9B811E712A053FA6008A660E /* RecentSummaryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B811E6F2A053FA6008A660E /* RecentSummaryCollectionViewCell.xib */; };
+		9B811E752A05430F008A660E /* DefaultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B811E732A05430F008A660E /* DefaultCollectionViewCell.swift */; };
+		9B811E762A05430F008A660E /* DefaultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B811E742A05430F008A660E /* DefaultCollectionViewCell.xib */; };
+		9B811E782A054340008A660E /* UICollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B811E772A054340008A660E /* UICollectionReusableView.swift */; };
 		9B9F46AE29D90B39008E0800 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9F46AD29D90B39008E0800 /* Loggable.swift */; };
 		9BBA939328BC6C6F002CB0CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA939228BC6C6F002CB0CF /* AppDelegate.swift */; };
 		9BBA939528BC6C6F002CB0CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA939428BC6C6F002CB0CF /* SceneDelegate.swift */; };
@@ -81,6 +86,11 @@
 		9B5F94E5292D011900AA97A5 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		9B5F94E7292D012000AA97A5 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		9B5F94EB292DCD8B00AA97A5 /* TopBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopBarView.swift; sourceTree = "<group>"; };
+		9B811E6E2A053FA6008A660E /* RecentSummaryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryCollectionViewCell.swift; sourceTree = "<group>"; };
+		9B811E6F2A053FA6008A660E /* RecentSummaryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSummaryCollectionViewCell.xib; sourceTree = "<group>"; };
+		9B811E732A05430F008A660E /* DefaultCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCollectionViewCell.swift; sourceTree = "<group>"; };
+		9B811E742A05430F008A660E /* DefaultCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultCollectionViewCell.xib; sourceTree = "<group>"; };
+		9B811E772A054340008A660E /* UICollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionReusableView.swift; sourceTree = "<group>"; };
 		9B9F46AD29D90B39008E0800 /* Loggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggable.swift; sourceTree = "<group>"; };
 		9BBA938F28BC6C6F002CB0CF /* TLDR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TLDR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBA939228BC6C6F002CB0CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -155,6 +165,7 @@
 			children = (
 				9B17C42C2A052D5400E80721 /* RecentSummaryViewController.swift */,
 				9B17C42D2A052D5400E80721 /* RecentSummaryViewController.xib */,
+				9B811E722A05405E008A660E /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -182,6 +193,15 @@
 				9B42D4F52917A2DD0053DBF3 /* FirebaseService.swift */,
 			);
 			path = FirebaseService;
+			sourceTree = "<group>";
+		};
+		9B811E722A05405E008A660E /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				9B811E6E2A053FA6008A660E /* RecentSummaryCollectionViewCell.swift */,
+				9B811E6F2A053FA6008A660E /* RecentSummaryCollectionViewCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		9B9F46AC29D90B2C008E0800 /* Utils */ = {
@@ -227,6 +247,7 @@
 				9BBA93BA28BF721A002CB0CF /* UIView.swift */,
 				9BBA93C628BF9CA4002CB0CF /* UIButton.swift */,
 				9BBA93D328C0B7F2002CB0CF /* UITextView.swift */,
+				9B811E772A054340008A660E /* UICollectionReusableView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -237,6 +258,8 @@
 				9BBA93D028C0ADBD002CB0CF /* LineView.swift */,
 				9BBA93D528C0CEB1002CB0CF /* UnderLineLabel.swift */,
 				9B5F94EB292DCD8B00AA97A5 /* TopBarView.swift */,
+				9B811E732A05430F008A660E /* DefaultCollectionViewCell.swift */,
+				9B811E742A05430F008A660E /* DefaultCollectionViewCell.xib */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -594,6 +617,8 @@
 				9BBA939F28BC6C70002CB0CF /* LaunchScreen.storyboard in Resources */,
 				9BBA939C28BC6C70002CB0CF /* Assets.xcassets in Resources */,
 				9B17C42F2A052D5400E80721 /* RecentSummaryViewController.xib in Resources */,
+				9B811E712A053FA6008A660E /* RecentSummaryCollectionViewCell.xib in Resources */,
+				9B811E762A05430F008A660E /* DefaultCollectionViewCell.xib in Resources */,
 				9B42D4EF2917A2100053DBF3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -619,8 +644,10 @@
 				9BBA93E328C355FF002CB0CF /* TextUtil.swift in Sources */,
 				9BFE60B229EFAE1B00283B67 /* SummarizeResultStorage.swift in Sources */,
 				9BD3C4A128E0743600B3B594 /* VersionData.swift in Sources */,
+				9B811E702A053FA6008A660E /* RecentSummaryCollectionViewCell.swift in Sources */,
 				9BBA93C328BF7A4F002CB0CF /* HomeView.swift in Sources */,
 				9B5F94E8292D012000AA97A5 /* InfoViewController.swift in Sources */,
+				9B811E782A054340008A660E /* UICollectionReusableView.swift in Sources */,
 				9BBA93D628C0CEB1002CB0CF /* UnderLineLabel.swift in Sources */,
 				9BBA93BB28BF721A002CB0CF /* UIView.swift in Sources */,
 				9BC961A728E554E600DBF323 /* KeywordCell.swift in Sources */,
@@ -630,6 +657,7 @@
 				9BFEE80829C83ACA009BB2FB /* SummarizeRepositoryProtocol.swift in Sources */,
 				9BFE60B729EFAF0A00283B67 /* SummarizeResultEntity+CoreDataProperties.swift in Sources */,
 				9B17C41F2A03B0F500E80721 /* RecentSummaryRepository.swift in Sources */,
+				9B811E752A05430F008A660E /* DefaultCollectionViewCell.swift in Sources */,
 				9BD3C46A28DC63C200B3B594 /* Observable.swift in Sources */,
 				9BBA93C128BF7A41002CB0CF /* HomeViewController.swift in Sources */,
 				9BBA93D128C0ADBD002CB0CF /* LineView.swift in Sources */,
