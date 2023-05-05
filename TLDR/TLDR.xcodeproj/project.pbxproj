@@ -11,6 +11,7 @@
 		9B17C41D2A03B0AD00E80721 /* RecentSummaryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B17C41C2A03B0AD00E80721 /* RecentSummaryRepositoryProtocol.swift */; };
 		9B17C41F2A03B0F500E80721 /* RecentSummaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B17C41E2A03B0F500E80721 /* RecentSummaryRepository.swift */; };
 		9B17C4212A03B17F00E80721 /* RecentSummaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B17C4202A03B17F00E80721 /* RecentSummaryUseCase.swift */; };
+		9B17C4272A05284900E80721 /* RecentSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B17C4262A05284900E80721 /* RecentSummaryViewController.swift */; };
 		9B42D4EF2917A2100053DBF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B42D4EE2917A2100053DBF3 /* GoogleService-Info.plist */; };
 		9B42D4F22917A26C0053DBF3 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9B42D4F12917A26C0053DBF3 /* FirebaseDatabase */; };
 		9B42D4F62917A2DD0053DBF3 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B42D4F52917A2DD0053DBF3 /* FirebaseService.swift */; };
@@ -69,6 +70,7 @@
 		9B17C41C2A03B0AD00E80721 /* RecentSummaryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryRepositoryProtocol.swift; sourceTree = "<group>"; };
 		9B17C41E2A03B0F500E80721 /* RecentSummaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryRepository.swift; sourceTree = "<group>"; };
 		9B17C4202A03B17F00E80721 /* RecentSummaryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryUseCase.swift; sourceTree = "<group>"; };
+		9B17C4262A05284900E80721 /* RecentSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryViewController.swift; sourceTree = "<group>"; };
 		9B42D4EE2917A2100053DBF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B42D4F52917A2DD0053DBF3 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		9B42D519291CDEF30053DBF3 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -135,6 +137,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9B17C4242A05281E00E80721 /* RecentSummary */ = {
+			isa = PBXGroup;
+			children = (
+				9B17C4252A05283C00E80721 /* View */,
+			);
+			path = RecentSummary;
+			sourceTree = "<group>";
+		};
+		9B17C4252A05283C00E80721 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9B17C4262A05284900E80721 /* RecentSummaryViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		9B42D4F32917A29D0053DBF3 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -257,6 +275,7 @@
 				9BFEE7F029C72D78009BB2FB /* Launch */,
 				9BFEE7F129C72D8D009BB2FB /* Home */,
 				9BFEE7F229C72D8F009BB2FB /* SummarizeResult */,
+				9B17C4242A05281E00E80721 /* RecentSummary */,
 				9BFEE7F329C72D93009BB2FB /* Info */,
 				9BBA93D828C198CA002CB0CF /* CustomViews */,
 				9BFEE7EB29C72ADE009BB2FB /* Utils */,
@@ -612,6 +631,7 @@
 				9BFE60AE29EFA8A500283B67 /* CoreDataStorage.swift in Sources */,
 				9BBA93BE28BF78C5002CB0CF /* TimeUtil.swift in Sources */,
 				9BBA93B128BF6E7F002CB0CF /* BaseViewController.swift in Sources */,
+				9B17C4272A05284900E80721 /* RecentSummaryViewController.swift in Sources */,
 				9B5F94E6292D011900AA97A5 /* InfoView.swift in Sources */,
 				9BFEE7EF29C72C18009BB2FB /* SummarizeDataDTO.swift in Sources */,
 				9BD3C43E28D9C63A00B3B594 /* HttpService.swift in Sources */,
