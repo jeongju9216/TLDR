@@ -9,7 +9,7 @@ import Foundation
 
 //todo
 //Wrap 클래스로 struct 최적화 하기
-struct SummarizeResult {
+struct SummarizeResult: Hashable {
     let text: String //원본
     let summarizeText: String //요약 내용
     let textKeywords: [String]
