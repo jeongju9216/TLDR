@@ -9,21 +9,20 @@ import UIKit
 
 final class RecentSummaryViewController: UIViewController {
 
+    private let recentSummaryVM: RecentSummaryViewModel = RecentSummaryViewModel()
+    private lazy var recentSummaries: [SummarizeResult] = {
+        do {
+            return try recentSummaryVM.action(.recentSummary).value() as! [SummarizeResult]
+        } catch {
+            return []
+        }
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        print(recentSummaries)
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+     
 }

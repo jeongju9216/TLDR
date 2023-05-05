@@ -27,7 +27,7 @@ struct RecentSummaryViewModel {
     
     init() { }
     
-    func action(_ actions: RecentSummaryViewModelActions) async throws -> RecentSummaryViewModelActionOutputs {
+    func action(_ actions: RecentSummaryViewModelActions) throws -> RecentSummaryViewModelActionOutputs {
         switch actions {
         case .recentSummary:
             return try .recentSummary(fetchRecentSummary())
