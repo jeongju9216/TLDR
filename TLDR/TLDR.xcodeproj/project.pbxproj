@@ -11,7 +11,9 @@
 		9B17C41D2A03B0AD00E80721 /* RecentSummaryRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B17C41C2A03B0AD00E80721 /* RecentSummaryRepositoryProtocol.swift */; };
 		9B17C41F2A03B0F500E80721 /* RecentSummaryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B17C41E2A03B0F500E80721 /* RecentSummaryRepository.swift */; };
 		9B17C4212A03B17F00E80721 /* RecentSummaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B17C4202A03B17F00E80721 /* RecentSummaryUseCase.swift */; };
-		9B17C4272A05284900E80721 /* RecentSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B17C4262A05284900E80721 /* RecentSummaryViewController.swift */; };
+		9B17C42E2A052D5400E80721 /* RecentSummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B17C42C2A052D5400E80721 /* RecentSummaryViewController.swift */; };
+		9B17C42F2A052D5400E80721 /* RecentSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B17C42D2A052D5400E80721 /* RecentSummaryViewController.xib */; };
+		9B17C4322A052E8C00E80721 /* RecentSummaryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B17C4312A052E8C00E80721 /* RecentSummaryViewModel.swift */; };
 		9B42D4EF2917A2100053DBF3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9B42D4EE2917A2100053DBF3 /* GoogleService-Info.plist */; };
 		9B42D4F22917A26C0053DBF3 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 9B42D4F12917A26C0053DBF3 /* FirebaseDatabase */; };
 		9B42D4F62917A2DD0053DBF3 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B42D4F52917A2DD0053DBF3 /* FirebaseService.swift */; };
@@ -70,7 +72,9 @@
 		9B17C41C2A03B0AD00E80721 /* RecentSummaryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryRepositoryProtocol.swift; sourceTree = "<group>"; };
 		9B17C41E2A03B0F500E80721 /* RecentSummaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryRepository.swift; sourceTree = "<group>"; };
 		9B17C4202A03B17F00E80721 /* RecentSummaryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryUseCase.swift; sourceTree = "<group>"; };
-		9B17C4262A05284900E80721 /* RecentSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryViewController.swift; sourceTree = "<group>"; };
+		9B17C42C2A052D5400E80721 /* RecentSummaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryViewController.swift; sourceTree = "<group>"; };
+		9B17C42D2A052D5400E80721 /* RecentSummaryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSummaryViewController.xib; sourceTree = "<group>"; };
+		9B17C4312A052E8C00E80721 /* RecentSummaryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryViewModel.swift; sourceTree = "<group>"; };
 		9B42D4EE2917A2100053DBF3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9B42D4F52917A2DD0053DBF3 /* FirebaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
 		9B42D519291CDEF30053DBF3 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
@@ -141,6 +145,7 @@
 			isa = PBXGroup;
 			children = (
 				9B17C4252A05283C00E80721 /* View */,
+				9B17C4302A052E7600E80721 /* ViewModel */,
 			);
 			path = RecentSummary;
 			sourceTree = "<group>";
@@ -148,9 +153,18 @@
 		9B17C4252A05283C00E80721 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				9B17C4262A05284900E80721 /* RecentSummaryViewController.swift */,
+				9B17C42C2A052D5400E80721 /* RecentSummaryViewController.swift */,
+				9B17C42D2A052D5400E80721 /* RecentSummaryViewController.xib */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		9B17C4302A052E7600E80721 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				9B17C4312A052E8C00E80721 /* RecentSummaryViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		9B42D4F32917A29D0053DBF3 /* Services */ = {
@@ -579,6 +593,7 @@
 			files = (
 				9BBA939F28BC6C70002CB0CF /* LaunchScreen.storyboard in Resources */,
 				9BBA939C28BC6C70002CB0CF /* Assets.xcassets in Resources */,
+				9B17C42F2A052D5400E80721 /* RecentSummaryViewController.xib in Resources */,
 				9B42D4EF2917A2100053DBF3 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -628,10 +643,11 @@
 				9B17C4212A03B17F00E80721 /* RecentSummaryUseCase.swift in Sources */,
 				9BBA93CB28C0762B002CB0CF /* SummarizeResultViewController.swift in Sources */,
 				9BC961AE28E99EC300DBF323 /* Decodable.swift in Sources */,
+				9B17C4322A052E8C00E80721 /* RecentSummaryViewModel.swift in Sources */,
 				9BFE60AE29EFA8A500283B67 /* CoreDataStorage.swift in Sources */,
 				9BBA93BE28BF78C5002CB0CF /* TimeUtil.swift in Sources */,
 				9BBA93B128BF6E7F002CB0CF /* BaseViewController.swift in Sources */,
-				9B17C4272A05284900E80721 /* RecentSummaryViewController.swift in Sources */,
+				9B17C42E2A052D5400E80721 /* RecentSummaryViewController.swift in Sources */,
 				9B5F94E6292D011900AA97A5 /* InfoView.swift in Sources */,
 				9BFEE7EF29C72C18009BB2FB /* SummarizeDataDTO.swift in Sources */,
 				9BD3C43E28D9C63A00B3B594 /* HttpService.swift in Sources */,

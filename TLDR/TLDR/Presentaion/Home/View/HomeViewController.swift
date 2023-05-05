@@ -57,17 +57,8 @@ final class HomeViewController: BaseViewController<HomeView> {
     }
     
     @objc private func clickedRecentSummaryButton() {
-        Task {
-            do {
-                let recentSummaries = try await homeVM.action(.recentSummary).value() as! [SummarizeResult]
-                print("recentSummaries: \(recentSummaries)")
-                for recentSummary in recentSummaries {
-                    print(recentSummary)
-                }
-            } catch {
-                
-            }
-        }
+        let recentSummaryVC: RecentSummaryViewController = RecentSummaryViewController()
+        present(recentSummaryVC, animated: true)
     }
     
     //붙여넣기 버튼

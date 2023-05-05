@@ -9,19 +9,15 @@ import Foundation
 
 enum HomeViewModelActions {
     case summarize(String)
-    case recentSummary
 }
 
 enum HomeViewModelActionOutputs {
     case summarize(SummarizeResult)
-    case recentSummary([SummarizeResult])
     
     func value() -> Any {
         switch self {
         case .summarize(let summarizeData):
             return summarizeData
-        case .recentSummary(let recentSummaries):
-            return recentSummaries
         }
     }
 }
@@ -29,7 +25,6 @@ enum HomeViewModelActionOutputs {
 struct HomeViewModel {
     //todo: 의존성 주입
     private let summarizeUseCase: SummarizeUseCase = SummarizeUseCase(repository: SummarizeRepository())
-    private let recentSummaryUseCase: RecentSummaryUseCase = RecentSummaryUseCase(repository: RecentSummaryRepository())
     
     init() { }
     
@@ -37,8 +32,6 @@ struct HomeViewModel {
         switch actions {
         case .summarize(let text):
             return try await .summarize(summarize(text: text))
-        case .recentSummary:
-            return try .recentSummary(fetchRecentSummary())
         }
     }
 }
@@ -49,11 +42,6 @@ extension HomeViewModel {
     private func summarize(text: String, language: SummarizeLangauge = .auto) async throws -> SummarizeResult {
         let requestValue = SummarizeRequestValue(text: createSentences(text), language: language)
         return try await summarizeUseCase.excute(requestValue: requestValue)
-    }
-    
-    //최근 요약 기록
-    private func fetchRecentSummary() throws -> [SummarizeResult] {
-        return try recentSummaryUseCase.excute()
     }
     
     /**
