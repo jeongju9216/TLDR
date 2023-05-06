@@ -83,9 +83,10 @@ final class RecentSummaryViewController: UIViewController, Loggable {
             
             //그룹 설정
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                   heightDimension: .absolute(40))
+                                                   heightDimension: .absolute(100))
             let group: NSCollectionLayoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-            
+            group.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 10)
+
             //세션 설정
             let section = NSCollectionLayoutSection(group: group)
             

@@ -10,7 +10,8 @@ import UIKit
 final class RecentSummaryCollectionViewCell: UICollectionViewCell {
     
     //MARK: - Views
-    @IBOutlet weak var testLabel: UILabel!
+    @IBOutlet weak var summaryLabel: UILabel!
+    @IBOutlet weak var keywordLabel1: UILabel!
     
     //MARK: - Life Cycles
     override func awakeFromNib() {
@@ -20,7 +21,10 @@ final class RecentSummaryCollectionViewCell: UICollectionViewCell {
 
     //MARK: - Methods
     func configuration(summarizeResult: SummarizeResult) {
-        testLabel.text = "--- \(summarizeResult.summarizeText)"
+        summaryLabel.text = summarizeResult.summarizeText
+        if summarizeResult.summarizeKeywords.count > 1 {
+            keywordLabel1.text = summarizeResult.summarizeKeywords[1]
+        }
     }
 
 }

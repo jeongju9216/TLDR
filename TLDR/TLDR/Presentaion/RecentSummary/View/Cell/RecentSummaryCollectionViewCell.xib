@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,35 +18,65 @@
                 <rect key="frame" x="0.0" y="0.0" width="560" height="162"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S3o-17-MKT">
-                        <rect key="frame" x="10" y="10" width="540" height="142"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xx6-0W-3uY">
+                        <rect key="frame" x="0.0" y="0.0" width="10" height="162"/>
+                        <color key="backgroundColor" name="MainColor"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="10" id="z2I-ba-XIw"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asdfasdf" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40T-x9-Xhh">
+                        <rect key="frame" x="20" y="0.0" width="540" height="122"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <view alpha="0.10000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oRC-yZ-9xR">
-                        <rect key="frame" x="0.0" y="155" width="560" height="1"/>
-                        <color key="backgroundColor" systemColor="labelColor"/>
+                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="oyc-5e-HhA">
+                        <rect key="frame" x="20" y="132" width="530" height="30"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Vs-Sr-xDg">
+                                <rect key="frame" x="0.0" y="0.0" width="176.66666666666666" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="키워드2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cqp-e1-mUC">
+                                <rect key="frame" x="176.66666666666669" y="0.0" width="176.66666666666669" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="키워드3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aL3-Kn-NbY">
+                                <rect key="frame" x="353.33333333333331" y="0.0" width="176.66666666666669" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="1" id="zgW-dA-7ih"/>
+                            <constraint firstAttribute="height" constant="30" id="OxT-k8-0or"/>
                         </constraints>
-                    </view>
+                    </stackView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" name="BackgroundColor"/>
             <constraints>
-                <constraint firstItem="S3o-17-MKT" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="6fF-2t-uO5"/>
-                <constraint firstItem="oRC-yZ-9xR" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="MLp-8T-YAd"/>
-                <constraint firstAttribute="bottom" secondItem="S3o-17-MKT" secondAttribute="bottom" constant="10" id="fbc-jq-uq9"/>
-                <constraint firstItem="S3o-17-MKT" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="fqW-N7-qMX"/>
-                <constraint firstItem="oRC-yZ-9xR" firstAttribute="top" secondItem="S3o-17-MKT" secondAttribute="bottom" constant="3" id="g2d-zp-8Kp"/>
-                <constraint firstAttribute="trailing" secondItem="oRC-yZ-9xR" secondAttribute="trailing" id="lWb-Qb-Nu0"/>
-                <constraint firstAttribute="trailing" secondItem="S3o-17-MKT" secondAttribute="trailing" constant="10" id="qpE-Fl-bdU"/>
+                <constraint firstItem="oyc-5e-HhA" firstAttribute="leading" secondItem="Xx6-0W-3uY" secondAttribute="trailing" constant="10" id="3sN-oP-6pg"/>
+                <constraint firstItem="Xx6-0W-3uY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="8HU-72-bxK"/>
+                <constraint firstItem="Xx6-0W-3uY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="QGM-c3-rd3"/>
+                <constraint firstItem="oyc-5e-HhA" firstAttribute="top" secondItem="40T-x9-Xhh" secondAttribute="bottom" constant="10" id="Svv-7W-YAZ"/>
+                <constraint firstAttribute="trailing" secondItem="40T-x9-Xhh" secondAttribute="trailing" id="cPh-zR-FxB"/>
+                <constraint firstAttribute="bottom" secondItem="Xx6-0W-3uY" secondAttribute="bottom" id="cqT-iQ-MvW"/>
+                <constraint firstItem="40T-x9-Xhh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="hgp-vR-7cd"/>
+                <constraint firstItem="40T-x9-Xhh" firstAttribute="leading" secondItem="Xx6-0W-3uY" secondAttribute="trailing" constant="10" id="oWu-mD-qXg"/>
+                <constraint firstAttribute="trailing" secondItem="oyc-5e-HhA" secondAttribute="trailing" constant="10" id="xh0-us-8MC"/>
+                <constraint firstAttribute="bottom" secondItem="oyc-5e-HhA" secondAttribute="bottom" id="xiz-E5-mVW"/>
             </constraints>
             <size key="customSize" width="560" height="162"/>
             <connections>
-                <outlet property="testLabel" destination="S3o-17-MKT" id="l3W-pW-NvH"/>
+                <outlet property="keywordLabel1" destination="0Vs-Sr-xDg" id="K2g-sE-OSw"/>
+                <outlet property="summaryLabel" destination="40T-x9-Xhh" id="spd-ss-PDz"/>
             </connections>
             <point key="canvasLocation" x="528.24427480916029" y="59.154929577464792"/>
         </collectionViewCell>
@@ -56,8 +85,8 @@
         <namedColor name="BackgroundColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="MainColor">
+            <color red="0.20000000298023224" green="0.70200002193450928" blue="0.91399997472763062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>
