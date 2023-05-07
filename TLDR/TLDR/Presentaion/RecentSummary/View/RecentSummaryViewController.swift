@@ -58,7 +58,7 @@ final class RecentSummaryViewController: UIViewController, Loggable {
     }
     
     private func setupDataSource() {
-        let cellProvider = { [weak self] (collectionView: UICollectionView, indexPath: IndexPath, product: SummarizeResult) -> UICollectionViewCell? in
+        let cellProvider = { (collectionView: UICollectionView, indexPath: IndexPath, product: SummarizeResult) -> UICollectionViewCell? in
             let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultCollectionViewCell.identifier, for: indexPath)
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentSummaryCollectionViewCell.identifier, for: indexPath) as? RecentSummaryCollectionViewCell else {
                 return defaultCell
@@ -83,9 +83,9 @@ final class RecentSummaryViewController: UIViewController, Loggable {
             
             //그룹 설정
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
-                                                   heightDimension: .absolute(100))
+                                                   heightDimension: .absolute(120))
             let group: NSCollectionLayoutGroup = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
-            group.contentInsets = NSDirectionalEdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 10)
+            group.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
 
             //세션 설정
             let section = NSCollectionLayoutSection(group: group)
