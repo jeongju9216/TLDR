@@ -58,6 +58,7 @@ final class HomeViewController: BaseViewController<HomeView> {
     
     @objc private func clickedRecentSummaryButton() {
         let recentSummaryVC: RecentSummaryViewController = RecentSummaryViewController()
+        recentSummaryVC.delegate = self
         present(recentSummaryVC, animated: true)
     }
     
@@ -144,5 +145,12 @@ extension HomeViewController: UITextViewDelegate {
     //입력이 완료되었을 때 값 넣기
     func textViewDidEndEditing(_ textView: UITextView) {
         update(text: textView.text)
+    }
+}
+
+//MARK: - SearchListDelegate
+extension HomeViewController: RecentSummaryDelegate {
+    func didSelectRecentSummaryCell(_ summarizeResult: SummarizeResult) {
+        goSummarizeVC(summarizeResult)
     }
 }

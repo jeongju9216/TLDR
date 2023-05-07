@@ -14,6 +14,7 @@ final class RecentSummaryViewController: UIViewController, Loggable {
 
     //MARK: - Views
     @IBOutlet weak var collectionView: UICollectionView!
+    weak var delegate: RecentSummaryDelegate?
     
     //MARK: - Properties
     private var dataSource: DataSource!
@@ -58,9 +59,10 @@ final class RecentSummaryViewController: UIViewController, Loggable {
     }
     
     private func setupDataSource() {
-        let cellProvider = { (collectionView: UICollectionView, indexPath: IndexPath, product: SummarizeResult) -> UICollectionViewCell? in
+        let cellProvider = { [weak self] (collectionView: UICollectionView, indexPath: IndexPath, product: SummarizeResult) -> UICollectionViewCell? in
             let defaultCell = collectionView.dequeueReusableCell(withReuseIdentifier: DefaultCollectionViewCell.identifier, for: indexPath)
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentSummaryCollectionViewCell.identifier, for: indexPath) as? RecentSummaryCollectionViewCell else {
+            guard let self = self,
+                  let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentSummaryCollectionViewCell.identifier, for: indexPath) as? RecentSummaryCollectionViewCell else {
                 return defaultCell
             }
             
@@ -99,8 +101,9 @@ final class RecentSummaryViewController: UIViewController, Loggable {
 
 extension RecentSummaryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        dismiss(animated: true)
         if let data = dataSource.itemIdentifier(for: indexPath) {
-            print(data.summarizeText)
+            delegate?.didSelectRecentSummaryCell(data)
         }
     }
 }
