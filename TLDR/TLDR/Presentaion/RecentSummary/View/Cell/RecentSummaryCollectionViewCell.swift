@@ -12,7 +12,8 @@ final class RecentSummaryCollectionViewCell: UICollectionViewCell {
     //MARK: - Views
     @IBOutlet weak var shadowView: UIView!
     @IBOutlet weak var summaryLabel: UILabel!
-    @IBOutlet weak var keywordLabel1: UILabel! //임시
+    @IBOutlet weak var keywordStackView: UIStackView!
+    private let maxKeywordsCount = 3
     
     //MARK: - Life Cycles
     override func awakeFromNib() {
@@ -35,9 +36,33 @@ final class RecentSummaryCollectionViewCell: UICollectionViewCell {
     //MARK: - Methods
     func configuration(summarizeResult: SummarizeResult) {
         summaryLabel.text = summarizeResult.summarizeText
-        if summarizeResult.summarizeKeywords.count > 1 {
-            keywordLabel1.text = summarizeResult.summarizeKeywords[1]
+        
+        let keywordCount = summarizeResult.summarizeKeywords.count - 1
+        for i in 1...maxKeywordsCount {
+            if keywordCount >= i {
+               addKeywords(summarizeResult.summarizeKeywords[i])
+            } else {
+                addBlankItem()
+            }
         }
     }
-
+    
+    private func addKeywords(_ keyword: String) {
+        let label = UILabel(frame: .zero)
+        
+        label.text = keyword
+        label.font = UIFont.systemFont(ofSize: 14)
+        label.textAlignment = .center
+        
+        label.layer.masksToBounds = true
+        label.layer.cornerRadius = (keywordStackView.frame.height/2)
+        label.layer.borderWidth = 1
+        label.layer.borderColor = UIColor.selectedKeywordColor.cgColor
+                
+        keywordStackView.addArrangedSubview(label)
+    }
+    
+    private func addBlankItem() {
+        keywordStackView.addArrangedSubview(UIView())
+    }
 }
