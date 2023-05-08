@@ -103,6 +103,8 @@ final class HomeView: UIView {
         setupTextView()
 
         self.bringSubviewToFront(topBarView)
+        
+        setEnabled(false)
     }
     
     private func setupTopBarView() {
