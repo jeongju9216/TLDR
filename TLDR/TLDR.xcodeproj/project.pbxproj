@@ -27,6 +27,7 @@
 		9B811E762A05430F008A660E /* DefaultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9B811E742A05430F008A660E /* DefaultCollectionViewCell.xib */; };
 		9B811E782A054340008A660E /* UICollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B811E772A054340008A660E /* UICollectionReusableView.swift */; };
 		9B811E7F2A07CEC9008A660E /* RecentSummaryDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B811E7E2A07CEC9008A660E /* RecentSummaryDelegate.swift */; };
+		9B811E862A091A7E008A660E /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B811E852A091A7E008A660E /* Alertable.swift */; };
 		9B9F46AE29D90B39008E0800 /* Loggable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9F46AD29D90B39008E0800 /* Loggable.swift */; };
 		9BBA939328BC6C6F002CB0CF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA939228BC6C6F002CB0CF /* AppDelegate.swift */; };
 		9BBA939528BC6C6F002CB0CF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BBA939428BC6C6F002CB0CF /* SceneDelegate.swift */; };
@@ -93,6 +94,7 @@
 		9B811E742A05430F008A660E /* DefaultCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DefaultCollectionViewCell.xib; sourceTree = "<group>"; };
 		9B811E772A054340008A660E /* UICollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionReusableView.swift; sourceTree = "<group>"; };
 		9B811E7E2A07CEC9008A660E /* RecentSummaryDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryDelegate.swift; sourceTree = "<group>"; };
+		9B811E852A091A7E008A660E /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		9B9F46AD29D90B39008E0800 /* Loggable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loggable.swift; sourceTree = "<group>"; };
 		9BBA938F28BC6C6F002CB0CF /* TLDR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TLDR.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BBA939228BC6C6F002CB0CF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,14 @@
 				9B811E7E2A07CEC9008A660E /* RecentSummaryDelegate.swift */,
 			);
 			path = Delegates;
+			sourceTree = "<group>";
+		};
+		9B811E842A091A75008A660E /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				9B811E852A091A7E008A660E /* Alertable.swift */,
+			);
+			path = Protocol;
 			sourceTree = "<group>";
 		};
 		9B9F46AC29D90B2C008E0800 /* Utils */ = {
@@ -392,6 +402,7 @@
 		9BFEE7EB29C72ADE009BB2FB /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9B811E842A091A75008A660E /* Protocol */,
 				9B811E7D2A07CE3F008A660E /* Delegates */,
 				9BD3C46928DC63C200B3B594 /* Observable.swift */,
 				9BBA93C428BF7D12002CB0CF /* SizeUtil.swift */,
@@ -671,6 +682,7 @@
 				9B811E752A05430F008A660E /* DefaultCollectionViewCell.swift in Sources */,
 				9BD3C46A28DC63C200B3B594 /* Observable.swift in Sources */,
 				9BBA93C128BF7A41002CB0CF /* HomeViewController.swift in Sources */,
+				9B811E862A091A7E008A660E /* Alertable.swift in Sources */,
 				9BBA93D128C0ADBD002CB0CF /* LineView.swift in Sources */,
 				9BBA93D428C0B7F2002CB0CF /* UITextView.swift in Sources */,
 				9B811E7F2A07CEC9008A660E /* RecentSummaryDelegate.swift in Sources */,
@@ -848,7 +860,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeong9216.TLDR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -877,7 +889,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeong9216.TLDR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

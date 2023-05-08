@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RecentSummaryViewController: UIViewController, Loggable {
+final class RecentSummaryViewController: UIViewController, Alertable, Loggable {
 
     private typealias DataSource = UICollectionViewDiffableDataSource<Section, SummarizeResult>
     private typealias SnapShot = NSDiffableDataSourceSnapshot<Section, SummarizeResult>
@@ -34,8 +34,25 @@ final class RecentSummaryViewController: UIViewController, Loggable {
         super.viewDidLoad()
         
         setupCollectionView()
-        
-        jlog(.debug, "cnt: \(recentSummaries.count) / recentSummaries: \(recentSummaries)")
+        updateList()
+    }
+    
+    //MARK: - Actions
+    @IBAction func clickedDeleteAllButton(_ sender: UIButton) {
+        showCancelAlert(message: "모든 최근 요약을 삭제하겠습니까?", doneAction: { [weak self] _ in
+            guard let self = self else { return }
+            
+            do {
+                self.recentSummaries = try viewModel.action(.deleteAll).value() as! [SummarizeResult]
+                self.updateList()
+            } catch {
+            }
+        })
+    }
+    
+    //MARK: - Methods
+    private func updateList() {
+        snapshot.deleteAllItems()
         
         snapshot.appendSections([.recentSummary])
         snapshot.appendItems(recentSummaries)

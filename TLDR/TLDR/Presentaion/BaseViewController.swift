@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseViewController<LayoutView: UIView>: UIViewController, Loggable {    
+class BaseViewController<LayoutView: UIView>: UIViewController, Alertable, Loggable {
     //MARK: - Views
     var layoutView: LayoutView {
         return view as! LayoutView
@@ -28,25 +28,6 @@ class BaseViewController<LayoutView: UIView>: UIViewController, Loggable {
     }
     
     //MARK: - Methods
-    func showAlert(title: String? = "알림", message: String = "", action: ((UIAlertAction) -> Void)? = nil) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else {
-                return
-            }
-
-            let alert = UIAlertController(title: title,
-                                               message: message,
-                                               preferredStyle: .alert)
-                        
-            let doneAction = UIAlertAction(title: "확인",
-                                           style: .default,
-                                           handler: action)
-            alert.addAction(doneAction)
-            
-            self.present(alert, animated: true)
-        }
-    }
-
     func showErrorAlert(message: String? = nil, action: ((UIAlertAction) -> Void)? = nil) {
         DispatchQueue.main.async { [weak self] in
             guard let self = self else {

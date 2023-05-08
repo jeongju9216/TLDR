@@ -9,4 +9,5 @@ import Foundation
 
 protocol RecentSummaryRepositoryProtocol {
     func fetchRecentSummary() throws -> [SummarizeResult]
+    func deleteAll()
 }

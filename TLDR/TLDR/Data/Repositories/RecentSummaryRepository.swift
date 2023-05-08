@@ -15,4 +15,8 @@ extension RecentSummaryRepository {
     func fetchRecentSummary() -> [SummarizeResult] {
         return summarizeResultStorage.fetch()
     }
+    
+    func deleteAll() {
+        summarizeResultStorage.deleteAll()
+    }
 }
