@@ -18,3 +18,15 @@ struct RecentSummaryUseCase: RecentSummaryUseCaseProtocol {
         return try repository.fetchRecentSummary()
     }
 }
+
+struct DeleteRecentSummaryUseCase: DeleteRecentSummaryUseCaseProtocol {
+    let repository: RecentSummaryRepositoryProtocol
+    
+    init(repository: RecentSummaryRepositoryProtocol) {
+        self.repository = repository
+    }
+    
+    func excute() {
+        repository.deleteAll()
+    }
+}

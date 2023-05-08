@@ -36,13 +36,25 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZpT-Cp-BCN">
+                    <rect key="frame" x="295.66666666666669" y="63" width="87.333333333333314" height="35"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="전체 삭제">
+                        <color key="baseForegroundColor" systemColor="labelColor"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="clickedDeleteAllButton:" destination="-1" eventType="touchUpInside" id="PgS-Z0-ev4"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ZpT-Cp-BCN" secondAttribute="trailing" constant="10" id="DMn-HL-6ja"/>
                 <constraint firstItem="YPC-Zs-rFY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="GGP-YG-Zr7"/>
                 <constraint firstItem="wZc-BW-DTv" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="PcI-No-Mzv"/>
                 <constraint firstItem="wZc-BW-DTv" firstAttribute="top" secondItem="YPC-Zs-rFY" secondAttribute="bottom" constant="10" id="fDJ-4C-nfn"/>
+                <constraint firstItem="ZpT-Cp-BCN" firstAttribute="bottom" secondItem="YPC-Zs-rFY" secondAttribute="bottom" id="glk-SW-RST"/>
                 <constraint firstItem="wZc-BW-DTv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ord-Os-XRA"/>
                 <constraint firstItem="YPC-Zs-rFY" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="qoP-61-mOQ"/>
                 <constraint firstItem="wZc-BW-DTv" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="xPt-GL-yth"/>
@@ -51,6 +63,9 @@
         </view>
     </objects>
     <resources>
+        <systemColor name="labelColor">
+            <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

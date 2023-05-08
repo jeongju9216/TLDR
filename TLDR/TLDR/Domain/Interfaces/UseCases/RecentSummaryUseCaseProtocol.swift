@@ -13,3 +13,9 @@ protocol RecentSummaryUseCaseProtocol {
     
     func excute() throws -> ResponseType
 }
+
+protocol DeleteRecentSummaryUseCaseProtocol {
+    var repository: RecentSummaryRepositoryProtocol { get }
+    
+    func excute()
+}
