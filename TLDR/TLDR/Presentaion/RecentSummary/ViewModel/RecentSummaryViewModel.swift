@@ -12,46 +12,33 @@ enum RecentSummaryViewModelActions {
     case deleteAll
 }
 
-enum RecentSummaryViewModelActionOutputs {
-    case recentSummary([SummarizeResult])
-    case deleteAll([SummarizeResult])
+final class RecentSummaryViewModel {
+    @Published private(set) var recentSummaries: [SummarizeResult] = []
     
-    func value() -> Any {
-        switch self {
-        case .recentSummary(let recentSummaries):
-            return recentSummaries
-        case .deleteAll(let list):
-            return list
-        }
-    }
-}
-
-struct RecentSummaryViewModel {
     private let recentSummaryUseCase: RecentSummaryUseCase = RecentSummaryUseCase(repository: RecentSummaryRepository())
     private let deleteRecentSummaryUseCase: DeleteRecentSummaryUseCase = DeleteRecentSummaryUseCase(repository: RecentSummaryRepository())
     
     init() { }
     
-    @discardableResult
-    func action(_ actions: RecentSummaryViewModelActions) throws -> RecentSummaryViewModelActionOutputs {
+    func action(_ actions: RecentSummaryViewModelActions) throws {
         switch actions {
         case .recentSummary:
-            return try .recentSummary(fetchRecentSummary())
+            try fetchRecentSummary()
         case .deleteAll:
-            return .deleteAll(deleteAll())
+            deleteAll()
         }
     }
 }
 
 extension RecentSummaryViewModel {
     //최근 요약 기록
-    private func fetchRecentSummary() throws -> [SummarizeResult] {
-        return try recentSummaryUseCase.excute()
+    private func fetchRecentSummary() throws {
+        recentSummaries = try recentSummaryUseCase.excute()
     }
     
     //모든 최근 요약 기록 삭제
-    private func deleteAll() -> [SummarizeResult] {
+    private func deleteAll() {
         deleteRecentSummaryUseCase.excute()
-        return []
+        recentSummaries = []
     }
 }
