@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Combine
 
 final class RecentSummaryViewController: UIViewController, Alertable, Loggable {
 
@@ -21,20 +22,27 @@ final class RecentSummaryViewController: UIViewController, Alertable, Loggable {
     private var snapshot: SnapShot = SnapShot()
     
     private let viewModel: RecentSummaryViewModel = RecentSummaryViewModel()
-    private lazy var recentSummaries: [SummarizeResult] = {
-        do {
-            return try viewModel.action(.recentSummary).value() as! [SummarizeResult]
-        } catch {
-            return []
-        }
-    }()
+    private var cancellables: Set<AnyCancellable> = []
     
     //MARK: - Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCollectionView()
-        updateList()
+        bind()
+        
+        try? viewModel.action(.recentSummary)
+    }
+    
+    private func bind() {
+        viewModel.$recentSummaries
+            .receive(on: RunLoop.main)
+            .sink { [weak self] recentSummaries in
+                guard let self = self else { return }
+                
+                self.updateList(recentSummaries)
+            }
+            .store(in: &cancellables)
     }
     
     //MARK: - Actions
@@ -42,16 +50,12 @@ final class RecentSummaryViewController: UIViewController, Alertable, Loggable {
         showCancelAlert(message: "모든 최근 요약을 삭제하겠습니까?", doneAction: { [weak self] _ in
             guard let self = self else { return }
             
-            do {
-                self.recentSummaries = try viewModel.action(.deleteAll).value() as! [SummarizeResult]
-                self.updateList()
-            } catch {
-            }
+            try? viewModel.action(.deleteAll)
         })
     }
     
     //MARK: - Methods
-    private func updateList() {
+    private func updateList(_ recentSummaries: [SummarizeResult]) {
         snapshot.deleteAllItems()
         
         snapshot.appendSections([.recentSummary])
