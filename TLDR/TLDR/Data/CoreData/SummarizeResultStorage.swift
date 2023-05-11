@@ -49,9 +49,9 @@ struct SummarizeResultStorage: Loggable {
     
     func save(_ summarizeResult: SummarizeResult) {
         do {
-            try saveObjectUsing(summarizeResult: summarizeResult, context: CoreDataStorage.shared.context)
+            try saveObjectUsing(summarizeResult: summarizeResult, context: CoreDataStorage.shared.backgroundContext)
             
-            try CoreDataStorage.shared.context.save()
+            try CoreDataStorage.shared.backgroundContext.save()
         } catch {
             
         }

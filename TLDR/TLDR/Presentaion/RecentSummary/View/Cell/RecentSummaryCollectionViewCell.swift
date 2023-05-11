@@ -37,6 +37,8 @@ final class RecentSummaryCollectionViewCell: UICollectionViewCell {
     func configuration(summarizeResult: SummarizeResult) {
         summaryLabel.text = summarizeResult.summarizeText
         
+        keywordStackView.subviews.forEach { $0.removeFromSuperview() }
+        
         let keywordCount = summarizeResult.summarizeKeywords.count - 1
         for i in 1...maxKeywordsCount {
             if keywordCount >= i {
