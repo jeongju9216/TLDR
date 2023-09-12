@@ -37,7 +37,9 @@ extension SummarizeRepository {
         
         let param = ["text": requestValue.text, "language": requestValue.language.rawValue]
         
-        let urlString = HttpService.shared.domain + HttpAPI.summarize.rawValue
+        let urlString = BaseData.shared.serverDomain + HttpAPI.summarize.rawValue
+        print("urlString: \(urlString)")
+        
         let response = await HttpService.shared.requestPost(url: urlString, param: param)
         
         let summarizeData = try parsingSummarizeData(response, originalText: requestValue.text)

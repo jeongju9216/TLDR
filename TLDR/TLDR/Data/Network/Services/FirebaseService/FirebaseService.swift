@@ -41,7 +41,6 @@ final class FirebaseService: Loggable {
         
         let result = snapData?["result"] ?? "fail"
         let notice = snapData?["notice"] ?? ""
-        jlog(.default, "result: \(result) / notice: \(notice)")
         
         let stateData = StateData(state: Result(rawValue: result) ?? .fail,
                                   notice: notice)
@@ -69,8 +68,20 @@ final class FirebaseService: Loggable {
                                                    appleID: appleID,
                                                    bundleID: bundleID)
         
-        jlog(.default, "versions: \(versionData)")
         return versionData
+    }
+    
+    func fetchDomain() async -> String {
+        var snapshot: DataSnapshot?
+        do {
+            snapshot = try await firebaseRef.child("domain").getData()
+        } catch {
+            jlog(.error, error.localizedDescription)
+        }
+        
+        let domain = snapshot?.value as? String ?? ""
+
+        return domain
     }
     
     func fetchPolicyURL() async -> String {

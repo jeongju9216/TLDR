@@ -27,7 +27,6 @@ final class HttpService: Loggable {
     private init() { }
 
     private let urlSession: URLSession = URLSession.shared
-    let domain: String = "https://tldr161718.site/"
     
     func requestGet(url: String) async -> Response {
         do {

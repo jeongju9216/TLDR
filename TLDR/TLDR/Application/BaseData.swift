@@ -21,6 +21,7 @@ final class BaseData {
     var lastetVersion = "" //최신버전
     var forcedUpdateVersion = "" //강제 업데이트 버전
     
+    var serverDomain: String = ""
     var policyURL: String = ""
 }
 
