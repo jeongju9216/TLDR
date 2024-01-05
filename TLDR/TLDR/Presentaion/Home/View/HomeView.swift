@@ -104,14 +104,13 @@ final class HomeView: UIView {
         setupSummarizeButton()
         setupHideKeyboardButton()
         
+        // 애드몹 배너
+        setupBannerView()
         setupTextView()
 
         self.bringSubviewToFront(topBarView)
         
         setEnabled(false)
-        
-        // 애드몹 배너
-        setupBannerView()
     }
     
     private func setupTopBarView() {
@@ -203,7 +202,7 @@ final class HomeView: UIView {
         textView.pinLeft(to: self.safeAreaLayoutGuide.leftAnchor)
         textView.pinRight(to: self.safeAreaLayoutGuide.rightAnchor)
         textView.pinTop(to: self.topBarView.bottomAnchor)
-        textView.pinBottom(to: self.summarizeButton.topAnchor)
+        textView.pinBottom(to: self.bannerView.topAnchor)
     }
     
     private func setupSummarizeButton() {
