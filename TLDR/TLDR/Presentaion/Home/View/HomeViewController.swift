@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import GoogleMobileAds
+import AppTrackingTransparency
+import AdSupport
 
 final class HomeViewController: BaseViewController<HomeView> {
     
@@ -26,6 +29,10 @@ final class HomeViewController: BaseViewController<HomeView> {
             addTargets()
             addObservers()
             addDelegate()
+            setupBannerView()
+            ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
+                // Tracking authorization completed. Start loading ads here.
+            })
         }
     }
             
@@ -116,6 +123,12 @@ final class HomeViewController: BaseViewController<HomeView> {
             self.navigationController?.pushViewController(summarizeVC, animated: true)
         }
     }
+    
+    private func setupBannerView() {
+        layoutView.bannerView.rootViewController = self
+        layoutView.bannerView.load(GADRequest())
+        layoutView.bannerView.delegate = self
+    }
                 
     private func addTargets() {
         //매개변수 3개 이상은 세로로 분리
@@ -152,5 +165,12 @@ extension HomeViewController: UITextViewDelegate {
 extension HomeViewController: RecentSummaryDelegate {
     func didSelectRecentSummaryCell(_ summarizeResult: SummarizeResult) {
         goSummarizeVC(summarizeResult)
+    }
+}
+
+//MARK: - GADBannerViewDelegate
+extension HomeViewController: GADBannerViewDelegate {
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        layoutView.bannerView.showSmoothly()
     }
 }

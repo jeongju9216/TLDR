@@ -1,0 +1,6 @@
+framework module Pods_TLDR {
+  umbrella header "Pods-TLDR-umbrella.h"
+
+  export *
+  module * { export * }
+}

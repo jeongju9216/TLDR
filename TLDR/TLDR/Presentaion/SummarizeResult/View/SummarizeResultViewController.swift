@@ -29,14 +29,11 @@ final class SummarizeResultViewController: BaseViewController<SummarizeResultVie
         super.viewDidLoad()
             
         setupCollectionView()
-        
         addTargets()
-        
-        bind()
         
         updateData()
         
-        
+        bind()
     }
     
     //MARK: - Actions

@@ -61,6 +61,7 @@
 		9BD3C44228D9D55000B3B594 /* HttpAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C44128D9D55000B3B594 /* HttpAPI.swift */; };
 		9BD3C46A28DC63C200B3B594 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C46928DC63C200B3B594 /* Observable.swift */; };
 		9BD3C4A128E0743600B3B594 /* VersionData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD3C4A028E0743600B3B594 /* VersionData.swift */; };
+		9BD53C542B46C6AB001E63CB /* GADBannerView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD53C532B46C6AB001E63CB /* GADBannerView+Extension.swift */; };
 		9BFE60AC29EFA55300283B67 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9BFE60AA29EFA55300283B67 /* CoreData.xcdatamodeld */; };
 		9BFE60AE29EFA8A500283B67 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFE60AD29EFA8A500283B67 /* CoreDataStorage.swift */; };
 		9BFE60B229EFAE1B00283B67 /* SummarizeResultStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFE60B129EFAE1B00283B67 /* SummarizeResultStorage.swift */; };
@@ -72,9 +73,11 @@
 		9BFEE80B29C83DB5009BB2FB /* SummarizeUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEE80A29C83DB5009BB2FB /* SummarizeUseCaseProtocol.swift */; };
 		9BFEE80E29C83E04009BB2FB /* SummarizeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BFEE80D29C83E04009BB2FB /* SummarizeUseCase.swift */; };
 		9BFEE81429C899D3009BB2FB /* JeongLogger in Frameworks */ = {isa = PBXBuildFile; productRef = 9BFEE81329C899D3009BB2FB /* JeongLogger */; };
+		A384B73F7593F67788113D49 /* Pods_TLDR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B080FAB8252C13C631370F54 /* Pods_TLDR.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		18DB21F483B0E47D4B0B7EF7 /* Pods-TLDR.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TLDR.release.xcconfig"; path = "Target Support Files/Pods-TLDR/Pods-TLDR.release.xcconfig"; sourceTree = "<group>"; };
 		9B17C41A2A03B08600E80721 /* RecentSummaryUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryUseCaseProtocol.swift; sourceTree = "<group>"; };
 		9B17C41C2A03B0AD00E80721 /* RecentSummaryRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryRepositoryProtocol.swift; sourceTree = "<group>"; };
 		9B17C41E2A03B0F500E80721 /* RecentSummaryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSummaryRepository.swift; sourceTree = "<group>"; };
@@ -130,6 +133,7 @@
 		9BD3C44128D9D55000B3B594 /* HttpAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpAPI.swift; sourceTree = "<group>"; };
 		9BD3C46928DC63C200B3B594 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		9BD3C4A028E0743600B3B594 /* VersionData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionData.swift; sourceTree = "<group>"; };
+		9BD53C532B46C6AB001E63CB /* GADBannerView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GADBannerView+Extension.swift"; sourceTree = "<group>"; };
 		9BFE60AB29EFA55300283B67 /* SummarizeResult.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SummarizeResult.xcdatamodel; sourceTree = "<group>"; };
 		9BFE60AD29EFA8A500283B67 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		9BFE60B129EFAE1B00283B67 /* SummarizeResultStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeResultStorage.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 		9BFEE80729C83ACA009BB2FB /* SummarizeRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeRepositoryProtocol.swift; sourceTree = "<group>"; };
 		9BFEE80A29C83DB5009BB2FB /* SummarizeUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeUseCaseProtocol.swift; sourceTree = "<group>"; };
 		9BFEE80D29C83E04009BB2FB /* SummarizeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummarizeUseCase.swift; sourceTree = "<group>"; };
+		B080FAB8252C13C631370F54 /* Pods_TLDR.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TLDR.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4409B51DD0E554C143A6F43 /* Pods-TLDR.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TLDR.debug.xcconfig"; path = "Target Support Files/Pods-TLDR/Pods-TLDR.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,12 +155,30 @@
 			files = (
 				9BFEE81429C899D3009BB2FB /* JeongLogger in Frameworks */,
 				9B42D4F22917A26C0053DBF3 /* FirebaseDatabase in Frameworks */,
+				A384B73F7593F67788113D49 /* Pods_TLDR.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2A6DE09CBDB98781BEA761EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B080FAB8252C13C631370F54 /* Pods_TLDR.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5BC6B9E00795749B59B1B9D2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C4409B51DD0E554C143A6F43 /* Pods-TLDR.debug.xcconfig */,
+				18DB21F483B0E47D4B0B7EF7 /* Pods-TLDR.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		9B17C4242A05281E00E80721 /* RecentSummary */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,6 +261,8 @@
 			children = (
 				9BBA939128BC6C6F002CB0CF /* TLDR */,
 				9BBA939028BC6C6F002CB0CF /* Products */,
+				5BC6B9E00795749B59B1B9D2 /* Pods */,
+				2A6DE09CBDB98781BEA761EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -268,6 +294,7 @@
 				9BBA93C628BF9CA4002CB0CF /* UIButton.swift */,
 				9BBA93D328C0B7F2002CB0CF /* UITextView.swift */,
 				9B811E772A054340008A660E /* UICollectionReusableView.swift */,
+				9BD53C532B46C6AB001E63CB /* GADBannerView+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -577,9 +604,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BBA93A328BC6C70002CB0CF /* Build configuration list for PBXNativeTarget "TLDR" */;
 			buildPhases = (
+				FC928841292B0211976ACAC2 /* [CP] Check Pods Manifest.lock */,
 				9BBA938B28BC6C6F002CB0CF /* Sources */,
 				9BBA938C28BC6C6F002CB0CF /* Frameworks */,
 				9BBA938D28BC6C6F002CB0CF /* Resources */,
+				EC99572F427C0143E0000144 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -647,6 +676,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		EC99572F427C0143E0000144 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TLDR/Pods-TLDR-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TLDR/Pods-TLDR-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TLDR/Pods-TLDR-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC928841292B0211976ACAC2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TLDR-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		9BBA938B28BC6C6F002CB0CF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -683,6 +754,7 @@
 				9BD3C46A28DC63C200B3B594 /* Observable.swift in Sources */,
 				9BBA93C128BF7A41002CB0CF /* HomeViewController.swift in Sources */,
 				9B811E862A091A7E008A660E /* Alertable.swift in Sources */,
+				9BD53C542B46C6AB001E63CB /* GADBannerView+Extension.swift in Sources */,
 				9BBA93D128C0ADBD002CB0CF /* LineView.swift in Sources */,
 				9BBA93D428C0B7F2002CB0CF /* UITextView.swift in Sources */,
 				9B811E7F2A07CEC9008A660E /* RecentSummaryDelegate.swift in Sources */,
@@ -842,6 +914,7 @@
 		};
 		9BBA93A428BC6C70002CB0CF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C4409B51DD0E554C143A6F43 /* Pods-TLDR.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -860,7 +933,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeong9216.TLDR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -871,6 +944,7 @@
 		};
 		9BBA93A528BC6C70002CB0CF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18DB21F483B0E47D4B0B7EF7 /* Pods-TLDR.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -889,7 +963,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.2.0;
+				MARKETING_VERSION = 1.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jeong9216.TLDR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

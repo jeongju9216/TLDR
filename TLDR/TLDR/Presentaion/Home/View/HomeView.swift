@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 final class HomeView: UIView {
     
@@ -22,6 +23,9 @@ final class HomeView: UIView {
     
     var summarizeButton: UIButton! //요약하기 버튼
     var hideKeyboardButton: UIButton! //키보드 숨김 버튼
+    
+    //애드몹 광고
+    var bannerView: GADBannerView = .createBannerView()
     
     //MARK: - Properties
     private var animationDuration: Double = 0.2
@@ -105,6 +109,9 @@ final class HomeView: UIView {
         self.bringSubviewToFront(topBarView)
         
         setEnabled(false)
+        
+        // 애드몹 배너
+        setupBannerView()
     }
     
     private func setupTopBarView() {
@@ -232,5 +239,14 @@ final class HomeView: UIView {
         hideKeyboardButton.pinLeft(to: self.leftAnchor)
         hideKeyboardButton.pinRight(to: self.rightAnchor)
         hideKeyboardButton.pinHeight(constant: 35)
+    }
+    
+    private func setupBannerView() {
+        addSubview(bannerView)
+        bannerView.pinLeft(to: self.leftAnchor)
+        bannerView.pinRight(to: self.rightAnchor)
+        bannerView.pinHeight(constant: GADAdSizeBanner.size.height)
+        bannerView.pinCenterX(to: centerXAnchor)
+        bannerView.pinBottom(to: summarizeButton.topAnchor)
     }
 }
